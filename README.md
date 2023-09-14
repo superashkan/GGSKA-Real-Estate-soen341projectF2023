@@ -6,4 +6,4 @@ Ashkan Forghani:\
 Yash Patel:\
 Phuong Khanh Ton:\
 Shayne Fleming:\
-Gerald (Put last name here thx):\
+Chimdindu Okelekwe:\
