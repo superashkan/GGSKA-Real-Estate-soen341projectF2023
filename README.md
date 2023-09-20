@@ -15,10 +15,9 @@ Brokers will be able to manage their own property listings. Brokers will also be
 
 
 
-## Team members:
-Giancarlo Biasiucci: Role\
+## Team members and Roles:
+Giancarlo Biasiucci:\
 Ashkan Forghani:\
-Yash Patel:\
 Phuong Khanh Ton:\
 Shayne Fleming:\
 Chimdindu Okelekwe:
