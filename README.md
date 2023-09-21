@@ -20,7 +20,7 @@ Giancarlo Biasiucci: Team Lead and Database Manager \
 Ashkan Forghani: Back-End Dev \
 Phuong Khanh Ton: Back-End Lead \
 Shayne Fleming: Front-End Lead \
-Chimdindu Okelekwe: Front-End Dev \
+Chimdindu Okelekwe: Front-End Dev
 
 ## Technologies:
 
