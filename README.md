@@ -30,10 +30,6 @@ MySQL\
 Frontend:\
 HTML\
 CSS\
-JavaScript\
-Node.js\
 \
 Backend:\
-Python\
-Django\
-Express.js\
+Node.js
