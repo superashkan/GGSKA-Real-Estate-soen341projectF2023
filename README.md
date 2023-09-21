@@ -16,10 +16,24 @@ Brokers will be able to manage their own property listings. Brokers will also be
 
 
 ## Team members and Roles:
-Giancarlo Biasiucci: Team Lead and DataBase Manager
-Ashkan Forghani: Back-End Dev
-Phuong Khanh Ton: Back-End Lead
-Shayne Fleming: Front-End Lead
-Chimdindu Okelekwe: Front-End Dev
+Giancarlo Biasiucci: Team Lead and Database Manager \
+Ashkan Forghani: Back-End Dev \
+Phuong Khanh Ton: Back-End Lead \
+Shayne Fleming: Front-End Lead \
+Chimdindu Okelekwe: Front-End Dev \
 
+## Technologies:
 
+Database:\
+MySQL\
+\
+Frontend:\
+HTML\
+CSS\
+JavaScript\
+Node.js\
+\
+Backend:\
+Python\
+Django\
+Express.js\
