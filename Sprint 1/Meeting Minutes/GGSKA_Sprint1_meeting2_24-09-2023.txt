@@ -1,0 +1,12 @@
+Meeting Minutes - 24/09/2023:
+
+Present at the Meeting: Giancarlo Biasiucci, Ashkan Forghani, Phuong Khanh Ton, Shayne Fleming, Chimdindu Okelekwe.
+Meeting Start Time: 7:15 PM
+
+-Discussed final tasks for Sprint 1.
+-Made sure that user stories had been reviewed & approved of.
+-Provided clarification for how to go about qualitatively assessing 3 backend & 3 frontend frameworks in conjunction with the “Project Approach and Technology” portion of the grading rubric for Sprint 1.
+-Reviewed the grading rubric & requirements for Sprint 1, determined what still needs to be completed, and mutually agreed to complete the remaining work during the following day.
+-Planned to work on the remaining 3 tasks (Project Approach, Plan for Next Sprint, and Task Breakdown) by tomorrow.
+
+Meeting End Time: 7:34 PM
