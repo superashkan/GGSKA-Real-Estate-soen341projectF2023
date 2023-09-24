@@ -9,7 +9,9 @@ Phuong:
 -
 
 Ashkan:
--
+- Assigned roles to individual members 
+- Determined the technologies we will use 
+(09/21/2023 around 15 minutes)
 
 Shayne:
 -
