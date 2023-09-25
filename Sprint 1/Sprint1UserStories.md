@@ -10,7 +10,7 @@ As a homebuyer, I would like to search for one or more properties by making use 
 
 ### Property Renter:
 
-As a homebuyer, I would like to search for one or more properties by making use of search criteria such as location, number of bedrooms, available amenities, price and, if possible, proximity to businesses or other locations. Ideally, this would be accomplished by using a form containing fields for the aforementioned search criteria, with every field being optional to allow for maximal search flexibility. The location and price will be the most important criteria for me, with the other listed criteria as well as any which should be of interest in the future being of lower priority.
+As a homebuyer, I would like to search for one or more properties by making use of search criteria such as location, number of bedrooms, available amenities, price and, if possible, proximity to businesses or other locations. Ideally, this would be accomplished by using a form containing fields for the aforementioned search criteria, with every field being optional to allow for maximal search flexibility. The location and price will be the most important criteria for me, with the other listed criteria as well as any which should be of interest in the future being of lower priority. I would also like to be able to request visits to properties of interest such that I will be able to view them in person. Ideally, this would be accomplished via a form containing fields for information such as the property address, my name and both the date & time of the planned visit. This should be implemented after the search functionality since it would allow me to easily search for a desired property to visit according to several important criteria.
 
 
 ### System Administrator:
