@@ -14,4 +14,7 @@ Ashkan:
 (09/21/2023 around 15 minutes)
 
 Shayne:
-- _
+- Quick research and benchmarking of different technologies and frameworks we may use 3:00 - 3:30 PM (09/20/2023)
+- Proofreading/Review of all 4 User Stories 12:00-12:15 PM (09/24/2023)
+- Written breakdown of some of the possible frameworks and technologies available 
+- 
