@@ -1,1 +1,1 @@
-#Wiki (for now, waiting on GitHub Student developper pack)
+# Wiki (for now, waiting on GitHub Student developper pack)
