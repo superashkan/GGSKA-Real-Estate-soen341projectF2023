@@ -11,4 +11,4 @@ For the front-end, 1-2 weeks should be enough time to create a simple and full l
 
 For the back-end, 2-3 weeks of work should be a sufficient amount of time to work on the simple property search, requests for visit feature and of course the CRUD operations.
 
-for the database, we will at all times be working with and on it, as it is always being updated by the back-end devs.
+For the database, we will at all times be working with and on it, as it is always being updated by the back-end devs.
