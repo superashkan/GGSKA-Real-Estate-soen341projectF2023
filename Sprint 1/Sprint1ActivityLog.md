@@ -23,5 +23,6 @@ Ashkan:
 Shayne:
 - Quick research and benchmarking of different technologies and frameworks we may use 3:00 - 3:30 PM (09/20/2023)
 - Proofreading/Review of all 4 User Stories 12:00-12:15 PM (09/24/2023)
-- Written breakdown of some of the possible frameworks and technologies available 
+- Written breakdown of some of the possible frameworks and technologies available 10-10:30 (09/25/2023)
+- Review of Task Breakdown for front end based on user stories 7:15-7:30 (09/25/2023) 
 - 
