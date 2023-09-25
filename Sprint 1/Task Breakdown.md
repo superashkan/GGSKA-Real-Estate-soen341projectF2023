@@ -14,7 +14,13 @@
 (Team member working on this: Giancarlo Biasiucci)
 
 ## Front-end:
-
+- Create wireframes or low-fidelity sketches to outline the website's layout and structure
+- Design an interface for brokers to manage their listings, including creating, updating, and deleting them.
+- Implement a user-friendly interface for homebuyers and property renters to view property listings.
+- Create an administrator interface to manage user accounts, especially broker accounts.
+- Design intuitive and user-friendly interfaces for all user roles.
+  (Team members working on this: Chimdindu Okelekwe, Shayne Fleming)
+  
 ## Back-end:
 - Responsible for creating and maintaning the client-server architecture
 - CRUD operation of user data
