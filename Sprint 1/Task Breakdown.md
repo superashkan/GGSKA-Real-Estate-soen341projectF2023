@@ -16,3 +16,7 @@
 ## Front-end:
 
 ## Back-end:
+- Responsible for creating and maintaning the client-server architecture
+- CRUD operation of user data
+- Implementing the us of application programming interfaces (APIs) (if necessary)
+(Team members working on this: Ashkan Forghani, Phuong Khanh Ton)
