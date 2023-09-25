@@ -7,7 +7,7 @@
   • Brokers\
   • Properties\
   • Scheduled Visits\
-(Team member working on this: Giancarlo Biasiucci).
+(Team member working on this: Giancarlo Biasiucci)
 
 ## Front-end:
 
