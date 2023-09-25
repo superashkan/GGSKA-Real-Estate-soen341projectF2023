@@ -9,7 +9,8 @@ Chimdindu:
 - Researched the technologies to be used for developing the front end of this project.
 
 Phuong Khanh:
-- Wrote meeting minutes for meeting 1 and 2 (around 15 minutes) 
+- Wrote meeting minutes for meeting 1 (4:30 - 5:15 PM 09/21/2023, around 15 minutes total)
+- Wrote meeting minutes for meeting 2 (7:15 - 7:32 PM 09/24/2023, around 10 minutes total) 
 
 Ashkan:
 - Assigned roles to individual members 
