@@ -7,7 +7,7 @@
   • Brokers\
   • Properties\
   • Scheduled Visits\
-  • Broker-Property (Relation)
+  • Broker-Property (Relation)\
 (Team member working on this: Giancarlo Biasiucci)
 
 ## Front-end:
