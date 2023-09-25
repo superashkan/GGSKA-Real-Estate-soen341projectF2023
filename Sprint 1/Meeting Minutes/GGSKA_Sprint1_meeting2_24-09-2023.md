@@ -3,8 +3,8 @@ Attendance: Giancarlo Biasiucci, Ashkan Forghani, Phuong Khanh Ton, Shayne Flemi
 
 "End of Sprint 1" Meeting
 
-Overview of what is left to do for the Sprint.\ 
-Review of the rubric. 
+Overview of what is left to do for the Sprint.\
+Review of the rubric.
 
 User stories have been reviewed and approved. 
 
