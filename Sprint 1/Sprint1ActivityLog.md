@@ -5,7 +5,7 @@ Giancarlo:
 - Proofreading of the Sprint 2 plan as well as the "Project Approach" portion of the README.md file. Made some changes to both of those files (had to revert an initial change made to the Sprint 2 plan since I made such a change before officially receiving approval to do so from a teammate) (1:10 PM - 2:00 PM (09/25/2023))
 
 Chimdindu:
-- _
+- Researched the technologies to be used for developing the front end of this project.
 
 Phuong Khanh:
 - Wrote meeting minutes for meeting 1 and 2 (around 15 minutes) 
