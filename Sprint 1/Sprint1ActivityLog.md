@@ -17,7 +17,8 @@ Ashkan:
 - Determined the technologies we will use 
 (09/21/2023 around 15 minutes)
 - Worked on project approach, more precisely the qualtitave assessment of 3 front and back end frameworks (09/25/2023, 10:45 - 11:45 am)
-- Created wiki and started plan for next sprint (09/25/2023, 11:45 -12:05 am) 
+- Created wiki and started plan for next sprint (09/25/2023, 11:45 - 12:05 am)
+- Updated task breakdown file for the back-end (09/25/2023, 5:00 - 5:15 pm)  
 
 Shayne:
 - Quick research and benchmarking of different technologies and frameworks we may use 3:00 - 3:30 PM (09/20/2023)
