@@ -13,6 +13,8 @@ Ashkan:
 - Determined the technologies we will use 
 (09/21/2023 around 15 minutes)
 
+-Worked on project approach, more precisely the qualtitave assessment of 3 front and back end frameworks (09/25/2023, 10:45 - 11:45 am)
+
 Shayne:
 - Quick research and benchmarking of different technologies and frameworks we may use 3:00 - 3:30 PM (09/20/2023)
 - Proofreading/Review of all 4 User Stories 12:00-12:15 PM (09/24/2023)
