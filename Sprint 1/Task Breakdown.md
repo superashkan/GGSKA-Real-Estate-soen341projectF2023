@@ -8,6 +8,9 @@
   • Properties\
   • Scheduled Visits\
   • Broker-Property (Relation)\
+  • Visit-Homebuyer (Relation)\
+  • Visit-"Property Renter" (Relation)\
+  • Visit-Broker (Relation)\
 (Team member working on this: Giancarlo Biasiucci)
 
 ## Front-end:
