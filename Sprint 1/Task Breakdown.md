@@ -1,7 +1,7 @@
 # Task Breakdown
 
 ## Database:
--Create a database for the website as well as tables for the following entities & relations:\
+- Create a database for the website as well as tables for the following entities & relations:\
   • Homebuyers\
   • Property Renters\
   • Brokers\
@@ -18,5 +18,7 @@
 ## Back-end:
 - Responsible for creating and maintaning the client-server architecture
 - CRUD operation of user data
-- Implementing the us of application programming interfaces (APIs) (if necessary)
+- Implementing the use of application programming interfaces (APIs) (if necessary)
+- Implementing a login system to ensure each user can only see what is necessary
+- Implementing the search system that will allow users to search properties
 (Team members working on this: Ashkan Forghani, Phuong Khanh Ton)
