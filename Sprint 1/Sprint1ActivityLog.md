@@ -12,7 +12,7 @@ Ashkan:
 - Assigned roles to individual members 
 - Determined the technologies we will use 
 (09/21/2023 around 15 minutes)
-- Worked on project approach, more precisely the qualtitave assessment of 3 front and back end frameworks (09/25/2023, 10:45 - 11:45 am )
+- Worked on project approach, more precisely the qualtitave assessment of 3 front and back end frameworks (09/25/2023, 10:45 - 11:45 am)
 - Created wiki and started plan for next sprint (09/25/2023, 11:45 -12:05 am) 
 
 Shayne:
