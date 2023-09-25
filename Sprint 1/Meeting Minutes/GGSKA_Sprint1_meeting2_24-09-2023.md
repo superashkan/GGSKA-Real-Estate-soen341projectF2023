@@ -17,4 +17,4 @@ Task Breakdown: Based on the user stories and roles, what the team members are s
 Plan for tomorrow:\
 Explanation of the chosen technologies as well as the assessment of 3 backend & 3 frontend frameworks.\
 Task Breakdown.\
-Plan for the next Sprint.\ 
+Plan for the next Sprint.
