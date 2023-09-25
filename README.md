@@ -36,7 +36,6 @@ Node.js
 
 
 ## Project Approach: 
-For the front end of the website, we will be using HTML and CSS as our main tools. Hand in hand these two languages can create stunning layouts for our real estate website.\
-Along side these base languages, we can introduce frameworks to enhance and facilitate our programming experience. One of these frameworks is called "React".
+For the front end of the website, we will be using HTML and CSS as our main tools. Hand in hand these two languages can create stunning layouts for our real estate website. Along side these base languages, we can introduce frameworks to enhance and facilitate our programming experience. One of these frameworks is called "React".
 
 
