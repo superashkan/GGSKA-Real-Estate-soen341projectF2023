@@ -1,6 +1,7 @@
 Giancarlo:
 - Developed first draft of 4 complete user stories, and repurposed each of them for Sprint 1 in particular: 90 minutes (10:00 - 11:00 AM (09/21/2023), 3:15 - 3:45 PM (09/21/2023))
 - Made some changes to 4 user stories to be submitted for Sprint 1 (3:15 PM - 3:45 PM (09/24/2023))
+- Proofreading of the Sprint 2 plan as well as the "Project Approach" portion of the README.md file. Made some changes to both of those files (had to revert an initial change made to the Sprint 2 plan since I made such a change before officially receiving approval to do so from a teammate) (1:25 PM - 2:00 PM (09/25/2023))
 
 Chimdindu:
 - _
