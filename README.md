@@ -41,6 +41,8 @@ For the front-end of the website, we will be using HTML and CSS as our main tool
 
 For the back-end we will strictly be working with JavaScript along side a back-end framework called "Node.js". Node.js can generate dynamic page content, it collect form data, it can add, delete and modify data in our database, as well as much more. As it uses JavaScript and can be used with our MySQL database, it will we relatively easy to learn and use. "Django" is another back-end framework that enhances development speed by focusing on reusing code. It runs of the Python language and it provides a quick and easy to use user experience. One more framework that we looked at but ultimatly passed on is the "Express.js" back-end framework. It utilizes JavaScript and it is built-upon Node.js, therefore it adds more features while building apps.
 
+As for our database, we will be using MySQL to store and update our data taken from the users of our website. This data will be manipulated by the back-end of website with the use of Node.js.
+
 
 
 
