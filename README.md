@@ -30,7 +30,7 @@ MySQL\
 Frontend:\
 HTML\
 CSS\
-React (can be change by front-end crew)
+React (can be change by front-end crew)\
 \
 Backend:\
 Node.js
