@@ -10,7 +10,7 @@ Chimdindu:
 - Researched the technologies to be used for developing the front end of this project.
 
 Phuong Khanh:
-- Wrote Project Approach to the README file (5:00 - 5:35 PM 09/14/2023)
+- Wrote Project Description to the README file (5:00 - 5:35 PM 09/14/2023)
 - Wrote meeting minutes for meeting 1 (4:30 - 5:15 PM 09/21/2023, around 15 minutes total)
 - Wrote meeting minutes for meeting 2 (7:15 - 7:32 PM 09/24/2023, around 10 minutes total) 
 
