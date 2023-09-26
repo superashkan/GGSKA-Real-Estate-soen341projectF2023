@@ -5,6 +5,7 @@ Giancarlo:
 - Proofreading of the Sprint 2 plan as well as the "Project Approach" portion of the README.md file. Made some changes to both of those files (had to revert an initial change made to the Sprint 2 plan since I made such a change before officially receiving approval to do so from a teammate) (1:10 PM - 2:00 PM (09/25/2023))
 - Developed a markdown version of the meeting minutes for meeting #2, making use of Phuong Khanh's version of the minutes for that meeting as well as adding some details to part of the "Plan for tomorrow" section (2:10 PM - 2:20 PM (09/25/2023))
 - Created a markdown file for Task Breakdown, added some database-related tasks and appointed myself as the team member to handle such tasks (2:53 PM - 3:15 PM (09/25/2023))
+
 Chimdindu:
 - Researched the technologies to be used for developing the front end of this project.
 
