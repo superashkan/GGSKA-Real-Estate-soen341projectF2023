@@ -18,7 +18,7 @@
 - Design an interface for brokers to manage their listings, including creating, updating, and deleting them.
 - Implement a user-friendly interface for homebuyers and property renters to view property listings.
 - Create an administrator interface to manage user accounts, especially broker accounts.
-- Design intuitive and user-friendly interfaces for all user roles.
+- Design intuitive and user-friendly interfaces for all user roles.\
   (Team members working on this: Chimdindu Okelekwe, Shayne Fleming)
   
 ## Back-end:
@@ -26,5 +26,5 @@
 - CRUD operation of user data
 - Implementing the use of application programming interfaces (APIs) (if necessary)
 - Implementing a login system to ensure each user can only see what is necessary
-- Implementing the search system that will allow users to search properties
+- Implementing the search system that will allow users to search properties\
 (Team members working on this: Ashkan Forghani, Phuong Khanh Ton)
