@@ -26,5 +26,6 @@
 - CRUD operation of user data
 - Implementing the use of application programming interfaces (APIs) (if necessary)
 - Implementing a login system to ensure each user can only see what is necessary
-- Implementing the search system that will allow users to search properties\
+- Implementing the search system that will allow users to search properties
+- Implementing functionnal features (for example: mortgage calculator)\
 (Team members working on this: Ashkan Forghani, Phuong Khanh Ton)
