@@ -19,7 +19,7 @@
 - Implement a user-friendly interface for homebuyers and property renters to view property listings.
 - Create an administrator interface to manage user accounts, especially broker accounts.
 - Design intuitive and user-friendly interfaces for all user roles.\
-  (Team members working on this: Chimdindu Okelekwe, Shayne Fleming)
+(Team members working on this: Chimdindu Okelekwe, Shayne Fleming)
   
 ## Back-end:
 - Responsible for creating and maintaning the client-server architecture
