@@ -11,6 +11,7 @@
   • Visit-Homebuyer (Relation)\
   • Visit-"Property Renter" (Relation)\
   • Visit-Broker (Relation)\
+-Establish a working connection between the database and the web application.\
 (Team member working on this: Giancarlo Biasiucci)
 
 ## Front-end:
