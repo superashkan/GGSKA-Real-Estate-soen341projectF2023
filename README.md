@@ -17,7 +17,7 @@ Brokers will be able to manage their own property listings, and request visits t
 
 ## Team members and Roles:
 Giancarlo Biasiucci: Team Lead and Database Manager \
-Ashkan Forghani: Back-End Developer \
+Ashkan Forghani: Full-Stack Developer \
 Phuong Khanh Ton: Back-End Lead \
 Shayne Fleming: Front-End Lead \
 Chimdindu Okelekwe: Front-End Developer
