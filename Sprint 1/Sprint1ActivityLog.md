@@ -10,7 +10,8 @@ Giancarlo:
 - Wrote and proposed four new user stories which include acceptance criteria & priority levels (2:50 PM - 3:30 PM (09/28/2023))
 
 Chimdindu:
-- Researched the technologies to be used for developing the front end of this project.
+- Researched the technologies to be used for developing the front end of this project.(6:50pm -7:20pm (09/25/2023))
+- Did research on selected technology for Front end development (4:45pm - 5:50pm (09/28/2023))
 
 Phuong Khanh:
 - Wrote Project Description to the README file (5:00 - 5:35 PM 09/14/2023)
