@@ -24,7 +24,7 @@
   
 ## Back-end:
 - Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties.\
-(Team member working on this task: Giancarlo Biasiucci)\
+(Team member working on this task: Giancarlo Biasiucci)
 - Responsible for creating and maintaning the client-server architecture
 - CRUD operation of user data
 - Implementing the use of application programming interfaces (APIs) (if necessary)
