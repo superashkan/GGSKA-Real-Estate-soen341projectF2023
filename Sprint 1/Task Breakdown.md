@@ -11,7 +11,7 @@ Giancarlo Biasiucci:
   • Broker-Property (Relation)\
   • Visit-Homebuyer (Relation)\
   • Visit-"Property Renter" (Relation)\
-  • Visit-Broker (Relation)\
+  • Visit-Broker (Relation)
 - Establish a working connection between the database and the web application.
 
 ## Front-end:
