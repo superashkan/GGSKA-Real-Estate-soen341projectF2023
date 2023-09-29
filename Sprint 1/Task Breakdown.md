@@ -12,8 +12,7 @@ Giancarlo Biasiucci:
   • Visit-Homebuyer (Relation)\
   • Visit-"Property Renter" (Relation)\
   • Visit-Broker (Relation)\
-- Establish a working connection between the database and the web application.\
-(Team member working on these tasks: Giancarlo Biasiucci)
+- Establish a working connection between the database and the web application.
 
 ## Front-end:
 Chimdindu Okelekwe, Shayne Fleming:
@@ -21,7 +20,7 @@ Chimdindu Okelekwe, Shayne Fleming:
 - Design an interface for brokers to manage their listings, including creating, updating, and deleting them.
 - Implement a user-friendly interface for homebuyers and property renters to view property listings.
 - Create an administrator interface to manage user accounts, especially broker accounts.
-- Design intuitive and user-friendly interfaces for all user roles.\
+- Design intuitive and user-friendly interfaces for all user roles.
   
 ## Back-end:
 Giancarlo Biasiucci:
