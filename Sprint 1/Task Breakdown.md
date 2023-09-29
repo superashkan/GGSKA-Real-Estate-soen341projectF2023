@@ -25,7 +25,7 @@ Chimdindu Okelekwe, Shayne Fleming:
   
 ## Back-end:
 Giancarlo Biasiucci:
-- Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties. Each of these functions will be used in the backend code.\
+- Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties. Each of these functions will be used in the backend code.
 
 Ashkan Forghani, Phuong Khanh Ton:
 - Responsible for creating and maintaning the client-server architecture
