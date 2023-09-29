@@ -23,9 +23,8 @@
 (Team members working on these tasks: Chimdindu Okelekwe, Shayne Fleming)
   
 ## Back-end:
-- Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties.\
+- Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties. Each of these functions will be used in the backend code.\
 (Team member working on this task: Giancarlo Biasiucci)
-
 - Responsible for creating and maintaning the client-server architecture
 - CRUD operation of user data
 - Implementing the use of application programming interfaces (APIs) (if necessary)
