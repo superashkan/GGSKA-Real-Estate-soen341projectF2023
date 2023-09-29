@@ -8,6 +8,8 @@ Giancarlo:
 - Made some small, final-stage adjustments to content to be submitted for Sprint 1 (2:53 PM - 3:12 PM (09/26/2023))
 - Created and started working on the Sprint 2 planning chart (10:18 AM - 11:19 AM (09/28/2023))
 - Wrote and proposed four new user stories which include acceptance criteria & priority levels (2:50 PM - 3:30 PM (09/28/2023))
+- Worked on Sprint 2 planning chart alongside my team - reviewed changes being made to document and ensured that everything aligned with the planning requirements as much as possible (4:20 PM - 5:45 PM (09/28/2023))
+- Made some changes to the User Stories markdown file (settled on newly written & proposed user stories) and Task Breakdown markdown file (added team member headers within the "Database", "Back-end" and "Front-end" task division sections, added a back-end task involving MySQL/database functions to be used in our back-end code, and made some formatting fixes) (5:15 PM - 5:38 PM (09/29/2023))
 
 Chimdindu:
 - Researched the technologies to be used for developing the front end of this project.(6:50pm -7:20pm (09/25/2023))
