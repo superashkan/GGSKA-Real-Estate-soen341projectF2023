@@ -1,7 +1,7 @@
 # Task Breakdown
 
 ## Database:
-Giancarlo Biasiucci:\
+Giancarlo Biasiucci:
 - Create a database for the website as well as tables for the following entities & relations:\
   • Homebuyers\
   • Property Renters\
@@ -16,7 +16,7 @@ Giancarlo Biasiucci:\
 (Team member working on these tasks: Giancarlo Biasiucci)
 
 ## Front-end:
-Chimdindu Okelekwe, Shayne Fleming:\
+Chimdindu Okelekwe, Shayne Fleming:
 - Create wireframes or low-fidelity sketches to outline the website's layout and structure
 - Design an interface for brokers to manage their listings, including creating, updating, and deleting them.
 - Implement a user-friendly interface for homebuyers and property renters to view property listings.
@@ -24,10 +24,10 @@ Chimdindu Okelekwe, Shayne Fleming:\
 - Design intuitive and user-friendly interfaces for all user roles.\
   
 ## Back-end:
-Giancarlo Biasiucci:\
+Giancarlo Biasiucci:
 - Create MySQL/database functions for CRUD operations for property listiings, CRUD operations for brokers, searching for properties and requesting visits to properties. Each of these functions will be used in the backend code.\
 
-Ashkan Forghani, Phuong Khanh Ton:\
+Ashkan Forghani, Phuong Khanh Ton:
 - Responsible for creating and maintaning the client-server architecture
 - CRUD operation of user data
 - Implementing the use of application programming interfaces (APIs) (if necessary)
