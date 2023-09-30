@@ -1,4 +1,4 @@
-# GGSKYA-Real-Estate
+# GGSKA-Real-Estate
 
 ## Project Description
 The project is a real estate web application for the search and the management of real estate properties. The application will have different features to make the real estate transactions more efficient.\
