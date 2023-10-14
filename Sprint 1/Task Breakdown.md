@@ -7,12 +7,10 @@ Giancarlo Biasiucci:
   • Property Renters\
   • Brokers\
   • Properties\
-  • Scheduled Visits\
-  • Broker-Property (Relation)\
-  • Visit-Homebuyer (Relation)\
-  • Visit-"Property Renter" (Relation)\
-  • Visit-Broker (Relation)
-- Establish a working connection between the database and the web application.
+  • Scheduled Visits (Brokers)\
+  • Scheduled Visits (Homebuyers)\
+  • Scheduled Visits (Property Renters)
+- Establish a working connection with the database.
 
 ## Front-end:
 Chimdindu Okelekwe, Shayne Fleming:
