@@ -693,76 +693,81 @@ function deleteBroker(brokerID) {
 //Search method:
 
 async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery) {
-  if ((isNullOrEmpty(addressQuery) && (isNullOrEmpty(brokerNameQuery) && isNullOrEmpty(maxGoingPriceQuery))) && (isNullOrEmpty(minGoingPriceQuery) && (isNullOrEmpty(amenitiesQuery) && isNullOrEmpty(numBedroomsQuery)))) {
-    throw new Error("Error (Property Search): All fields are either null or empty. Please enter a valid value for at least one search criteria field");
-  }
-  var searchQuery = `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`;
-  var rowDataPacketList = [];
-  var resultsList = [];
-  var brokerName = "";
-  if (!isNullOrEmpty(addressQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
+  try {
+    if ((isNullOrEmpty(addressQuery) && (isNullOrEmpty(brokerNameQuery) && isNullOrEmpty(maxGoingPriceQuery))) && (isNullOrEmpty(minGoingPriceQuery) && (isNullOrEmpty(amenitiesQuery) && isNullOrEmpty(numBedroomsQuery)))) {
+      throw new Error("Error (Property Search): All fields are either null or empty. Please enter a valid value for at least one search criteria field");
     }
-    searchQuery = searchQuery.concat(`Properties.Address LIKE '%${addressQuery}%'`);
-  }
-  if (!isNullOrEmpty(brokerNameQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
-    }
-    searchQuery = searchQuery.concat(`Properties.BrokerID IN (SELECT BrokerID FROM Brokers WHERE FirstName LIKE '%${brokerNameQuery}%' OR LastName LIKE '%${brokerNameQuery}%')`);
-  }
-  if (!isNullOrEmpty(maxGoingPriceQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
-    }
-    searchQuery = searchQuery.concat(`Properties.GoingPrice <= ${maxGoingPriceQuery}`);
-  }
-  if (!isNullOrEmpty(minGoingPriceQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
-    }
-    searchQuery = searchQuery.concat(`Properties.GoingPrice >= ${minGoingPriceQuery}`);
-  }
-  if (!isNullOrEmpty(amenitiesQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
-    }
-    searchQuery = searchQuery.concat(`Properties.Amenities LIKE '%${amenitiesQuery}%'`);
-  }
-  if (!isNullOrEmpty(numBedroomsQuery)) {
-    if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
-      searchQuery = searchQuery.concat(` WHERE `);
-    } else {
-      searchQuery = searchQuery.concat(` AND `);
-    }
-    searchQuery = searchQuery.concat(`Properties.NumBedrooms = ${numBedroomsQuery}`);
-  }
-
-  //https://stackoverflow.com/questions/47158979/node-wait-for-async-function-before-continue
-  return new Promise(function(resolve, reject) {
-    connection.query(searchQuery, function (error, result) {
-      if (error) throw error;
-
-      //https://stackoverflow.com/questions/31221980/how-to-access-a-rowdatapacket-object
-      result = JSON.parse(JSON.stringify(result));
-      for (property of result) {
-        const newProperty = new Property(property['PropertyID'], property['BrokerID'], property['BrokerFullName'], property['Address'], property['GoingPrice'], property['Amenities'], property['NumBedrooms']);
-        resultsList.push(newProperty);
+    var searchQuery = `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`;
+    var rowDataPacketList = [];
+    var resultsList = [];
+    var brokerName = "";
+    if (!isNullOrEmpty(addressQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
       }
-      resolve(resultsList);
+      searchQuery = searchQuery.concat(`Properties.Address LIKE '%${addressQuery}%'`);
+    }
+    if (!isNullOrEmpty(brokerNameQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.BrokerID IN (SELECT BrokerID FROM Brokers WHERE FirstName LIKE '%${brokerNameQuery}%' OR LastName LIKE '%${brokerNameQuery}%')`);
+    }
+    if (!isNullOrEmpty(maxGoingPriceQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.GoingPrice <= ${maxGoingPriceQuery}`);
+    }
+    if (!isNullOrEmpty(minGoingPriceQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.GoingPrice >= ${minGoingPriceQuery}`);
+    }
+    if (!isNullOrEmpty(amenitiesQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.Amenities LIKE '%${amenitiesQuery}%'`);
+    }
+    if (!isNullOrEmpty(numBedroomsQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.NumBedrooms = ${numBedroomsQuery}`);
+    }
+
+    //https://stackoverflow.com/questions/47158979/node-wait-for-async-function-before-continue
+    return new Promise(function(resolve, reject) {
+      connection.query(searchQuery, function (error, result) {
+        if (error) throw error;
+
+        //https://stackoverflow.com/questions/31221980/how-to-access-a-rowdatapacket-object
+        result = JSON.parse(JSON.stringify(result));
+        for (property of result) {
+          const newProperty = new Property(property['PropertyID'], property['BrokerID'], property['BrokerFullName'], property['Address'], property['GoingPrice'], property['Amenities'], property['NumBedrooms']);
+          resultsList.push(newProperty);
+        }
+        resolve(resultsList);
+      });
     });
-  });
+  }
+  catch(error) {
+    console.log(error.message);
+  }
 }
 
 //https://stackoverflow.com/questions/47158979/node-wait-for-async-function-before-continue
@@ -773,5 +778,5 @@ async function getResults(addressQuery, brokerNameQuery, maxGoingPriceQuery, min
 
 //For testing purposes:
 
-// getResults("", "", null, 0.00, "decorated", null);
+getResults("", "", 0.00, null, "", null);
 connection.end();
