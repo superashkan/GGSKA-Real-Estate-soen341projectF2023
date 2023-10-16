@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Search</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="GGSKA.png" alt="GGSKA">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Buy</a></li>
+                <li><a href="#">Rent</a></li>
+                <li><a href="#">Sell</a></li>
+                <li><a href="#">Reservations</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Property Search</h1>
+    <form id="search-form">
+        <div class="search-params">
+            <div>
+                <label for="location">Location:</label>
+                <input class="input-field" type="text" id="location" name="location" placeholder="Enter location">
+            </div>
+            <div>
+                <label for="price">Price Range:</label>
+                <input class="input-field" type="number" id="min-price" name="min-price" placeholder="Min Price">
+                <input class="input-field" type="number" id="max-price" name="max-price" placeholder="Max Price">
+            </div>
+            <div class="dropdowns">
+                <select id="beds" name="beds" class="dropdown">
+                    <option value="" selected disabled>Select Beds</option>
+                    <option value="1">1 Bed</option>
+                    <option value="2">2 Beds</option>
+                    <option value="3">3 Beds</option>
+                    <option value="4">4 Beds</option>
+                    <option value="5">5 Beds</option>
+                </select>
+                <select id="baths" name="baths" class="dropdown">
+                    <option value="" selected disabled>Select Baths</option>
+                    <option value="1">1 Bath</option>
+                    <option value="2">2 Baths</option>
+                    <option value="3">3 Baths</option>
+                    <option value="4">4 Baths</option>
+                    <option value="5">5 Baths</option>
+                </select>
+            </div>
+        </div>
+        <button class="search-button" type="submit">Search</button>
+    </form>
+    <div id="search-results">
+        <!-- Display search results here -->
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
