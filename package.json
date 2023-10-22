@@ -1,0 +1,11 @@
+{
+  "name": "ggska-real-estate-soen341projectf2023",
+  "version": "1.0.0",
+  "description": "Real estate web app",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
