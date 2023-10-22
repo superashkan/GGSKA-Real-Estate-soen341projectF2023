@@ -9,6 +9,8 @@ on:
   pull_request:
     branches: [ "Continuous-Integration-test/**" ]
 
+  workflow_dispatch:
+
 jobs:
   build:
 
