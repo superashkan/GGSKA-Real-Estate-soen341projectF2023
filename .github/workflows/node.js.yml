@@ -5,9 +5,9 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "Continuous-Integration-test" ]
+    branches: [ "Continuous-Integration-test/**" ]
   pull_request:
-    branches: [ "Continuous-Integration-test" ]
+    branches: [ "Continuous-Integration-test/**" ]
 
 jobs:
   build:
