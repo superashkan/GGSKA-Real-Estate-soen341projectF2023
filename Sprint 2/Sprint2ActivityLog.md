@@ -9,6 +9,6 @@ Phuong Khanh:
 
 
 Ashkan:
-
+- Created the properties listing page template with HTML and CSS (2:30 pm - 3:30 pm (2023/10/22))
 
 Shayne:
