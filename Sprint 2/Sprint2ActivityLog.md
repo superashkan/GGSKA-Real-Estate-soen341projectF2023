@@ -6,8 +6,8 @@ Chimdindu:
 
 
 Phuong Khanh:
-- Wrote the meeting minutes - around 15 minutes total (4:30 PM - 5:00 PM 05/10/2023)
-- Wrote the meeting minutes - around 20 minutes total (8:45 PM - 9:30 PM 17/10/2023)
+- Wrote the meeting minutes - around 15 minutes total (4:30 PM - 5:00 PM (05/10/2023))
+- Wrote the meeting minutes - around 20 minutes total (8:45 PM - 9:30 PM (17/10/2023))
 
 Ashkan:
 - Created the properties listing page template with HTML and CSS (2:30 pm - 3:30 pm (2023/10/22))
