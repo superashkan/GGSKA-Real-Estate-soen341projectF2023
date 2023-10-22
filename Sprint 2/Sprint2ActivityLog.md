@@ -10,5 +10,6 @@ Phuong Khanh:
 
 Ashkan:
 - Created the properties listing page template with HTML and CSS (2:30 pm - 3:30 pm (2023/10/22))
+- Created the Buy and Rent property page templates with HTML and CSS (3:30 - 4:50 pm (2023/10/22))
 
 Shayne:
