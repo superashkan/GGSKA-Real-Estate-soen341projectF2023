@@ -7,6 +7,10 @@ header {
     padding: 10px 20px;
 }
 
+h1{
+    padding: 2%;
+}
+
 .logo img {
     height: 60px;
     width: 60px;
@@ -119,4 +123,25 @@ h1 {
     padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+}
+
+.property {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    max-width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.property img {
+    max-width: 100%;
+    height: auto;
+}
+.property-address {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 2%;
+}
+.property-details {
+    margin-top: 1%;
+    text-align: left;
 }
