@@ -66,7 +66,6 @@ window.addEventListener("scroll", e => {
 
         <div class="navbar-wrapper">
             <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
-          
             <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
 
         </div>
