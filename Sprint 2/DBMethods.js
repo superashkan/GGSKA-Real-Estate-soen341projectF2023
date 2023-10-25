@@ -9,9 +9,9 @@
 
 var Property = require('./Property.js');
 
-const requiredConnectionParam = require("mysql");
+var requiredConnectionParam = require("mysql");
 
-const connection = requiredConnectionParam.createConnection({
+var connection = requiredConnectionParam.createConnection({
   host: "localhost",
   user: "root",
   password: "KnowTheName3472!",
@@ -20,10 +20,11 @@ const connection = requiredConnectionParam.createConnection({
 
 connection.connect(function(error) {
   if (error) throw error;
+  console.log("Connection successful");
 });
 
-datePattern = /[0-9][0-9][0-9][0-9]\u002D[0-9][0-9]\u002D[0-9][0-9]/;
-timePattern = /[0-9][0-9]\u003A[0-9][0-9]\u003A[0-9][0-9]/;
+var datePattern = /[0-9][0-9][0-9][0-9]\u002D[0-9][0-9]\u002D[0-9][0-9]/;
+var timePattern = /[0-9][0-9]\u003A[0-9][0-9]\u003A[0-9][0-9]/;
 
 function isNullOrEmpty(stringInput) {
   if (stringInput === null || stringInput.toString().trim() === "") {
@@ -208,17 +209,17 @@ function getAllBrokerInformation() {
 }
 
 //For testing purposes:
-// insertBroker("Jeff", "Smith", "jeffsmith91", "BeautifulButterfly32");
-// insertBroker("Jeff", "Davidson", "jdavidson91", "WallStreetRules247!");
-// insertBroker("Elaine", "Davidson", "elaine_h_davidson", "MyHusbandIsAmazing");
-// insertBroker("Peter", "St-Charles", "peterstcharles4249", "R0ck&R011@11D@yL0ng!");
-// insertBroker("Alana", "Masterson", "jdavidson91", "WhyDidIUseThisUsername?");
+insertBroker("Jeff", "Smith", "jeffsmith91", "BeautifulButterfly32");
+insertBroker("Jeff", "Davidson", "jdavidson91", "WallStreetRules247!");
+insertBroker("Elaine", "Davidson", "elaine_h_davidson", "MyHusbandIsAmazing");
+insertBroker("Peter", "St-Charles", "peterstcharles4249", "R0ck&R011@11D@yL0ng!");
+insertBroker("Alana", "Masterson", "jdavidson91", "WhyDidIUseThisUsername?");
 // getAllBrokerInformation();
 
 
 //For the Properties table:
 
-function insertProperty(address, brokerID, goingPrice, amenities, numBedrooms) {
+function insertProperty(address, brokerID, goingPrice, amenities, numBedrooms, numBathrooms) {
   try {
     if (isNullOrEmpty(address) || address.length > 255){
       throw new Error("Error (Property Insertion): A valid, non-null address that is no longer than 255 characters must be provided.");
@@ -232,10 +233,13 @@ function insertProperty(address, brokerID, goingPrice, amenities, numBedrooms) {
     if (numBedrooms === null || numBedrooms <= 0) {
       throw new Error("Error (Property Insertion): A valid, non-null, positive number of bedrooms must be provided.");
     }
+    if (numBathrooms === null || numBathrooms <= 0) {
+      throw new Error("Error (Property Insertion): A valid, non-null, positive number of bathrooms must be provided.");
+    }
     if (goingPrice === null || goingPrice <= 0.00) {
       throw new Error("Error (Property Insertion): A valid, non-null, positive going price must be provided.");
     }
-    const insertQuery = `INSERT INTO Properties (Address, BrokerID, GoingPrice, Amenities, NumBedrooms) VALUES ('${address}', ${brokerID}, ${goingPrice}, '${amenities}', ${numBedrooms})`;
+    const insertQuery = `INSERT INTO Properties (Address, BrokerID, GoingPrice, Amenities, NumBedrooms, NumBathrooms) VALUES ('${address}', ${brokerID}, ${goingPrice}, '${amenities}', ${numBedrooms}, ${numBathrooms})`;
     connection.query(insertQuery, function (error, result) {
       try {
         if (error) {
@@ -262,7 +266,7 @@ function insertProperty(address, brokerID, goingPrice, amenities, numBedrooms) {
 
 function getAllPropertyInformation() {
   try {
-    const getAllQuery = 'SELECT Address, BrokerID, GoingPrice, Amenities, NumBedrooms FROM Properties';
+    const getAllQuery = 'SELECT Address, BrokerID, GoingPrice, Amenities, NumBedrooms, NumBathrooms FROM Properties';
     connection.query(getAllQuery, function (error, result) {
       try {
         if (error) {
@@ -281,11 +285,11 @@ function getAllPropertyInformation() {
 }
 
 //For testing purposes:
-// insertProperty("342 Melon Street", 1, 2100.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3);
-// insertProperty("5091 Campbell Avenue", 2, 3000.00, "Spacious & decorated interior, stunning castle-like exterior, modern-day dining room complete with all of the latest kitchen gadgets & even some Renaissance-era paintings, king-sized bedding, and so much more.", 4);
-// insertProperty("27 Heathrow Lane", 3, 540.00, "Small-medium interior, aged & rusted exterior, dated furnishings & decor, high-quality plumbing, single-person bedding, and so much more.", 1);
-// insertProperty("67 Merano Boulevard", 4, 1500.00, "Medium-sized interior, apartment, fully furnished, plasma-screen TV, king-sized bedding, reliable fire escape, balcony complete with chairs & a view, and so much more.", 2);
-// insertProperty("341 Melon Street", 5, 730.00, "This is just a test!", 5);
+insertProperty("342 Melon Street", 1, 2100.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3, 2);
+insertProperty("5091 Campbell Avenue", 2, 3000.00, "Spacious & decorated interior, stunning castle-like exterior, modern-day dining room complete with all of the latest kitchen gadgets & even some Renaissance-era paintings, king-sized bedding, and so much more.", 4, 3);
+insertProperty("27 Heathrow Lane", 3, 540.00, "Small-medium interior, aged & rusted exterior, dated furnishings & decor, high-quality plumbing, single-person bedding, and so much more.", 1, 2);
+insertProperty("67 Merano Boulevard", 4, 1500.00, "Medium-sized interior, apartment, fully furnished, plasma-screen TV, king-sized bedding, reliable fire escape, balcony complete with chairs & a view, and so much more.", 2, 1);
+insertProperty("341 Melon Street", 5, 730.00, "This is just a test!", 5, 1);
 // getAllPropertyInformation();
 
 
@@ -506,7 +510,7 @@ function getAllBrokerVisitInformation() {
 
 //Properties:
 
-function updateProperty(propertyID, newAddress, newBrokerID, newGoingPrice, newAmenities, newNumBedrooms) {
+function updateProperty(propertyID, newAddress, newBrokerID, newGoingPrice, newAmenities, newNumBedrooms, newNumBathrooms) {
   try {
     if (isNullOrEmpty(newAddress) || newAddress.length > 255) {
       throw new Error("Error (Property Update): A valid, non-null address that is no longer than 255 characters must be provided.");
@@ -523,7 +527,10 @@ function updateProperty(propertyID, newAddress, newBrokerID, newGoingPrice, newA
     if (newNumBedrooms === null || newNumBedrooms <= 0) {
       throw new Error("Error (Property Update): A valid, non-null, positive number of bedrooms must be provided.");
     }
-    const updateQuery = `UPDATE Properties SET Address = '${newAddress}', BrokerID = ${newBrokerID}, GoingPrice = ${newGoingPrice}, Amenities = '${newAmenities}', NumBedrooms = ${newNumBedrooms} WHERE PropertyID = ${propertyID}`;
+    if (newNumBathrooms === null || newNumBathrooms <= 0) {
+      throw new Error("Error (Property Update): A valid, non-null, positive number of bathrooms must be provided.");
+    }
+    const updateQuery = `UPDATE Properties SET Address = '${newAddress}', BrokerID = ${newBrokerID}, GoingPrice = ${newGoingPrice}, Amenities = '${newAmenities}', NumBedrooms = ${newNumBedrooms}, NumBathrooms = ${newNumBathrooms} WHERE PropertyID = ${propertyID}`;
     connection.query(updateQuery, function (error, result) {
       try {
         if (error) {
@@ -584,10 +591,10 @@ function deleteProperty(propertyID) {
 
 //For testing purposes:
 
-// updateProperty(1, "597 Theodoria Street", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3);
-// updateProperty(1, "5091 Campbell Avenue", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3);
-// updateProperty(5, "5091 Campbell Avenue", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3);
-// updateProperty(5, "597 Theodoria Street", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3);
+// updateProperty(1, "597 Theodoria Street", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3, 2);
+// updateProperty(1, "5091 Campbell Avenue", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3, 3);
+// updateProperty(5, "5091 Campbell Avenue", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3, 2);
+// updateProperty(5, "597 Theodoria Street", 2, 2400.00, "Spacious interior, beautiful exterior, fully furnished basement, state-of-the-art shower system, king-sized bedding, and so much more.", 3, 1);
 // deleteProperty(2);
 // deleteProperty(3);
 // deleteProperty(6);
@@ -692,9 +699,9 @@ function deleteBroker(brokerID) {
 
 //Search method:
 
-async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery) {
+async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery, numBathroomsQuery) {
   try {
-    if ((isNullOrEmpty(addressQuery) && (isNullOrEmpty(brokerNameQuery) && isNullOrEmpty(maxGoingPriceQuery))) && (isNullOrEmpty(minGoingPriceQuery) && (isNullOrEmpty(amenitiesQuery) && isNullOrEmpty(numBedroomsQuery)))) {
+    if (isNullOrEmpty(numBathroomsQuery) && ((isNullOrEmpty(addressQuery) && (isNullOrEmpty(brokerNameQuery) && isNullOrEmpty(maxGoingPriceQuery))) && (isNullOrEmpty(minGoingPriceQuery) && (isNullOrEmpty(amenitiesQuery) && isNullOrEmpty(numBedroomsQuery))))) {
       throw new Error("Error (Property Search): All fields are either null or empty. Please enter a valid value for at least one search criteria field");
     }
     var searchQuery = `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`;
@@ -702,7 +709,7 @@ async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuer
     var resultsList = [];
     var brokerName = "";
     if (!isNullOrEmpty(addressQuery)) {
-      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties`) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties INNER JOIN Brokers ON Properties.BrokerID = Brokers.BrokerID`) {
         searchQuery = searchQuery.concat(` WHERE `);
       } else {
         searchQuery = searchQuery.concat(` AND `);
@@ -749,16 +756,25 @@ async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuer
       }
       searchQuery = searchQuery.concat(`Properties.NumBedrooms = ${numBedroomsQuery}`);
     }
-
+    if (!isNullOrEmpty(numBathroomsQuery)) {
+      if (searchQuery === `SELECT Properties.*, CONCAT(Brokers.FirstName, ' ', Brokers.LastName) AS BrokerFullName FROM Properties`) {
+        searchQuery = searchQuery.concat(` WHERE `);
+      } else {
+        searchQuery = searchQuery.concat(` AND `);
+      }
+      searchQuery = searchQuery.concat(`Properties.NumBathrooms = ${numBathroomsQuery}`);
+    }
     //https://stackoverflow.com/questions/47158979/node-wait-for-async-function-before-continue
     return new Promise(function(resolve, reject) {
+      console.log(searchQuery);
       connection.query(searchQuery, function (error, result) {
         if (error) throw error;
 
         //https://stackoverflow.com/questions/31221980/how-to-access-a-rowdatapacket-object
         result = JSON.parse(JSON.stringify(result));
+        console.log(result);
         for (property of result) {
-          const newProperty = new Property(property['PropertyID'], property['BrokerID'], property['BrokerFullName'], property['Address'], property['GoingPrice'], property['Amenities'], property['NumBedrooms']);
+          var newProperty = new Property(property['PropertyID'], property['BrokerID'], property['BrokerFullName'], property['Address'], property['GoingPrice'], property['Amenities'], property['NumBedrooms'], property['NumBathrooms']);
           resultsList.push(newProperty);
         }
         resolve(resultsList);
@@ -771,12 +787,14 @@ async function searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuer
 }
 
 //https://stackoverflow.com/questions/47158979/node-wait-for-async-function-before-continue
-async function getResults(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery) {
-  var results = await searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery);
+async function getResults(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery, numBathroomsQuery) {
+  var results = await searchProperties(addressQuery, brokerNameQuery, maxGoingPriceQuery, minGoingPriceQuery, amenitiesQuery, numBedroomsQuery, numBathroomsQuery);
   console.log(results);
 }
 
 //For testing purposes:
 
-getResults("", "", 0.00, null, "", null);
+getResults("", "", null, 0.00, "", null, null);
 connection.end();
+
+module.exports = getResults;

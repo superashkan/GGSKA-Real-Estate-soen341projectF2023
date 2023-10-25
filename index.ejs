@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Property Search</title>
+    <link rel="stylesheet" href="http://localhost:3000/style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="GGSKA.png" alt="GGSKA">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Buy</a></li>
+                <li><a href="#">Rent</a></li>
+                <li><a href="#">Sell</a></li>
+                <li><a href="#">Reservations</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Property Search</h1>
+    <form action='search-properties' id="search-form">
+        <div class="search-params">
+            <div>
+                <label for="location">Location:</label>
+                <input class="input-field" type="text" id="location" name="location" placeholder="Enter location">
+            </div>
+            <div>
+                <label for="price">Price Range:</label>
+                <input class="input-field" type="number" id="min-price" name="min_price" min=0.00 placeholder="Mininum Price">
+                <input class="input-field" type="number" id="max-price" name="max_price" min=0.00 placeholder="Maximum Price">
+            </div>
+            <div class="dropdowns">
+                <select id="beds" name="beds" class="dropdown">
+                    <option value="" selected disabled>Select Beds</option>
+                    <option value="noselection">No Selection</option>
+                    <option value="1">1 Bed</option>
+                    <option value="2">2 Beds</option>
+                    <option value="3">3 Beds</option>
+                    <option value="4">4 Beds</option>
+                    <option value="5">5 Beds</option>
+                </select>
+                <select id="baths" name="baths" class="dropdown">
+                    <option value="" selected disabled>Select Baths</option>
+                    <option value="noselection">No Selection</option>
+                    <option value="1">1 Bath</option>
+                    <option value="2">2 Baths</option>
+                    <option value="3">3 Baths</option>
+                    <option value="4">4 Baths</option>
+                    <option value="5">5 Baths</option>
+                </select>
+            </div>
+        </div>
+        <button class="search-button" id="search-button" type="submit" disabled>Search</button>
+    </form>
+    <div id="search-results">
+      <% if (hasSearchBeenDone == true) { %>
+      <table>
+        <tr>
+          <th>Property ID</th>
+          <th>Broker Name</th>
+          <th>Address</th>
+          <th>Going Price</th>
+          <th>Amenities</th>
+          <th>Bedrooms</th>
+          <th>Bathrooms</th>
+        </tr>
+        <% for (var counter = 0; counter < propertyList.length; counter++) { %>
+          <tr>
+            <td><%= propertyList[counter].property_ID %></td>
+            <td><%= propertyList[counter].broker_name%></td>
+            <td><%= propertyList[counter].address%></td>
+            <td><%= propertyList[counter].going_price%></td>
+            <td><%= propertyList[counter].amenities%></td>
+            <td><%= propertyList[counter].num_bedrooms%></td>
+            <td><%= propertyList[counter].num_bathrooms%></td>
+          </tr>
+        <% } %>
+      </table>
+    <% } %>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!--
+    <script src="./script.js"></script>
+    -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var locationField = document.getElementById("location");
+      var minPriceField = document.getElementById("min-price");
+      var maxPriceField = document.getElementById("max-price");
+      var bedroomsField = document.getElementById("beds");
+      var bathroomsField = document.getElementById("baths");
+      var searchButton = document.getElementById("search-button");
+      locationField.addEventListener("change", function() {
+        if ((locationField.value == "" && (minPriceField.value == "" && maxPriceField.value == "")) && (bedroomsField.value == "" && bathroomsField.value == "")) {
+          searchButton.disabled = true;
+        } else {
+          searchButton.disabled = false;
+        }
+      });
+      minPriceField.addEventListener("change", function() {
+        if ((locationField.value == "" && (minPriceField.value == "" && maxPriceField.value == "")) && (bedroomsField.value == "" && bathroomsField.value == "")) {
+          searchButton.disabled = true;
+        } else {
+          searchButton.disabled = false;
+        }
+      });
+      maxPriceField.addEventListener("change", function() {
+        if ((locationField.value == "" && (minPriceField.value == "" && maxPriceField.value == "")) && (bedroomsField.value == "" && bathroomsField.value == "")) {
+          searchButton.disabled = true;
+        } else {
+          searchButton.disabled = false;
+        }
+      });
+      bedroomsField.addEventListener("change", function() {
+        if ((locationField.value == "" && (minPriceField.value == "" && maxPriceField.value == "")) && (bedroomsField.value == "" && bathroomsField.value == "")) {
+          searchButton.disabled = true;
+        } else {
+          searchButton.disabled = false;
+        }
+      });
+      bathroomsField.addEventListener("change", function() {
+        if ((locationField.value == "" && (minPriceField.value == "" && maxPriceField.value == "")) && (bedroomsField.value == "" && bathroomsField.value == "")) {
+          searchButton.disabled = true;
+        } else {
+          searchButton.disabled = false;
+        }
+      });
+
+      var locationRes = ("<%= locationInput %>" == "") ? "" : "<%= locationInput %>"
+      var minPriceRes = ("<%= minPriceInput %>" == "") ? "0.00" : "<%= minPriceInput %>"
+      var maxPriceRes = ("<%= maxPriceInput %>" == "") ? "0.00" : "<%= maxPriceInput %>"
+      var bedroomsRes = ("<%= bedroomsInput %>" == "default"  || "<%= bedroomsInput %>" == "noselection") ? "" : "<%= bedroomsInput %>"
+      var bathroomsRes = ("<%= bathroomsInput %>" == "default" || "<%= bathroomsInput %>" == "noselection") ? "" : "<%= bathroomsInput %>"
+
+      locationField.value = locationRes;
+      if (parseFloat(minPriceRes) > 0.00) {
+        minPriceField.value = parseFloat(minPriceRes);
+      }
+      if (parseFloat(maxPriceRes) > 0.00) {
+        maxPriceField.value = parseFloat(maxPriceRes);
+      }
+      bedroomsField.value = bedroomsRes
+      bathroomsField.value = bathroomsRes
+    });
+    </script>
+</body>
+</html>
