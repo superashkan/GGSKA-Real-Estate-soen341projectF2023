@@ -1,45 +1,88 @@
-import React, { useState } from 'react'
-import Logo from '../assets/white back logo.jpg'
+import React from 'react'
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import ReorderIcon from '@mui/icons-material/Reorder';
-import '../styles/Navbar.css';
+import Logo from '../assets/white back logo.jpg'
+import '../styles/NewHome.css'
 
 
-//Navagation bar on the top of every page
 
-function Navbar() {
-    const [openLinks, setOpenLinks] = useState(false)
+function NewNavbar() {
+useEffect(() => {
+    
+    'use strict';
 
-    const toggleNavbar = () => {
-        setOpenLinks(!openLinks);
 
-    }
+const /** {NodeElement} */ $navbar = document.querySelector("[data-navbar]");
+const /** {NodeElement} */ $navToggler = document.querySelector("[data-nav-toggler]");
+
+$navToggler.addEventListener("click", () => $navbar.classList.toggle("active"));
+
+
+
+/**
+ * Header scroll state
+ */
+
+const /** {NodeElement} */ $header = document.querySelector("[data-header]");
+
+window.addEventListener("scroll", e => {
+  $header.classList[window.scrollY > 50 ? "add" : "remove"]("active");
+});
+}, []);
 
   return (
-    <div className='navbar'>
-        <div className='leftSide' id={openLinks ? "open" : "close"}>  
-            <Link to='/'> 
-                <img src={Logo} /> 
-            </Link> 
-                <div className='hiddenLinks'>
-                    <Link to='/'> Buy </Link>
-                    <Link to='/'> Rent </Link>
-                    <Link to='/login'> Login </Link>
-                </div>
+
+
+    <header className="header" data-header>
+    <div className="container">
+
+    <Link to='/'>
+      <img style={{ mixBlendMode: "multiply", height: "70px", width: "100%"}} src={Logo}  alt="Your Logo" />
+    </Link>
+ 
+
+      <nav className="navbar" data-navbar>
+
+        <ul className="navbar-list">
+
+          <li>
+            <Link to='/'><span className="navbar-link label-medium">Home</span></Link>
+          </li>
+
+          <li>
+            <Link to='/rent'><span className="navbar-link label-medium">Rent</span></Link>
+          </li>
+
+          <li>
+          <Link to='/buy'><span className="navbar-link label-medium">Buy</span></Link>
+          </li>
+
+          <li>
+            <Link to='/'><span className="navbar-link label-medium">Sell</span></Link>
+          </li>
+
+
+        </ul>
+
+        <div class="navbar-wrapper">
+            <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
+          
+            <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
+
         </div>
-        
-        <div className='rightSide'>
-            <Link to='/'> Buy </Link>
-            <Link to='/'> Rent </Link>
-            <Link to='/login'> Login </Link>
-            <button onClick={toggleNavbar}>
-                <ReorderIcon />
-            </button>
-        </div>
-        
+
+      </nav>
+
+      <button className="nav-toggle-btn icon-btn" aria-label="toggle navbar" data-nav-toggler>
+        <span className="material-symbols-rounded open" aria-hidden="true">menu</span>
+        <span className="material-symbols-rounded close" aria-hidden="true">close</span>
+      </button>
 
     </div>
+  </header>
+
+
   )
 }
 
-export default Navbar
+export default NewNavbar

@@ -1,12 +1,12 @@
 import './App.css';
-import Navbar from './components/NewNavbar';
+import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import Home from './pages/new_home';
+import Home from './pages/home';
 import Login from './pages/login'
 import Register from './pages/register'
 import Buy from './pages/buy'
-
+import Rent from './pages/rent'
 
 function App() {
   return (
@@ -18,6 +18,7 @@ function App() {
             <Route path='/login' exact element={<Login />} />
             <Route path='/register' exact element={<Register />} />
             <Route path='/buy' exact element={<Buy />} />
+            <Route path='/rent' exact element={<Rent />} />
           </Routes>
           <Footer/>
         </Router>
