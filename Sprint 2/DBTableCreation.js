@@ -89,7 +89,7 @@ connection.query(brokerTableCreateQuery, function (error, result) {
 });
 
 //Create the Properties table.
-propertyTableCreateQuery = "CREATE TABLE IF NOT EXISTS Properties (PropertyID int NOT NULL AUTO_INCREMENT, BrokerID int NOT NULL, Address varchar(255) NOT NULL UNIQUE, GoingPrice double NOT NULL, Amenities varchar(500) NOT NULL, NumBedrooms int NOT NULL, PRIMARY KEY (PropertyID), FOREIGN KEY (BrokerID) REFERENCES Brokers(BrokerID) );"
+propertyTableCreateQuery = "CREATE TABLE IF NOT EXISTS Properties (PropertyID int NOT NULL AUTO_INCREMENT, BrokerID int NOT NULL, Address varchar(255) NOT NULL UNIQUE, GoingPrice double NOT NULL, Amenities varchar(500) NOT NULL, NumBedrooms int NOT NULL, NumBathrooms int NOT NULL, PRIMARY KEY (PropertyID), FOREIGN KEY (BrokerID) REFERENCES Brokers(BrokerID) );"
 connection.query(propertyTableCreateQuery, function (error, result) {
        if (error) throw error;
        console.log("The Properties table has been created.");
