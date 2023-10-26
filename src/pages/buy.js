@@ -12,9 +12,11 @@ function buy() {
           return (
             <BuyItem
               key={key}
+              uid={key}
               image={buyItem.image}
               address={buyItem.address}
               price={buyItem.price}
+              type={buyItem.type}
             />
           );
         })}
