@@ -1,12 +1,15 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import '../styles/Login.css'
 
 function register() {
   return (
     <div>
 
-      <h1> Register </h1>
+
+      <div className='registerTitle'>
+        <h1> Register </h1>
+      </div>
 
       <form id="contact-form" method="POST">
         <label htmlFor="name">Full Name</label>
@@ -14,7 +17,7 @@ function register() {
         <label htmlFor="email">Email</label>
         <input name="email" placeholder="Enter email..." type="email" />
         <label htmlFor="password">Password</label>
-        <input name="password" placeholder="Enter password..." type="email" />
+        <input name="password" placeholder="Enter password..." type="text" />
 
         <div className='notRegistered'>
         <Link to='/login'> Already registered? Login</Link>
