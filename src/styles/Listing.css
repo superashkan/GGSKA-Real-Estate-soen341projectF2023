@@ -1,9 +1,11 @@
-.menu {
-    margin-top: 10%;
-    width: 100%;
+.buyListing {
+    margin-top: 5%;
+    width: 50%;
     height: auto;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
+    font-family: 'Times New Roman', Times; 
   }
+  
