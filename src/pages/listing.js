@@ -1,22 +1,34 @@
-import React from 'react'
-import '../styles/Listing.css'
+import React from 'react';
+import '../styles/Listing.css';
 import { BuyList } from '../helpers/BuyList';
 
-function listing() {
-    const id = 1;
-    const { address, price, type, image, lotSize, bathrooms } = BuyList[id];
+function Listing() {
+  const id = 1;
+  const { address, price, type, image, lotSize, bathrooms } = BuyList[id];
+
+  const handleRequestVisit = () => {
+    // Add logic for handling the property visit request here
+    alert('Property visit requested!'); // Replace this with your actual logic
+  };
+
   return (
-        <div className='menu'>
-            <div className="buyItem">
-                <h1> {address} </h1>
-                <p> {price} </p>
-                <p> {type} </p>
-                <p> {lotSize} </p>
-                <p> {bathrooms} </p>
-                <img src={image}></img>
-            </div>
-        </div>
-    );
+    <div className="buyListing">
+      <div className="buyItem">
+        <h1>Address: {address}</h1>
+        <p>Price: {price}</p>
+        <p>Type: {type}</p>
+        <p>Lot Size: {lotSize}</p>
+        <p>Bathrooms: {bathrooms}</p>
+        <img src={image} alt="Property Image" style={{ marginBottom: '10px', marginTop: '10px'}} />
+        <button
+          onClick={handleRequestVisit}
+          style={{ fontFamily: 'Arial', fontSize: '18px' }}
+        >
+          Request Property Visit
+        </button>
+      </div>
+    </div>
+  );
 }
-    
-export default listing;
+
+export default Listing;
