@@ -7,6 +7,7 @@ import Login from './pages/login'
 import Register from './pages/register'
 import Buy from './pages/buy'
 import Rent from './pages/rent'
+import Listing from './pages/listing'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path='/register' exact element={<Register />} />
             <Route path='/buy' exact element={<Buy />} />
             <Route path='/rent' exact element={<Rent />} />
+            <Route path='/listing/:id' element={<Listing />} />
           </Routes>
           <Footer/>
         </Router>
