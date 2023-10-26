@@ -8,6 +8,8 @@ import Register from './pages/register'
 import Buy from './pages/buy'
 import Rent from './pages/rent'
 import Listing from './pages/listing'
+import Search from './pages/Search'
+import Sell from './pages/Sell'
 
 function App() {
   return (
@@ -18,8 +20,10 @@ function App() {
             <Route path='/' exact element={<Home />} />
             <Route path='/login' exact element={<Login />} />
             <Route path='/register' exact element={<Register />} />
+            <Route path='/Search' exact element={<Search />} />
             <Route path='/buy' exact element={<Buy />} />
             <Route path='/rent' exact element={<Rent />} />
+            <Route path='/Sell' exact element={<Sell />} />
             <Route path='/listing/:id' element={<Listing />} />
           </Routes>
           <Footer/>
