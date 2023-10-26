@@ -73,8 +73,8 @@ window.addEventListener("scroll", e => {
       </nav>
 
       <button className="nav-toggle-btn icon-btn" aria-label="toggle navbar" data-nav-toggler>
-        <span className="material-symbols-rounded open" aria-hidden="true">menu</span>
-        <span className="material-symbols-rounded close" aria-hidden="true">close</span>
+        <span className="material-symbols-rounded open" aria-hidden="true">Menu</span>
+        <span className="material-symbols-rounded close" aria-hidden="true">Close</span>
       </button>
 
     </div>
