@@ -13,5 +13,7 @@ Phuong Khanh:
 Ashkan:
 - Created the properties listing page template with HTML and CSS (2:30 pm - 3:30 pm (2023/10/22))
 - Created the Buy and Rent property page templates with HTML and CSS (3:30 - 4:50 pm (2023/10/22))
+- Created the react app and worked on the UI (3:00 - 7:00 pm (2023/10/24))
+- Refactored the Front-end with the work from Chimdindu and completed login,register,home/search,etc. ((10:30 am - 1:00 pm (break) 3:00 pm - 7:09 pm (2023/10/25))
 
 Shayne:

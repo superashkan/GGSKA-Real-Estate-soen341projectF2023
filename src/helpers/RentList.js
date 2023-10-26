@@ -1,27 +1,27 @@
-//HomeRent #1 https://www.centris.ca/en/houses~for-sale~montreal-pierrefonds-roxboro/13519692?view=Summary
-//HomeRent #2 https://www.centris.ca/en/houses~for-sale~kirkland/27617011?view=Summary
+//HomeRent #1 https://www.centris.ca/en/lofts-studios~for-rent~montreal-ville-marie/17345749?view=Summary
+//HomeRent #2 https://www.centris.ca/en/condos-apartments~for-rent~montreal-ville-marie/21378859?view=Summary
 
 
-import Rent1 from '../assets/buy1.jpg'
-import Rent2 from '../assets/buy2.jpg'
+import Rent1 from '../assets/rent1.jpg'
+import Rent2 from '../assets/rent2.jpg'
 
 
 export const RentList = [
     {
-      address: "4972, Rue Kent, Montréal (Pierrefonds-Roxboro)",
+      address: "360, Avenue du Président-Kennedy, apt. 1907, Montréal (Ville-Marie)",
       image: Rent1,
-      price: "579,000 $",
-      type: "Bungalow, Detached",
-      lotSize: "5,402 sqft", 
-      bathrooms: 2,
+      price: "1,795$/month",
+      type: "Appartment/Condo",
+      lotSize: "516 sqft", 
+      bathrooms: 1,
     },
     
     {
         address: "2, Rue du Beaujolais, Kirkland, Neighbourhood North East",
         image: Rent2,
-        price: "1,699,000 $" ,
-        type: "Two Storey, Detached",
-        lotSize: "10,933 sqft", 
+        price: "7,500$/month" ,
+        type: "Appartment/Condo",
+        lotSize: "1,635 sqft", 
         bathrooms: 2,
       },
 
