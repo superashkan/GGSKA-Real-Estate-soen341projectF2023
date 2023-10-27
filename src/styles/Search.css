@@ -1,0 +1,17 @@
+.results-table {
+    outline: 1px solid black;
+    width: 90%;
+    margin: 0 auto;
+}
+
+.results-table tbody tr {
+    border-bottom: 1px solid rgb(142, 180, 226);
+}
+
+.results-table tbody tr:nth-child(odd) {
+    background-color: rgb(142, 180, 226);
+}
+
+.results-table td, th {
+    padding: 10px;
+}

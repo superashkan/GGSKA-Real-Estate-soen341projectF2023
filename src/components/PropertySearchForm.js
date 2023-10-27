@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { BuyList } from '../helpers/BuyList'
 import "../styles/Login.css";
+import "../styles/Search.css"
 import Cookies from 'js-cookie';
 
 function PropertySearchForm() {
@@ -221,7 +222,7 @@ function PropertySearchForm() {
           <label htmlFor="max_price">Maximum Price</label>
           <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
           <label htmlFor="numBedrooms"># of Bedrooms</label>
-          <select id="numBedrooms" name="numBedrooms" class="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
+          <select id="numBedrooms" name="numBedrooms" className="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
               <option value="" selected disabled># of Bedrooms</option>
               <option value="noselection">No Selection</option>
               <option value="1">1 Bed</option>
@@ -231,7 +232,7 @@ function PropertySearchForm() {
               <option value="5">5 Beds</option>
           </select>
           <label htmlFor="numBathrooms"># of Bathrooms</label>
-          <select id="numBathrooms" name="numBathrooms" class="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
+          <select id="numBathrooms" name="numBathrooms" className="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
               <option value="" selected disabled># of Bathrooms</option>
               <option value="noselection">No Selection</option>
               <option value="1">1 Bath</option>
@@ -260,7 +261,7 @@ function PropertySearchForm() {
             <label htmlFor="max_price">Maximum Price</label>
             <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
             <label htmlFor="numBedrooms"># of Bedrooms</label>
-            <select id="numBedrooms" name="numBedrooms" class="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
+            <select id="numBedrooms" name="numBedrooms" className="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
                 <option value="" selected disabled># of Bedrooms</option>
                 <option value="noselection">No Selection</option>
                 <option value="1">1 Bed</option>
@@ -270,7 +271,7 @@ function PropertySearchForm() {
                 <option value="5">5 Beds</option>
             </select>
             <label htmlFor="numBathrooms"># of Bathrooms</label>
-            <select id="numBathrooms" name="numBathrooms" class="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
+            <select id="numBathrooms" name="numBathrooms" className="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
                 <option value="" selected disabled># of Bathrooms</option>
                 <option value="noselection">No Selection</option>
                 <option value="1">1 Bath</option>
@@ -285,7 +286,7 @@ function PropertySearchForm() {
             <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(event.target.value)}/>
             <div id="errorMessage">{errorMessage}</div>
           </form>
-          <table>
+          <table className="results-table">
             <thead>
               <tr>
                 <th>Address</th>

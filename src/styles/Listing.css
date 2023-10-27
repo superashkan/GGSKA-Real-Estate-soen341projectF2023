@@ -1,11 +1,40 @@
-.buyListing {
-    margin-top: 5%;
-    width: 50%;
-    height: auto;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: column;
-    font-family: 'Times New Roman', Times; 
-  }
-  
+.listing {
+  margin-top: 10%;
+  font-family: 'Times New Roman', Times; 
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
+.listing h1, .visit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.listing img {
+  width: 300px;
+  height: 200px;
+  margin-left: 50px;
+  border-radius: 10px;
+}
+
+.listing-body {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.visit {
+  background-color: rgb(0, 115, 255);
+  color: white;
+  font-weight: 700px;
+  font-family: sans-serif;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 15px auto 0 auto;
+  width: 175px;
+}
+

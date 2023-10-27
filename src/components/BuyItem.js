@@ -3,7 +3,7 @@ import '../styles/BuyList.css'
 import { Link } from "react-router-dom";
 
 function BuyItem({ image, address, price, type, uid }) {
-  const listingURL = `/listing/${uid}`;
+  const listingURL = `/buy-listing/${uid}`;
   return (
     <div className="buyItem">
       <Link to={listingURL}>

@@ -7,7 +7,8 @@ import Login from './pages/login'
 import Register from './pages/register'
 import Buy from './pages/buy'
 import Rent from './pages/rent'
-import Listing from './pages/listing'
+import BuyListing from './pages/buy_listing'
+import RentListing from './pages/rent_listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
 import RequestVisitPage from './pages/requestvisitpage'
@@ -26,7 +27,8 @@ function App() {
             <Route path='/buy' exact element={<Buy />} />
             <Route path='/rent' exact element={<Rent />} />
             <Route path='/Sell' exact element={<Sell />} />
-            <Route path='/listing/:id' element={<Listing />} />
+            <Route path='/buy-listing/:id' element={<BuyListing />} />
+            <Route path='/rent-listing/:id' element={<RentListing />} />
             <Route path='/requestvisitpage' element={<RequestVisitPage/>} />
           </Routes>
           <Footer/>

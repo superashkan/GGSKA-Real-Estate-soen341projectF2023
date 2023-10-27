@@ -12,6 +12,7 @@ function rent() {
           return (
             <RentItem
               key={key}
+              uid={key}
               image={rentItem.image}
               address={rentItem.address}
               price={rentItem.price}
