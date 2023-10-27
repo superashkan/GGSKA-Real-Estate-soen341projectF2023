@@ -12,6 +12,7 @@ import RentListing from './pages/rent_listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
 import RequestVisitPage from './pages/requestvisitpage'
+import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:3001' 
 axios.defaults.withCredentials = true;
