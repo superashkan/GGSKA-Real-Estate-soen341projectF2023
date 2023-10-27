@@ -10,6 +10,8 @@ import Rent from './pages/rent'
 import Listing from './pages/listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
+import RequestVisitPage from './pages/requestvisitpage'
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
             <Route path='/rent' exact element={<Rent />} />
             <Route path='/Sell' exact element={<Sell />} />
             <Route path='/listing/:id' element={<Listing />} />
+            <Route path='/requestvisitpage' element={<RequestVisitPage/>} />
           </Routes>
           <Footer/>
         </Router>
