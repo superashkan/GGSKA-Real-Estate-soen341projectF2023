@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { BuyList, createProperty } from '../helpers/BuyList'
+import { BuyList } from '../helpers/BuyList'
 import "../styles/Login.css";
-//import connection from "../helpers/Database"
-//import mysql from 'mysql'
+import Cookies from 'js-cookie';
 
 function PropertyAddForm() {
 
@@ -14,14 +13,27 @@ function PropertyAddForm() {
   var [type, setType] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
   var [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
-  var [propertyList, setPropertyList] = useState(BuyList);
+  var [propertyList, setPropertyList] = useState(Cookies.get('propertyList') ? JSON.parse(Cookies.get('propertyList')) : BuyList);
 
   const neatlyFormatValue = function(value) {
     var newValueStr = "";
     var forwardPositionCounter = 0;
     for (var i = value.toString().length - 1;i >= 0;i--) {
-      if ((forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0)) {
-        newValueStr = "," + newValueStr;
+      if (!value.toString().includes(".")) {
+        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
+          newValueStr = "," + newValueStr;
+        }
+      } else {
+        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
+          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
+            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
+              newValueStr = "," + newValueStr;
+            }
+          }
+        }
+        if (newValueStr.length > 6) {
+
+        }
       }
       newValueStr = value.toString()[i] + newValueStr;
       forwardPositionCounter++;
@@ -37,8 +49,8 @@ function PropertyAddForm() {
     createProperty(address, neatlyFormatValue(price), type, neatlyFormatValue(size), price, size, bedrooms, bathrooms)
   }
 
-  const localCreateProperty = function(address, neatPrice, type, neatSize, purePrice, pureLotSize, bedrooms, bathrooms) {
-    BuyList.push({
+  const createProperty = function(address, neatPrice, type, neatSize, purePrice, pureLotSize, bedrooms, bathrooms) {
+    propertyList.push({
       address: address,
       price: neatPrice,
       type: type,
@@ -48,6 +60,8 @@ function PropertyAddForm() {
       bedrooms: bedrooms,
       bathrooms: bathrooms
     })
+    console.log(propertyList.length)
+    Cookies.set('propertyList', JSON.stringify(propertyList), { expires: 400 });
   }
 
   const performChecks = function() {
@@ -103,7 +117,7 @@ function PropertyAddForm() {
           <input name="price" id="price" placeholder="Price" type="number" onInput={(event) => setPrice(event.target.value)} />
           <label htmlFor="type">Type of Property</label>
           <select id="type" name="type" class="dropdown" onInput={(event) => setType(event.target.value)}>
-              <option value="" selected disabled># of Bathrooms</option>
+              <option value="" selected disabled>Type of Property</option>
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
               <option value="Townhome">Townhome</option>
@@ -132,30 +146,44 @@ function PropertyAddForm() {
           <input name="size" id="size" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
         </form>
-        <button className="form button" onClick={event => addProperty()}> Test Add Property </button>
+        <button className="button" onClick={event => addProperty()}> Test Add Property </button>
         <table>
             <thead>
               <tr>
-                <th>ID</th>
                 <th>Address</th>
                 <th>Price</th>
                 <th>Type</th>
                 <th>Lot Size</th>
                 <th># of Bedrooms</th>
                 <th># of Bathrooms</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
-              {BuyList.map((property) => {
+              {propertyList.map((property, index) => {
                 return (
                   <tr>
-                    <td>{property.id}</td>
                     <td>{property.address}</td>
                     <td>${neatlyFormatValue(property.purePrice)}</td>
                     <td>{property.type}</td>
                     <td>{neatlyFormatValue(property.pureLotSize)} sqft.</td>
                     <td>{property.bedrooms}</td>
                     <td>{property.bathrooms}</td>
+                    <td>
+                      <button className="button" onClick = {(event) =>
+                        {
+                          var newList = [];
+                          for (var i = 0;i < propertyList.length;i++) {
+                            if (i != index) {
+                              newList.push(propertyList[i]);
+                            }
+                          }
+                          setPropertyList(newList);
+                          Cookies.set('propertyList', JSON.stringify(newList), { expires: 400 });
+                        }}>
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 )})
               }

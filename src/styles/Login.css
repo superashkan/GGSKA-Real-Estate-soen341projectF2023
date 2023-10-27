@@ -1,5 +1,5 @@
   registerTitle{
-    text-align: center; 
+    text-align: center;
     margin-top: 20px;
     padding: 300px;
     height: 100%;
@@ -14,7 +14,7 @@
     height: auto;
     padding: 30px;
   }
-  
+
   form input {
     height: 40px;
     width: 80%;
@@ -22,7 +22,7 @@
     border-bottom: 1px solid #121619;
     color: black;
   }
-  
+
   form textarea {
     margin-top: 15px;
     height: 70px;
@@ -41,13 +41,24 @@
   textarea:focus {
     outline: none;
   }
-  
+
   form label {
     margin-top: 15px;
     color: grey;
   }
-  
+
   form button {
+    margin-top: 40px;
+    width: 140px;
+    height: 40px;
+    border: none;
+    background-color: #121619;
+    color: whitesmoke;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .button {
     margin-top: 40px;
     width: 140px;
     height: 40px;
