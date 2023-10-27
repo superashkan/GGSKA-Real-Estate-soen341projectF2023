@@ -13,12 +13,14 @@ import Search from './pages/Search'
 import Sell from './pages/Sell'
 import RequestVisitPage from './pages/requestvisitpage'
 import axios from 'axios';
+import { BrokerContextProvider } from './helpers/BrokerContext';
 
 axios.defaults.baseURL = 'http://localhost:3001' 
 axios.defaults.withCredentials = true;
 
 function App() {
   return (
+    <BrokerContextProvider>
       <div className='App'>
         <Router>
           <Navbar/>
@@ -37,6 +39,7 @@ function App() {
           <Footer/>
         </Router>
       </div>
+</BrokerContextProvider>
   );
 }
 
