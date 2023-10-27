@@ -10,6 +10,9 @@ Chimdindu:
 Phuong Khanh:
 - Wrote the meeting minutes - around 15 minutes total (4:30 PM - 5:00 PM (10/05/2023))
 - Wrote the meeting minutes - around 20 minutes total (8:45 PM - 9:30 PM (10/17/2023))
+- Wrote the meeting minutes - around 10 minutes total (4:30 PM - 4:45 PM (10/25/2023))
+- Wrote the meeting minutes - around 15 minutes total (4:15 PM - 4:40 PM (10/26/2023))
+- Implemented workflow for Continuous Integration using GitHub Actions (5:30 PM - 7:00 PM (10/22/2023), 2:15 PM - 4:30 PM (10/26/2023), 6:30 PM - 7:30 PM (10/27/2023))
 
 Ashkan:
 - Created the properties listing page template with HTML and CSS (2:30 pm - 3:30 pm (2023/10/22))
