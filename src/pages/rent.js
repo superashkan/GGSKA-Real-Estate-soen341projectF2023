@@ -6,7 +6,7 @@ import "../styles/BuyList.css";
 function rent() {
   return (
     <div className="menu">
-      <h1 className="buyTitle">Whats for rent</h1>
+      <h1 className="buyTitle">Properties Available to Rent</h1>
       <div className="buyList">
         {RentList.map((rentItem, key) => {
           return (

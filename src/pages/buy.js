@@ -6,7 +6,7 @@ import "../styles/BuyList.css";
 function buy() {
   return (
     <div className="menu">
-      <h1 className="buyTitle">Whats for sale</h1>
+      <h1 className="buyTitle" font>Properties for Purchase</h1>
       <div className="buyList">
         {BuyList.map((buyItem, key) => {
           return (
