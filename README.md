@@ -1,5 +1,8 @@
 # GGSKA-Real-Estate
 
+##IMPORTANT
+In order to run the web app, one must have Node.js installed and all the necessary plugins(MongoDB extension on VSC, npm package manager, react.js, etc.)
+
 ## Project Description
 The project is a real estate web application for the search and the management of real estate properties. The application will have different features to make the real estate transactions more efficient.\
 \
