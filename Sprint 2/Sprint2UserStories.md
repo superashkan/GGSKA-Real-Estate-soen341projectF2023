@@ -2,7 +2,7 @@
 
 ### Searching for Brokers:
 -User Story: As a homebuyer or property renter, I should be able to search for brokers using their first and/or last names. Priority: High.\
--Acceptance Criteria: Given that I know the first name and/or last name of the broker(s) I wish to search for and am on the broker search page, when I input their first name and/or last name into a form or form-like interface and click on a search button, then I should be able to view a list of one or more brokers whose first name and/or last name matches my search criteria.\
+-Acceptance Criteria: Given that I know the first name and/or last name of the broker(s) I wish to search for and am on the broker search page, when I input their first name and/or last name into a form or form-like interface and click on a search button, then I should be able to view a list of one or more brokers whose first name and/or last name matches my search criteria.
 
 ### Submitting Offers to Purchase Properties:
 -User Story: As a broker, I should be able to submit monetary offers on properties which I wish to purchase (on behalf of one or more of my clients) and keep track of the status of my sent offers. Priority: High.\
