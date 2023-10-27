@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { BuyList } from '../helpers/BuyList'
 import "../styles/Login.css";
-//import mysql from 'mysql'
+import Cookies from 'js-cookie';
 
 function PropertySearchForm() {
 
@@ -14,6 +14,7 @@ function PropertySearchForm() {
   var [address, setAddress] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please enter at least one search criterion");
   var [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(true);
+  var [propertyList, setPropertyList] = useState(Cookies.get('propertyList') ? JSON.parse(Cookies.get('propertyList')) : BuyList);
   var [results, setResults] = useState([]);
 
   const neatlyFormatValue = function(value) {
@@ -61,7 +62,7 @@ function PropertySearchForm() {
   }
 
   const performSearch = function() {
-    var resultsList = BuyList;
+    var resultsList = propertyList;
     const res = performChecks();
     if (res == false) {
       results = [];
