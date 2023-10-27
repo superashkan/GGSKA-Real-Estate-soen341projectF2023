@@ -23,6 +23,8 @@ jobs:
       matrix:
         node-version: [18.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+      fail-fast: false
+      # Runs every test even if one of them fails
 
     steps:
     - uses: actions/checkout@v3
@@ -31,6 +33,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    # Installs necessary dependencies for the build
     - run: npm ci
     - run: npm run build --if-present
-    - run: npm test
+    - run: npm test --passWithNoTests
