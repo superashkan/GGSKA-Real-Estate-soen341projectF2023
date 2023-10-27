@@ -17,3 +17,11 @@ Ashkan:
 - Refactored the Front-end with the work from Chimdindu and completed login,register,home/search,etc. ((10:30 am - 1:00 pm (break) 3:00 pm - 7:09 pm (2023/10/25))
 
 Shayne:
+- Created template for a website with HTML and CSS (1:00 - 4:00 pm (2023/10/14))
+- Created a Listing page for both Rent Properties and Buy Properties and linked it to the buy and rent pages (5:30 - 8:00 pm (2023/10/25))
+- Updated the CSS for the listings page (1:45 - 4:00 pm (2023/10/26))
+- Created a button and linked a visit property page on the listing pages (7:00 - 9:45 (2023/10/26))
+- Created a dynamic table for the search page (10:30 - 11:30 am (2023/10/27))
+- Adjusted the CSS for the request to visit the page (1:00 - 1:30 pm (2023/10/27))
+- Adjusted CSS for other pages of the website such as login, Sell and search
+- 
