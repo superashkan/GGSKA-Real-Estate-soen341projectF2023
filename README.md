@@ -1,6 +1,6 @@
 # GGSKA-Real-Estate
 
-##IMPORTANT
+## IMPORTANT
 In order to run the web app, one must have Node.js installed and all the necessary plugins(MongoDB extension on VSC, npm package manager, react.js, etc.)
 
 ## Project Description
