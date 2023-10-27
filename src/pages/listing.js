@@ -1,14 +1,15 @@
 import React from 'react';
 import '../styles/Listing.css';
 import { BuyList } from '../helpers/BuyList';
+import { Link } from 'react-router-dom';
 
 function Listing() {
   const id = 1;
   const { address, price, type, image, lotSize, bathrooms } = BuyList[id];
 
   const handleRequestVisit = () => {
-    // Add logic for handling the property visit request here
-    alert('Property visit requested!'); // Replace this with your actual logic
+    
+    alert('Property visit requested!');
   };
 
   return (
@@ -20,15 +21,11 @@ function Listing() {
         <p>Lot Size: {lotSize}</p>
         <p>Bathrooms: {bathrooms}</p>
         <img src={image} alt="Property Image" style={{ marginBottom: '10px', marginTop: '10px'}} />
-        <button
-          onClick={handleRequestVisit}
-          style={{ fontFamily: 'Arial', fontSize: '18px' }}
-        >
-          Request Property Visit
-        </button>
+        <Link to = '/requestvisitpage'>Request a visit</Link>
       </div>
     </div>
   );
 }
 
 export default Listing;
+
