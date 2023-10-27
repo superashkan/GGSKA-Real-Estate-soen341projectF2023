@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Logo from '../assets/white back logo.jpg'
 import '../styles/NewHome.css'
+import { BrokerContext } from '../helpers/BrokerContext'
 
 
 
 function NewNavbar() {
+
+const {broker} = useContext(BrokerContext)
+
 useEffect(() => {
 
     'use strict';
@@ -69,8 +73,15 @@ window.addEventListener("scroll", e => {
         <div class="navbar-wrapper">
             <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
             <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
-
         </div>
+
+        {!!broker &&(
+          <div className="btn-link label-medium">
+            <Link to='/profile'>
+            {broker.name}
+            </Link>
+          </div>
+        )}
 
       </nav>
 

@@ -1,23 +1,33 @@
 import {Link, Navigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import axios from "axios";
+import { BrokerContext } from "../helpers/BrokerContext";
 
 
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  const [redirect, setRedirect] = useState(false);
+  const {setBroker} = useContext(BrokerContext);
+  
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try{
-      await axios.post('/login', {email,password});
+      const {data} = await axios.post('/login', {email,password});
+      setBroker(data);
       alert('Login successful')
+      setRedirect(true);
     }
     catch (e){
       alert('Login failed')
     }
   }
+
+  if(redirect){
+    return <Navigate to={'/'} />
+  }
+
   return (
         <div>
             <h1 className='title'> Login </h1>
