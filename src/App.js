@@ -13,6 +13,8 @@ import Search from './pages/Search'
 import Sell from './pages/Sell'
 import RequestVisitPage from './pages/requestvisitpage'
 
+axios.defaults.baseURL = 'http://localhost:3001' 
+axios.defaults.withCredentials = true;
 
 function App() {
   return (
