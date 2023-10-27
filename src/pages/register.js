@@ -1,13 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import '../styles/Login.css'
+import '../styles/MultiPageCSS.css'
 
 function register() {
   return (
     <div>
-
-
-      <div className='registerTitle'>
+      <div className='title'>
         <h1> Register </h1>
       </div>
 
@@ -20,8 +18,8 @@ function register() {
         <input name="password" placeholder="Enter password..." type="text" />
 
         <div className='notRegistered'>
-        <Link to='/login'> Already registered? Login</Link>
-        </div>  
+        <Link to='/login' className="alreadyRegistered"> Already registered? Login</Link>
+        </div>
 
         <button type="submit"> Login </button>
       </form>

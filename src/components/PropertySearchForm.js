@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { BuyList } from '../helpers/BuyList'
-import "../styles/Login.css";
+import "../styles/MultiPageCSS.css";
 import "../styles/Search.css"
 import Cookies from 'js-cookie';
 
@@ -11,6 +11,7 @@ function PropertySearchForm() {
   var [minSize, setMinSize] = useState("");
   var [maxSize, setMaxSize] = useState("");
   var [bedrooms, setBedrooms] = useState("");
+  var [type, setType] = useState("");
   var [bathrooms, setBathrooms] = useState("");
   var [address, setAddress] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please enter at least one search criterion");
@@ -29,29 +30,6 @@ function PropertySearchForm() {
       forwardPositionCounter++;
     }
     return newValueStr;
-  }
-
-  const addressCheck = function(event) {
-    setAddress(event.target.value, () => {
-      console.log(address);
-    });
-    performChecks();
-  }
-
-  const bedroomsCheck = function(event) {
-    if (parseInt(event.target.value) < 0) {
-      event.target.value = 0;
-    }
-    setBedrooms(parseInt(event.target.value));
-    performChecks();
-  }
-
-  const bathroomsCheck = function(event) {
-    if (parseInt(event.target.value) < 0) {
-      event.target.value = 0;
-    }
-    setBathrooms(parseInt(event.target.value));
-    performChecks();
   }
 
   const isNullOrEmpty = function(stringInput) {
@@ -74,6 +52,9 @@ function PropertySearchForm() {
     }
     if (bathrooms == "noselection") {
       bathrooms = "";
+    }
+    if (type == "noselection") {
+      type = "";
     }
     if (!isNullOrEmpty(address)) {
       resultsList = resultsList.filter(function(property) {
@@ -105,6 +86,11 @@ function PropertySearchForm() {
         return property.bedrooms == bedrooms;
       });
     }
+    if (!isNullOrEmpty(type)) {
+      resultsList = resultsList.filter(function(property) {
+        return property.type == type;
+      });
+    }
     if (!isNullOrEmpty(bathrooms)) {
       resultsList = resultsList.filter(function(property) {
         return property.bathrooms == bathrooms;
@@ -115,15 +101,17 @@ function PropertySearchForm() {
 
   const performChecks = function() {
     if (address == "") {
-      if (minPrice == 0 || minPrice == "") {
-        if (maxPrice == 0 || maxPrice == "") {
+      if (minPrice == "") {
+        if (maxPrice == "") {
           if (bedrooms == "") {
             if (bathrooms == "") {
-              if (minSize == 0 || minSize == "") {
-                if (maxSize == 0 || maxSize == "") {
-                  setErrorMessage("Please enter at least one search criterion.");
-                  setIsSearchButtonDisabled(true)
-                  return false;
+              if (minSize == "") {
+                if (maxSize == "") {
+                  if (type == "") {
+                    setErrorMessage("Please enter at least one search criterion.");
+                    setResults([]);
+                    return false;
+                  }
                 }
               }
             }
@@ -133,81 +121,46 @@ function PropertySearchForm() {
     }
     if (minPrice < 0.00) {
       setErrorMessage("Minimum price must not be negative.");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
-    if (maxPrice < 0.00) {
-      setErrorMessage("Maximum price must not be negative.");
-      setIsSearchButtonDisabled(true);
+    if (maxPrice <= 0.00 && maxPrice.toString() != '') {
+      setErrorMessage("Maximum price must be positive.");
+      setResults([]);
       return false;
     }
     if (minSize < 0.00) {
       setErrorMessage("Minimum property size must not be negative.");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
-    if (maxSize < 0.00) {
-      setErrorMessage("Maximum size must not be negative.");
-      setIsSearchButtonDisabled(true);
-      return false;
-    }
-    if (bedrooms != "" && (bedrooms < 1 || bedrooms > 5)) {
-      setErrorMessage("If choosing a number of bedrooms, please choose a number between 1 and 5.");
-      setIsSearchButtonDisabled(true);
-      return false;
-    }
-    if (bathrooms != "" && (bathrooms < 1 || bathrooms > 5)) {
-      setErrorMessage("If choosing a number of bathrooms, please choose a number between 1 and 5.");
-      setIsSearchButtonDisabled(true);
+    if (maxSize <= 0.00 && maxSize.toString() != '') {
+      setErrorMessage("Maximum property size must be positive.");
+      setResults([]);
       return false;
     }
     if ((minPrice == 0 && maxPrice == 0) && (minPrice.toString() != '' && maxPrice.toString() != '')) {
       setErrorMessage("Please choose a minimum or maximum price.");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
     if ((minSize == 0 && maxSize == 0) && (minSize.toString() != '' && maxSize.toString() != '')) {
       setErrorMessage("Please choose a minimum or maximum lot size.");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
     if (minPrice > maxPrice && maxPrice != '') {
       setErrorMessage("Maximum price must be greater than minimum price.");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
     if (minSize > maxSize  && maxSize != '') {
       setErrorMessage("Maximum lot size must be greater than minimum lot size.");
-      setIsSearchButtonDisabled(true);
-      return false;
-    }
-    if (maxPrice == 0 && maxPrice.toString() != '') {
-      setErrorMessage("Maximum price must be greater than $0");
-      setIsSearchButtonDisabled(true);
+      setResults([]);
       return false;
     }
     setErrorMessage("");
-    setIsSearchButtonDisabled(false);
     return true;
-  }
-
-  const checkIfValueNegative = function(event) {
-    if (event.target.value < 0) {
-      event.target.value = 0;
-    }
-    if (event.target.id == "min_price") {
-      setMinPrice(parseFloat(event.target.value));
-    }
-    if (event.target.id == "max_price") {
-      setMaxPrice(parseFloat(event.target.value));
-    }
-    if (event.target.id == "min_size") {
-      setMinSize(parseFloat(event.target.value));
-    }
-    if (event.target.id == "max_size") {
-      setMaxSize(parseFloat(event.target.value));
-    }
-    performChecks();
   }
 
   const constructHTML = function() {
@@ -221,25 +174,34 @@ function PropertySearchForm() {
           <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(event.target.value)} />
           <label htmlFor="max_price">Maximum Price</label>
           <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
-          <label htmlFor="numBedrooms"># of Bedrooms</label>
+          <label htmlFor="type">Type of Property</label>
+          <select id="type" name="type" class="dropdown" onInput={(event) => setType(event.target.value)}>
+              <option value="" selected disabled>What type of property are you searching for?</option>
+              <option value="Apartment">Apartment</option>
+              <option value="Villa">Villa</option>
+              <option value="Townhome">Townhome</option>
+              <option value="Bungalow">Bungalow</option>
+              <option value="Loft">Loft</option>
+          </select>
+          <label htmlFor="numBedrooms">Number of Bedrooms</label>
           <select id="numBedrooms" name="numBedrooms" className="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
-              <option value="" selected disabled># of Bedrooms</option>
+              <option value="" selected disabled>How many bedrooms are you looking for?</option>
               <option value="noselection">No Selection</option>
-              <option value="1">1 Bed</option>
-              <option value="2">2 Beds</option>
-              <option value="3">3 Beds</option>
-              <option value="4">4 Beds</option>
-              <option value="5">5 Beds</option>
+              <option value="1">1 Bedroom</option>
+              <option value="2">2 Bedrooms</option>
+              <option value="3">3 Bedrooms</option>
+              <option value="4">4 Bedrooms</option>
+              <option value="5">5 Bedrooms</option>
           </select>
           <label htmlFor="numBathrooms"># of Bathrooms</label>
           <select id="numBathrooms" name="numBathrooms" className="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
-              <option value="" selected disabled># of Bathrooms</option>
+              <option value="" selected disabled>How many bathrooms are you searching for?</option>
               <option value="noselection">No Selection</option>
-              <option value="1">1 Bath</option>
-              <option value="2">2 Baths</option>
-              <option value="3">3 Baths</option>
-              <option value="4">4 Baths</option>
-              <option value="5">5 Baths</option>
+              <option value="1">1 Bathroom</option>
+              <option value="2">2 Bathrooms</option>
+              <option value="3">3 Bathrooms</option>
+              <option value="4">4 Bathrooms</option>
+              <option value="5">5 Bathrooms</option>
           </select>
           <label htmlFor="min_price">Minimum Lot Size</label>
           <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(event.target.value)} />
@@ -247,7 +209,7 @@ function PropertySearchForm() {
           <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(event.target.value)}/>
           <div id="errorMessage">{errorMessage}</div>
         </form>
-        <button className="form button" onClick={event => performSearch()}> Test Search </button>
+        <button className="propertySearchButton" onClick={event => performSearch()}> Test Search </button>
         </div>
       );
     } else {
@@ -260,25 +222,35 @@ function PropertySearchForm() {
             <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(event.target.value)} />
             <label htmlFor="max_price">Maximum Price</label>
             <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
+            <label htmlFor="type">Type of Property</label>
+            <select id="type" name="type" className="dropdown" onInput={(event) => setType(event.target.value)}>
+                <option value="" selected disabled>What type of property are you searching for?</option>
+                <option value="noselection">No Selection</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Villa">Villa</option>
+                <option value="Townhome">Townhome</option>
+                <option value="Bungalow">Bungalow</option>
+                <option value="Loft">Loft</option>
+            </select>
             <label htmlFor="numBedrooms"># of Bedrooms</label>
             <select id="numBedrooms" name="numBedrooms" className="dropdown" onChange={(event) => setBedrooms(event.target.value)}>
-                <option value="" selected disabled># of Bedrooms</option>
+                <option value="" selected disabled>How many bedrooms are you looking for?</option>
                 <option value="noselection">No Selection</option>
-                <option value="1">1 Bed</option>
-                <option value="2">2 Beds</option>
-                <option value="3">3 Beds</option>
-                <option value="4">4 Beds</option>
-                <option value="5">5 Beds</option>
+                <option value="1">1 Bedroom</option>
+                <option value="2">2 Bedrooms</option>
+                <option value="3">3 Bedrooms</option>
+                <option value="4">4 Bedrooms</option>
+                <option value="5">5 Bedrooms</option>
             </select>
             <label htmlFor="numBathrooms"># of Bathrooms</label>
             <select id="numBathrooms" name="numBathrooms" className="dropdown" onChange={(event) => setBathrooms(event.target.value)}>
-                <option value="" selected disabled># of Bathrooms</option>
+                <option value="" selected disabled>How many bathrooms are you looking for?</option>
                 <option value="noselection">No Selection</option>
-                <option value="1">1 Bath</option>
-                <option value="2">2 Baths</option>
-                <option value="3">3 Baths</option>
-                <option value="4">4 Baths</option>
-                <option value="5">5 Baths</option>
+                <option value="1">1 Bathroom</option>
+                <option value="2">2 Bathrooms</option>
+                <option value="3">3 Bathrooms</option>
+                <option value="4">4 Bathrooms</option>
+                <option value="5">5 Bathrooms</option>
             </select>
             <label htmlFor="min_price">Minimum Lot Size</label>
             <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(event.target.value)} />
@@ -286,7 +258,9 @@ function PropertySearchForm() {
             <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(event.target.value)}/>
             <div id="errorMessage">{errorMessage}</div>
           </form>
-          <table className="results-table">
+          <button className="propertySearchButton" onClick={event => performSearch()}> Test Search </button>
+          <h2 class="searchResHeader">Search Results: </h2>
+          <table>
             <thead>
               <tr>
                 <th>Address</th>
@@ -312,7 +286,6 @@ function PropertySearchForm() {
               }
             </tbody>
           </table>
-          <button className="form button" onClick={event => performSearch()}> Test Search </button>
         </div>
       );
     }

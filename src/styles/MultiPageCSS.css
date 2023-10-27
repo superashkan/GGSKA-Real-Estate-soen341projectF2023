@@ -1,0 +1,150 @@
+  .title{
+    text-align: center;
+    padding-top: 50px;
+    margin-top: 50px;
+    height: 100%;
+  }
+
+  .soldPropertiesTitle {
+    text-align: center;
+    padding-top: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 100%;
+  }
+
+  table {
+    width: 95%;
+    margin: auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+
+  tr, th, td:not(.emptyCell .propertyDeleteCell) {
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .propertyDeleteCell {
+    margin: auto;
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .emptyCell {
+    border: none;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    height: auto;
+    padding: 30px;
+  }
+
+  form input {
+    height: 40px;
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #121619;
+    color: black;
+  }
+
+  form textarea {
+    margin-top: 15px;
+    height: 70px;
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid #121619;
+    color: black;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    font-weight: bold;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  form input:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+  form label {
+    margin-top: 15px;
+    color: grey;
+  }
+
+  form button {
+    margin-top: 40px;
+    width: 140px;
+    height: 40px;
+    border: none;
+    background-color: #121619;
+    color: whitesmoke;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .button {
+    margin-top: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    border: none;
+    background-color: #121619;
+    color: whitesmoke;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .propertySearchButton {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: auto;
+    margin-left: auto;
+    padding: 15px;
+    border: none;
+    background-color: #121619;
+    color: whitesmoke;
+    font-size: 15px;
+    cursor: pointer;
+  }
+
+  .deleteProperty {
+    width: 100%;
+    background-color: pink;
+    font-weight: bold;
+  }
+
+  .notYetRegistered {
+    border: 0.5px dashed grey;
+    display: inline;
+    color: #5A5A5A;
+    background-color: pink;
+  }
+
+  .alreadyRegistered {
+    border: 0.5px dashed grey;
+    display: inline;
+    color: #5A5A5A;
+    background-color: #bbfdb4;
+  }
+
+  select {
+    border: 1px dotted black;
+    display: inline;
+    width: 50%;
+    margin-left: 0px;
+  }
+
+  .searchResHeader {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+  }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { BuyList } from '../helpers/BuyList'
-import "../styles/Login.css";
+import "../styles/MultiPageCSS.css";
 import Cookies from 'js-cookie';
 
-function PropertyAddForm() {
+function PropertySaleManagement() {
 
   var [price, setPrice] = useState("");
   var [size, setSize] = useState("");
@@ -146,7 +146,10 @@ function PropertyAddForm() {
           <input name="size" id="size" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
         </form>
-        <button className="button" onClick={event => addProperty()}> Test Add Property </button>
+        <button className="button" onClick={event => addProperty()}> Add Property </button>
+        <div class="soldPropertiesTitle">
+          <h1>Manage Sold Properties</h1>
+        </div>
         <table>
             <thead>
               <tr>
@@ -156,7 +159,7 @@ function PropertyAddForm() {
                 <th>Lot Size</th>
                 <th># of Bedrooms</th>
                 <th># of Bathrooms</th>
-                <th>Delete</th>
+                <th className="emptyCell"></th>
               </tr>
             </thead>
             <tbody>
@@ -169,8 +172,8 @@ function PropertyAddForm() {
                     <td>{neatlyFormatValue(property.pureLotSize)} sqft.</td>
                     <td>{property.bedrooms}</td>
                     <td>{property.bathrooms}</td>
-                    <td>
-                      <button className="button" onClick = {(event) =>
+                    <td className="propertyDeleteCell">
+                      <button className="deleteProperty" onClick = {(event) =>
                         {
                           var newList = [];
                           for (var i = 0;i < propertyList.length;i++) {
@@ -181,7 +184,7 @@ function PropertyAddForm() {
                           setPropertyList(newList);
                           Cookies.set('propertyList', JSON.stringify(newList), { expires: 400 });
                         }}>
-                        Delete
+                        Delete Property
                       </button>
                     </td>
                   </tr>
@@ -195,4 +198,4 @@ function PropertyAddForm() {
 
   return constructHTML();
 }
-export default PropertyAddForm
+export default PropertySaleManagement

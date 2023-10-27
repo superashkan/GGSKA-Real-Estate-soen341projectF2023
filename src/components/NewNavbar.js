@@ -8,7 +8,7 @@ import '../styles/NewHome.css'
 
 function NewNavbar() {
 useEffect(() => {
-    
+
     'use strict';
 
 
@@ -39,7 +39,7 @@ window.addEventListener("scroll", e => {
     <Link to='/'>
       <img style={{ mixBlendMode: "multiply", height: "70px", width: "100%"}} src={Logo}  alt="Your Logo" />
     </Link>
- 
+
 
       <nav className="navbar" data-navbar>
 
@@ -64,9 +64,9 @@ window.addEventListener("scroll", e => {
 
         </ul>
 
-        <div class="navbar-wrapper">
+        <div className="navbar-wrapper">
             <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
-          
+
             <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
 
         </div>

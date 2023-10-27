@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/Login.css'
+import '../styles/MultiPageCSS.css'
 import { Link } from 'react-router-dom'
 
 
@@ -7,7 +7,7 @@ function login() {
   return (
         <div>
             <h1 className='title'> Login </h1>
-    
+
             <form id="contact-form" method="POST">
               <label htmlFor="name">Full Name</label>
               <input name="name" placeholder="Enter full name..." type="text" />
@@ -17,14 +17,14 @@ function login() {
               <input name="password" placeholder="Enter password..." type="email" />
 
               <div className='notRegistered'>
-              <Link to='/register'> Not yet registered? Do it now!</Link>
-              </div>  
+              <Link to='/register' className='notYetRegistered'> Not yet registered? Do it now!</Link>
+              </div>
 
               <button type="submit"> Login </button>
             </form>
         </div>
       );
     }
-    
+
 
 export default login
