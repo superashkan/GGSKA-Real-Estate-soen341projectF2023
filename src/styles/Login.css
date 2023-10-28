@@ -1,1 +1,9 @@
-/* placeholder file */
+.registerForm {
+margin-top: 10%;
+width: 100%;
+height: auto;
+display: flex;
+justify-content: center;
+align-items: left;
+flex-direction: column
+}

@@ -28,7 +28,7 @@ function Register() {
 
 
   return (
-    <div>
+    <div className="registerForm">
       <div className='registerTitle'>
         <h1> Register </h1>
       </div>
