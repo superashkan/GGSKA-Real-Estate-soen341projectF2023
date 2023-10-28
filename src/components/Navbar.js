@@ -7,7 +7,7 @@ import { BrokerContext } from '../helpers/BrokerContext'
 
 
 
-function NewNavbar() {
+function Navbar() {
 
 const {broker} = useContext(BrokerContext)
 
@@ -76,10 +76,8 @@ window.addEventListener("scroll", e => {
         </div>
 
         {!!broker &&(
-          <div className="btn-link label-medium">
-            <Link to='/profile'>
-            {broker.name}
-            </Link>
+          <div className='btn-link label-medium'>
+            <Link to='/profile'>{broker.name}</Link>
           </div>
         )}
 
@@ -97,4 +95,4 @@ window.addEventListener("scroll", e => {
   )
 }
 
-export default NewNavbar
+export default Navbar

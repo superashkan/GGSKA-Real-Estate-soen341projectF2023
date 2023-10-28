@@ -11,6 +11,7 @@ import BuyListing from './pages/buy_listing'
 import RentListing from './pages/rent_listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
+import Profile from './pages/profile'
 import RequestVisitPage from './pages/requestvisitpage'
 import axios from 'axios';
 import { BrokerContextProvider } from './helpers/BrokerContext';
@@ -35,11 +36,12 @@ function App() {
             <Route path='/buy-listing/:id' element={<BuyListing />} />
             <Route path='/rent-listing/:id' element={<RentListing />} />
             <Route path='/requestvisitpage' element={<RequestVisitPage/>} />
+            <Route path='/profile' element={<Profile/>}/>
           </Routes>
           <Footer/>
         </Router>
       </div>
-</BrokerContextProvider>
+   </BrokerContextProvider>
   );
 }
 

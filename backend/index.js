@@ -48,9 +48,12 @@ app.post('/login', async (req,res) => {
     if(brokerDoc){
         const passOk = bcrypt.compareSync(password, brokerDoc.password)   
         if (passOk) {
-            jwt.sign({email: brokerDoc.email, id:brokerDoc._id}, jwtSecret, {}, (err, token) => {
+            jwt.sign({
+                email: brokerDoc.email, 
+                id:brokerDoc._id}, 
+                jwtSecret, {}, (err, token) => {
                 if(err) throw err;
-                res.cookie('token', token).json('pass ok')
+                res.cookie('token', token).json(brokerDoc)
             });
         } 
         else{
