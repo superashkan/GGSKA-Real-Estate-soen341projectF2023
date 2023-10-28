@@ -2,8 +2,8 @@ import React, {useContext} from 'react'
 import { BrokerContext } from '../helpers/BrokerContext'
 import { Navigate } from 'react-router-dom'
 
-function profile() {
-  const {ready, broker} = UseContext(BrokerContext)
+function Profile() {
+  const {ready, broker} = useContext(BrokerContext)
  
  if(ready && !broker){
   return <Navigate to={'/login'}/>
