@@ -19,6 +19,7 @@ Ashkan:
 - Created the Buy and Rent property page templates with HTML and CSS (3:30 - 4:50 pm (2023/10/22))
 - Created the react app and worked on the UI (3:00 - 7:00 pm (2023/10/24))
 - Refactored the Front-end with the work from Chimdindu and completed login,register,home/search,etc. ((10:30 am - 1:00 pm (break) 3:00 pm - 7:09 pm (2023/10/25))
+- Work on the whole project, more precisly the Broker CRUD operations (Register/Login, CSS, Back-end, MongoDB, etc.) ((11:00 am - 9:00 pm) 2023/10/27)
 
 Shayne:
 - Created template for a website with HTML and CSS (1:00 - 4:00 pm (2023/10/14))
