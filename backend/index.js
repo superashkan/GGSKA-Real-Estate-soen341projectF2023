@@ -12,7 +12,7 @@ mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.n
 
 const app = express()
 app.use(express.json())
-app.use(cors({
+app.use(cors){
     credentials: true,
     origin: 'http://localhost:3000', 
 }))
