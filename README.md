@@ -25,7 +25,7 @@ Chimdindu Okelekwe: Front-End Developer
 ## Technologies:
 
 Database:\
-MySQL\
+MongoDB
 \
 Frontend:\
 HTML\
