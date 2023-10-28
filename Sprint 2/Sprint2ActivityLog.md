@@ -5,10 +5,10 @@ Giancarlo:
 - Updated property search functionality to work with React rather than Express.js, changed certain styling elements to try & make certain pages look neater and more appealing, added cookie functionality to store the current (modified via additions & deletions) version of the property list for access whenever applicable, added functionality for adding (listing) properties and deleting properties. (12:00 PM - 1:00 AM (10/25/2023), 10:00 AM - 1:00 AM (10/26/2023), 8:00 AM - 3:30 PM (10/27/2023))
 
 Chimdindu:
--Designed and Implemented the home page using CSS and HTML (10:00 am - 8:09 pm (2023/10/24))
--Designed a brand logo to be displayed on the home page  (4:15 PM - 4:40 PM (10/26/2023))
--Researched color combinations that go well together in order to have an appealing website (1:45 - 4:00 pm (2023/10/26))
--Started mofidying css design for the different webpages( Currently on the Login and Registration pages)  (4:30 PM - 11:00 PM (10/27/2023))
+- Designed and Implemented the home page using CSS and HTML (10:00 am - 8:09 pm (2023/10/24))
+- Designed a brand logo to be displayed on the home page  (4:15 PM - 4:40 PM (10/26/2023))
+- Researched color combinations that go well together in order to have an appealing website (1:45 - 4:00 pm (2023/10/26))
+- Started mofidying css design for the different webpages( Currently on the Login and Registration pages)  (4:30 PM - 11:00 PM (10/27/2023))
 
 
 
