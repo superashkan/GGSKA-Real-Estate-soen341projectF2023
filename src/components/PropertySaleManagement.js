@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import {React, useState, useContext, useEffect } from 'react'
 import { BuyList } from '../helpers/BuyList'
 import "../styles/MultiPageCSS.css";
 import Cookies from 'js-cookie';
+import axios from "axios";
+import {Link, Navigate} from "react-router-dom";
 
 function PropertySaleManagement() {
 
@@ -12,13 +14,19 @@ function PropertySaleManagement() {
   var [address, setAddress] = useState("");
   var [type, setType] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
-  var [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
-  var [propertyList, setPropertyList] = useState(Cookies.get('propertyList') ? JSON.parse(Cookies.get('propertyList')) : BuyList);
+  var [propertyList, setPropertyList] = useState([]);
+
+  const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data));
+  
+  useEffect(() => {
+    getAllProperties();
+ }, []);
 
   const neatlyFormatValue = function(value) {
+    value = value.toString();
     var newValueStr = "";
     var forwardPositionCounter = 0;
-    for (var i = value.toString().length - 1;i >= 0;i--) {
+    for (var i = value.length - 1;i >= 0;i--) {
       if (!value.toString().includes(".")) {
         if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
           newValueStr = "," + newValueStr;
@@ -41,27 +49,26 @@ function PropertySaleManagement() {
     return newValueStr;
   }
 
-  const addProperty = function() {
-    const res = performChecks();
-    if (res == false) {
-      return;
+  const handleCreation = async function(event) {
+    try{
+      const {data} = await axios.post('/createProperty', {address, price, type, bedrooms, bathrooms, size});
+      alert('Property creation successful')
+      return <Navigate to={'/Sell'} />
     }
-    createProperty(address, neatlyFormatValue(price), type, neatlyFormatValue(size), price, size, bedrooms, bathrooms)
+    catch (e){
+      alert(e);
+    }
   }
 
-  const createProperty = function(address, neatPrice, type, neatSize, purePrice, pureLotSize, bedrooms, bathrooms) {
-    propertyList.push({
-      address: address,
-      price: neatPrice,
-      type: type,
-      lotSize: neatSize,
-      purePrice: purePrice,
-      pureLotSize: pureLotSize,
-      bedrooms: bedrooms,
-      bathrooms: bathrooms
-    })
-    console.log(propertyList.length)
-    Cookies.set('propertyList', JSON.stringify(propertyList), { expires: 400 });
+  const handleDeletion = async function(address) {
+    try {
+      console.log(address);
+      axios.post('/deleteProperty', {address: address})
+      window.location.reload(false);
+    }
+    catch (e){
+      alert(e);
+    }
   }
 
   const performChecks = function() {
@@ -110,13 +117,13 @@ function PropertySaleManagement() {
   const constructHTML = function() {
       return (
         <div>
-        <form id="search-form">
+        <form id="search-form" onSubmit={handleCreation}>
           <label htmlFor="address">Address</label>
           <input name="address" id="address" placeholder="Address" type="text" onInput={(event) => setAddress(event.target.value)}/>
-          <label htmlFor="price">Price</label>
-          <input name="price" id="price" placeholder="Price" type="number" onInput={(event) => setPrice(event.target.value)} />
-          <label htmlFor="type">Type of Property</label>
-          <select id="type" name="type" class="dropdown" onInput={(event) => setType(event.target.value)}>
+          <label htmlFor="goingPrice">Price</label>
+          <input name="goingPrice" id="goingPrice" placeholder="Price" type="number" onInput={(event) => setPrice(event.target.value)} />
+          <label htmlFor="propertyType">Type of Property</label>
+          <select id="propertyType" name="propertyType" class="dropdown" onInput={(event) => setType(event.target.value)}>
               <option value="" selected disabled>Type of Property</option>
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
@@ -142,11 +149,11 @@ function PropertySaleManagement() {
               <option value="4">4 Baths</option>
               <option value="5">5 Baths</option>
           </select>
-          <label htmlFor="size">Lot Size</label>
-          <input name="size" id="size" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
+          <label htmlFor="propertySize">Lot Size</label>
+          <input name="propertySize" id="propertySize" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
+          <button className="button" type="submit"> Create Property </button>
         </form>
-        <button className="button" onClick={event => addProperty()}> Add Property </button>
         <div class="soldPropertiesTitle">
           <h1>Manage Sold Properties</h1>
         </div>
@@ -163,27 +170,17 @@ function PropertySaleManagement() {
               </tr>
             </thead>
             <tbody>
-              {propertyList.map((property, index) => {
+              {propertyList.map((property) => {
                 return (
                   <tr>
                     <td>{property.address}</td>
-                    <td>${neatlyFormatValue(property.purePrice)}</td>
-                    <td>{property.type}</td>
-                    <td>{neatlyFormatValue(property.pureLotSize)} sqft.</td>
-                    <td>{property.bedrooms}</td>
-                    <td>{property.bathrooms}</td>
+                    <td>${neatlyFormatValue(property.goingPrice)}</td>
+                    <td>{property.propertyType}</td>
+                    <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
+                    <td>{property.numBedrooms}</td>
+                    <td>{property.numBathrooms}</td>
                     <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) =>
-                        {
-                          var newList = [];
-                          for (var i = 0;i < propertyList.length;i++) {
-                            if (i != index) {
-                              newList.push(propertyList[i]);
-                            }
-                          }
-                          setPropertyList(newList);
-                          Cookies.set('propertyList', JSON.stringify(newList), { expires: 400 });
-                        }}>
+                      <button className="deleteProperty" onClick = {(event) => handleDeletion(property.address)}>
                         Delete Property
                       </button>
                     </td>

@@ -4,6 +4,7 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Broker = require('./models/Brokers')
+const Property = require('./models/Properties')
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'slhafhafsaflAH'
@@ -17,7 +18,13 @@ app.use(cors({
     origin: 'http://localhost:3000', 
 }))
 
-
+const isNullOrEmpty = function(stringInput) {
+    if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
 app.post('/register', async (req, res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
@@ -39,6 +46,26 @@ app.post('/register', async (req, res) => {
     }
 
 })
+
+app.post('/createProperty', async (req, res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    var {address, price, type, bedrooms, bathrooms, size} = req.body;
+    console.log(req.body);
+    try{
+        const propertyDoc = await Property.create({
+            address: address,
+            goingPrice: price,
+            propertyType: type,
+            numBedrooms: bedrooms,
+            numBathrooms: bathrooms,
+            propertySize: size
+        });
+        res.json({propertyDoc})
+    }
+    catch (e){
+        res.status(422).json({ error: "Property creation failed. Please try again later" });
+    }
+  })
 
 app.post('/login', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
@@ -67,7 +94,83 @@ app.post('/login', async (req,res) => {
 
 }) 
 
-
+app.post('/deleteProperty', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const address = req.body.address
+    console.log(address);
+    await Property.deleteOne({"address": String(address)})
+  })
+  
+  app.get('/getAllProperties', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    var propertyDoc = await Property.find();
+    if(propertyDoc){
+      res.json(propertyDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+    }
+  })
+  
+  app.post('/searchProperties', async (req,res) => {
+      mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+      const {address,maxSize,minSize,maxPrice,minPrice,bedrooms,bathrooms,type} = req.body
+      console.log(req.body);
+      console.log(address);
+      var propertyDoc = await Property.find();
+      console.log(propertyDoc);
+      if (!isNullOrEmpty(address)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.address.toLowerCase().includes(address.toLowerCase());
+          });
+        }
+        if (!isNullOrEmpty(maxSize)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.propertySize <= parseFloat(maxSize);
+          });
+        }
+        if (!isNullOrEmpty(minSize)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.propertySize >= parseFloat(minSize);
+          });
+        }
+        if (!isNullOrEmpty(maxPrice)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.goingPrice <= parseFloat(maxPrice);
+          });
+        }
+        if (!isNullOrEmpty(minPrice)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.goingPrice >= parseFloat(minPrice);
+          });
+        }
+        if (!isNullOrEmpty(bedrooms) && bedrooms != 'noselection') {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.numBedrooms == parseInt(bedrooms);
+          });
+        }
+        if (!isNullOrEmpty(type)) {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.propertyType == type;
+          });
+        }
+        if (!isNullOrEmpty(bathrooms) && bathrooms != 'noselection') {
+          propertyDoc = propertyDoc.filter(function(property) {
+            return property.numBathrooms == parseInt(bathrooms);
+          });
+        }
+        
+        if(propertyDoc){
+          //console.log(propertyDoc);
+          res.json(propertyDoc);
+        } 
+        else{
+            res.status(422).json('pass not ok')
+          }
+      }) 
+  
 
 
 app.listen(3001, () => {
