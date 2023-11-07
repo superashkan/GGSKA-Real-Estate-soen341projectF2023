@@ -13,6 +13,7 @@ import Search from './pages/Search'
 import Sell from './pages/Sell'
 import Profile from './pages/profile'
 import RequestVisitPage from './pages/requestvisitpage'
+import EditProperty from './pages/EditProperty'
 import axios from 'axios';
 import { BrokerContextProvider } from './helpers/BrokerContext';
 
@@ -33,6 +34,7 @@ function App() {
             <Route path='/buy' exact element={<Buy />} />
             <Route path='/rent' exact element={<Rent />} />
             <Route path='/Sell' exact element={<Sell />} />
+            <Route path='/EditProperty' exact element={<EditProperty />} />
             <Route path='/buy-listing/:id' element={<BuyListing />} />
             <Route path='/rent-listing/:id' element={<RentListing />} />
             <Route path='/requestvisitpage' element={<RequestVisitPage/>} />

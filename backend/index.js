@@ -102,6 +102,30 @@ app.post('/deleteProperty', async (req,res) => {
     console.log(address);
     await Property.deleteOne({"address": String(address)})
   })
+
+  app.post('/editProperty', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize} = req.body
+    const propertyDoc = await Property.updateOne(
+      {address: String(currentAddress)},
+      {
+        address: newAddress,
+        goingPrice: newPrice,
+        propertyType: newType,
+        numBedrooms: newBedrooms,
+        numBathrooms: newBathrooms,
+        propertySize: newSize
+      }
+    )
+    if(propertyDoc){
+      res.json(propertyDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+      }
+  })
   
   app.get('/getAllProperties', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")

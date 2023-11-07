@@ -3,10 +3,11 @@ import { BuyList } from '../helpers/BuyList'
 import "../styles/MultiPageCSS.css";
 import Cookies from 'js-cookie';
 import axios from "axios";
-import {Link, Navigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 function PropertySaleManagement() {
 
+  const navigate = useNavigate();
   var [price, setPrice] = useState("");
   var [size, setSize] = useState("");
   var [bedrooms, setBedrooms] = useState("");
@@ -53,7 +54,7 @@ function PropertySaleManagement() {
     try{
       const {data} = await axios.post('/createProperty', {address, price, type, bedrooms, bathrooms, size});
       alert('Property creation successful')
-      return <Navigate to={'/Sell'} />
+      return navigate('/Sell');
     }
     catch (e){
       alert(e);
@@ -179,6 +180,21 @@ function PropertySaleManagement() {
                     <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
                     <td>{property.numBedrooms}</td>
                     <td>{property.numBathrooms}</td>
+                    <td className="propertyDeleteCell">
+                      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/EditProperty', {state: {
+                          currentAddress: property.address,
+                          currentPrice: property.goingPrice,
+                          currentType: property.propertyType,
+                          currentBedrooms: property.numBedrooms,
+                          currentBathrooms: property.numBathrooms,
+                          currentSize: property.propertySize
+                        }});
+                        }
+                        }>
+                        Edit
+                      </button>
+                    </td>
                     <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => handleDeletion(property.address)}>
                         Delete Property
