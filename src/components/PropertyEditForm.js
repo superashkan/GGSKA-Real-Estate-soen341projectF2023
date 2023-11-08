@@ -1,9 +1,7 @@
 import {React, useState, useContext, useEffect } from 'react'
-import { BuyList } from '../helpers/BuyList'
 import "../styles/MultiPageCSS.css";
-import Cookies from 'js-cookie';
 import axios from "axios";
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 
 function PropertyEditForm() {
   const navigate = useNavigate();
@@ -29,33 +27,6 @@ function PropertyEditForm() {
       return false;
     }
   }
-  
-  const neatlyFormatValue = function(value) {
-    value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
-      if (!value.toString().includes(".")) {
-        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-          newValueStr = "," + newValueStr;
-        }
-      } else {
-        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-              newValueStr = "," + newValueStr;
-            }
-          }
-        }
-        if (newValueStr.length > 6) {
-
-        }
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
 
   const handleEdit = async function(event) {
     try{
@@ -78,7 +49,9 @@ function PropertyEditForm() {
             newBathrooms = currentBathrooms;
         }
       const {data} = await axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize});
-      alert('Property edit successful')
+      console.log("data: ");
+      console.log(data);
+      alert('Property edit successful');
       return navigate('/Sell');
     }
     catch (e){
@@ -138,7 +111,7 @@ function PropertyEditForm() {
           <label htmlFor="goingPrice">Price</label>
           <input name="goingPrice" id="goingPrice" placeholder="Price" defaultValue={currentPrice} type="number" onInput={(event) => setNewPrice(event.target.value)} />
           <label htmlFor="propertyType">Type of Property</label>
-          <select id="propertyType" name="propertyType" class="dropdown" defaultValue={currentType} onInput={(event) => setNewType(event.target.value)}>
+          <select id="propertyType" name="propertyType" className="dropdown" defaultValue={currentType} onInput={(event) => setNewType(event.target.value)}>
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
               <option value="Townhome">Townhome</option>
@@ -146,7 +119,7 @@ function PropertyEditForm() {
               <option value="Loft">Loft</option>
           </select>
           <label htmlFor="numBedrooms"># of Bedrooms</label>
-          <select id="numBedrooms" name="numBedrooms" class="dropdown" defaultValue={currentBedrooms} onInput={(event) => setNewBedrooms(event.target.value)}>
+          <select id="numBedrooms" name="numBedrooms" className="dropdown" defaultValue={currentBedrooms} onInput={(event) => setNewBedrooms(event.target.value)}>
               <option value="1">1 Bed</option>
               <option value="2">2 Beds</option>
               <option value="3">3 Beds</option>
@@ -154,8 +127,7 @@ function PropertyEditForm() {
               <option value="5">5 Beds</option>
           </select>
           <label htmlFor="numBathrooms"># of Bathrooms</label>
-          <select id="numBathrooms" name="numBathrooms" class="dropdown" defaultValue={currentBathrooms} onInput={(event) => setNewBathrooms(event.target.value)}>
-              <option value="" selected disabled># of Bathrooms</option>
+          <select id="numBathrooms" name="numBathrooms" className="dropdown" defaultValue={currentBathrooms} onInput={(event) => setNewBathrooms(event.target.value)}>
               <option value="1">1 Bath</option>
               <option value="2">2 Baths</option>
               <option value="3">3 Baths</option>
@@ -165,7 +137,7 @@ function PropertyEditForm() {
           <label htmlFor="propertySize">Lot Size</label>
           <input name="propertySize" id="propertySize" placeholder="Lot Size (sqft.)" defaultValue={currentSize} type="number" onInput={(event) => setNewSize(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
-          <button className="button" type="submit"> Create Property </button>
+          <button className="button" type="submit"> Edit Property </button>
         </form>
         </div>
       );

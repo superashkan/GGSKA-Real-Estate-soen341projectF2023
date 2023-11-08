@@ -124,8 +124,8 @@ function PropertySaleManagement() {
           <label htmlFor="goingPrice">Price</label>
           <input name="goingPrice" id="goingPrice" placeholder="Price" type="number" onInput={(event) => setPrice(event.target.value)} />
           <label htmlFor="propertyType">Type of Property</label>
-          <select id="propertyType" name="propertyType" class="dropdown" onInput={(event) => setType(event.target.value)}>
-              <option value="" selected disabled>Type of Property</option>
+          <select id="propertyType" name="propertyType" defaultValue="" className="dropdown" onInput={(event) => setType(event.target.value)}>
+              <option value="" disabled>Type of Property</option>
               <option value="Apartment">Apartment</option>
               <option value="Villa">Villa</option>
               <option value="Townhome">Townhome</option>
@@ -133,8 +133,8 @@ function PropertySaleManagement() {
               <option value="Loft">Loft</option>
           </select>
           <label htmlFor="numBedrooms"># of Bedrooms</label>
-          <select id="numBedrooms" name="numBedrooms" class="dropdown" onInput={(event) => setBedrooms(event.target.value)}>
-              <option value="" selected disabled># of Bedrooms</option>
+          <select id="numBedrooms" name="numBedrooms" defaultValue="" className="dropdown" onInput={(event) => setBedrooms(event.target.value)}>
+              <option value="" disabled># of Bedrooms</option>
               <option value="1">1 Bed</option>
               <option value="2">2 Beds</option>
               <option value="3">3 Beds</option>
@@ -142,8 +142,8 @@ function PropertySaleManagement() {
               <option value="5">5 Beds</option>
           </select>
           <label htmlFor="numBathrooms"># of Bathrooms</label>
-          <select id="numBathrooms" name="numBathrooms" class="dropdown" onInput={(event) => setBathrooms(event.target.value)}>
-              <option value="" selected disabled># of Bathrooms</option>
+          <select id="numBathrooms" name="numBathrooms" defaultValue="" className="dropdown" onInput={(event) => setBathrooms(event.target.value)}>
+              <option value="" disabled># of Bathrooms</option>
               <option value="1">1 Bath</option>
               <option value="2">2 Baths</option>
               <option value="3">3 Baths</option>
@@ -193,6 +193,16 @@ function PropertySaleManagement() {
                         }
                         }>
                         Edit
+                      </button>
+                    </td>
+                    <td className="propertyDeleteCell">
+                      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/Offer', {state: {
+                          currentAddress: property.address
+                        }});
+                        }
+                        }>
+                        Make Offer
                       </button>
                     </td>
                     <td className="propertyDeleteCell">

@@ -5,6 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Broker = require('./models/Brokers')
 const Property = require('./models/Properties')
+const Offer = require('./models/Offers')
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'slhafhafsaflAH'
@@ -45,6 +46,21 @@ app.post('/register', async (req, res) => {
         res.status(422).json({ error: "Registration failed. Please try again later" });
     }
 
+})
+
+app.post('/submitOffer', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+  var {currentAddress, offer} = req.body
+  try {
+    const offerDoc = await Offer.create({
+      address: currentAddress,
+      offer: offer
+    });
+    res.json({propertyDoc})
+  }
+  catch (e) {
+    res.status(422).json({ error: "Offer failed. Please try again later" });
+  }
 })
 
 app.post('/createProperty', async (req, res) => {
@@ -119,12 +135,28 @@ app.post('/deleteProperty', async (req,res) => {
         propertySize: newSize
       }
     )
-    if(propertyDoc){
-      res.json(propertyDoc);
+    const offerDoc = await Offer.updateMany(
+      {address: String(currentAddress)},
+      {
+        address: newAddress,
+      }
+    )
+  })
+
+  app.post('/findOffersByAddress', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {currentAddress} = req.body
+    const offerDoc = await Offer.find(
+      {address: String(currentAddress)},
+    )
+    if(offerDoc){
+      res.json(offerDoc);
     } 
     else{
         res.status(422).json('pass not ok')
-      }
+    }
   })
   
   app.get('/getAllProperties', async (req,res) => {
