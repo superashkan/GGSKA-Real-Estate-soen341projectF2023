@@ -68,6 +68,11 @@ window.addEventListener("scroll", e => {
           <li>
             <Link to='/Search'><span className="navbar-link label-medium">Search</span></Link>
           </li>
+
+          <li>
+            <Link to='/brokers'><span className="navbar-link label-medium">Brokers</span></Link>
+          </li>
+
         </ul>
 
         <div class="navbar-wrapper">
@@ -77,7 +82,7 @@ window.addEventListener("scroll", e => {
 
         {!!broker &&(
           <div className='btn-link label-medium'>
-            <Link to='/profile'>{broker.name}</Link>
+            <Link to='/profile' style={{ color: 'black' }}>{broker.name}</Link>
           </div>
         )}
 

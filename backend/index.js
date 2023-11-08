@@ -226,6 +226,10 @@ app.post('/deleteProperty', async (req,res) => {
             res.status(422).json('pass not ok')
           }
       }) 
+
+
+
+      
   
 
 

@@ -15,6 +15,7 @@ import Profile from './pages/profile'
 import RequestVisitPage from './pages/requestvisitpage'
 import EditProperty from './pages/EditProperty'
 import Offer from './pages/Offer'
+import Brokers from './pages/brokers'
 import axios from 'axios';
 import { BrokerContextProvider } from './helpers/BrokerContext';
 
@@ -41,6 +42,7 @@ function App() {
             <Route path='/rent-listing/:id' element={<RentListing />} />
             <Route path='/requestvisitpage' element={<RequestVisitPage/>} />
             <Route path='/profile' element={<Profile/>}/>
+            <Route path='/brokers' element={<Brokers/>}/>
           </Routes>
           <Footer/>
         </Router>
