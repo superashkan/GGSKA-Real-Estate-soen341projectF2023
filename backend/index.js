@@ -5,7 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Broker = require('./models/Brokers')
 const Property = require('./models/Properties')
-const Offer = require('./models/Offers')
+const Offer = require('./models/Offers');
+const { default: Brokers } = require('../src/pages/brokers');
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'slhafhafsaflAH'
@@ -227,10 +228,17 @@ app.post('/deleteProperty', async (req,res) => {
           }
       }) 
 
-
-
-      
   
+app.get('/getBrokers', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+  var BrokerDoc = await Broker.find();
+  if(BrokerDoc){
+    res.json(BrokerDoc);
+  } 
+  else{
+      res.status(422).json('pass not ok')
+  }
+})  
 
 
 app.listen(3001, () => {

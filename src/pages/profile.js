@@ -18,6 +18,7 @@ function Profile() {
         <div className="profile-info">
           <p><strong>Name:</strong> {broker?.name}</p>
           <p><strong>Email:</strong> {broker?.email}</p>
+          <p><strong>Age:</strong> {broker?.age}</p>
         </div>
         <button className="edit-button">Edit</button>
         </div>
