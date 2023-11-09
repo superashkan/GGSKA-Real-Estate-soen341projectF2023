@@ -54,12 +54,18 @@ function BuyListing() {
       setBedrooms(result.data.numBedrooms);
       setSize(result.data.propertySize);
       setImageURL(result.data.propertyImageURL);
+    })
+    .catch((err)=>{
+      console.log(err);
     });
   }
 
   const findVisitsByAddress = () => {
     axios.post('/findVisitsByAddress', {propertyAddress: propertyAddress}).then(result => {
       setVisitList(result.data);
+    })
+    .catch((err)=>{
+      console.log(err);
     });
   }
   

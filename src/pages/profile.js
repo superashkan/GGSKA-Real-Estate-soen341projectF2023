@@ -11,7 +11,10 @@ function Profile() {
   const navigate = useNavigate();
   const {ready, broker} = useContext(BrokerContext)
 
-  const getBrokerProperties = () => axios.post('/findPropertiesByBroker', {state: {brokerEmail: broker?.email}}).then(result => setPropertyList(result.data));
+  const getBrokerProperties = () => axios.post('/findPropertiesByBroker', {state: {brokerEmail: broker?.email}}).then(result => setPropertyList(result.data))
+  .catch((err)=>{
+        console.log(err);
+      });
   
   useEffect(() => {
     getBrokerProperties();

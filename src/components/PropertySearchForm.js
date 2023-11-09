@@ -50,6 +50,9 @@ function PropertySearchForm() {
       axios.post('/searchProperties', {address,maxSize,minSize,maxPrice,minPrice,bedrooms,bathrooms,type}).then((response) => {
         setResults(response.data);
         console.log(response);
+      })
+      .catch((err)=>{
+        console.log(err);
       });
     }
     catch (e){

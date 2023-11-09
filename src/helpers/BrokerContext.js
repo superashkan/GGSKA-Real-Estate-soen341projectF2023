@@ -13,6 +13,9 @@ export function BrokerContextProvider({children}){
             setBroker(data);
             setReady(true);
             })
+            .catch((err)=>{
+                console.log(err);
+              })
             
         }
     }, [])

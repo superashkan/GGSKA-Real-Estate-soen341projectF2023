@@ -34,6 +34,9 @@ function Brokers() {
   const getAllBrokers = () => {
     axios.get('/getAllBrokers').then(result => {
       setBrokerList(result.data);
+    })
+    .catch((err)=>{
+      console.log(err);
     });
   }
   

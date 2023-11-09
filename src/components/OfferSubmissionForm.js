@@ -47,7 +47,10 @@ function OfferSubmissionForm() {
   }
 
   const findOffersByAddress = () => {
-    axios.post('/findOffersByAddress', {currentAddress: currentAddress}).then(result => setOfferList(result.data));
+    axios.post('/findOffersByAddress', {currentAddress: currentAddress}).then(result => setOfferList(result.data))
+    .catch((err)=>{
+      console.log(err);
+    });
   }
   
   useEffect(() => {

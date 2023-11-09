@@ -14,7 +14,10 @@ function Login() {
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try{
-      const {data} = await axios.post('/login', {email,password});
+      const {data} = await axios.post('/login', {email,password})
+      .catch((err)=>{
+        console.log(err);
+      });
       setBroker(data);
       alert('Login successful')
       setRedirect(true);

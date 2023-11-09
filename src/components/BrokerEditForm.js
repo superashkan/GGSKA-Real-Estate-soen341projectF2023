@@ -48,7 +48,10 @@ function PropertyEditForm() {
         if (isNullOrEmpty(newAgency)) {
             newAgency = currentAgency;
         }
-      const {data} = await axios.post('/editBroker', {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency});
+      const {data} = await axios.post('/editBroker', {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency})
+      .catch((err)=>{
+        console.log(err);
+      });
       console.log("data: ");
       console.log(data);
       alert('Broker edit successful');
