@@ -109,6 +109,7 @@ function Profile() {
             <th>Lot Size</th>
             <th># of Bedrooms</th>
             <th># of Bathrooms</th>
+            <th>Buyable or Rentable?</th>
             <th className="emptyCell"></th>
           </tr>
           {propertyList.map((property) => {
@@ -120,6 +121,7 @@ function Profile() {
                 <td>{neatlyFormatValue(property.propertySize) + "sqft."}</td>
                 <td>{property.numBedrooms}</td>
                 <td>{property.numBathrooms}</td>
+                <td>{property.forRentOrPurchase}</td>
                 <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => {
                         return navigate('/EditProperty', {state: {

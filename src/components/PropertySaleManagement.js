@@ -16,6 +16,7 @@ function PropertySaleManagement() {
   var [address, setAddress] = useState("");
   var [type, setType] = useState("");
   var [buyOrRent, setBuyOrRent] = useState("");
+  var [propertyImageURL, setPropertyImageURL] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
   var [propertyList, setPropertyList] = useState([]);
 
@@ -62,7 +63,7 @@ function PropertySaleManagement() {
       if (location.state != null) {
         brokerEmail = location.state.brokerEmail;
       }
-      const {data} = await axios.post('/createProperty', {brokerEmail, address, price, type, bedrooms, bathrooms, size});
+      const {data} = await axios.post('/createProperty', {brokerEmail, address, price, type, bedrooms, bathrooms, size, buyOrRent, propertyImageURL});
       alert('Property creation successful')
       return navigate('/Sell');
     }
@@ -168,6 +169,8 @@ function PropertySaleManagement() {
               <option value="Buyable">Buying</option>
               <option value="Rentable">Renting</option>
           </select>
+          <label htmlFor="propertyImageURL">URL of Image of Property</label>
+          <input id="propertyImageURL" name="propertyImageURL" placeholder="URL of image to be used for property" onInput={(event) => setPropertyImageURL(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
           <button className="button" type="submit"> Create Property </button>
         </form>
@@ -183,6 +186,7 @@ function PropertySaleManagement() {
                 <th>Lot Size</th>
                 <th># of Bedrooms</th>
                 <th># of Bathrooms</th>
+                <th>Buyable or Rentable?</th>
               </tr>
             </thead>
             <tbody>

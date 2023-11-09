@@ -130,6 +130,12 @@ function PropertyAddForm() {
           </select>
           <label htmlFor="size">Lot Size</label>
           <input name="size" id="size" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
+          <label htmlFor="buyOrRent">Is this property for buying or renting?</label>
+          <select id="buyOrRent" name="buyOrRent" class="dropdown" onInput={(event) => setBuyOrRent(event.target.value)}>
+              <option value="" selected disabled>Buyable or Rentable?</option>
+              <option value="Buyable">Buying</option>
+              <option value="Rentable">Renting</option>
+          </select>
           <div id="errorMessage">{errorMessage}</div>
         </form>
         <button className="form button" onClick={event => addProperty()}> Test Add Property </button>

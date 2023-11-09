@@ -12,12 +12,16 @@ function PropertyEditForm() {
   const currentBathrooms = location.state.currentBathrooms;
   const currentType = location.state.currentType;
   const currentSize = location.state.currentSize;
+  const currentBuyOrRent = location.state.currentBuyOrRent;
+  const currentPropertyImageURL = location.state.currentPropertyImageURL;
   var [newPrice, setNewPrice] = useState("");
   var [newSize, setNewSize] = useState("");
   var [newBedrooms, setNewBedrooms] = useState("");
   var [newBathrooms, setNewBathrooms] = useState("");
   var [newAddress, setNewAddress] = useState("");
   var [newType, setNewType] = useState("");
+  var [newBuyOrRent, setNewBuyOrRent] = useState("");
+  var [newPropertyImageURL, setNewPropertyImageURL] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
 
   const isNullOrEmpty = function(stringInput) {
@@ -48,7 +52,7 @@ function PropertyEditForm() {
         if (isNullOrEmpty(newBathrooms)) {
             newBathrooms = currentBathrooms;
         }
-      const {data} = await axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize})
+      const {data} = await axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL})
       .catch((err)=>{
         console.log(err);
       });
@@ -139,6 +143,13 @@ function PropertyEditForm() {
           </select>
           <label htmlFor="propertySize">Lot Size</label>
           <input name="propertySize" id="propertySize" placeholder="Lot Size (sqft.)" defaultValue={currentSize} type="number" onInput={(event) => setNewSize(event.target.value)} />
+          <label htmlFor="buyOrRent">Is this property for buying or renting?</label>
+          <select id="buyOrRent" name="buyOrRent" class="dropdown" defaultValue={currentBuyOrRent} onInput={(event) => setNewBuyOrRent(event.target.value)}>
+              <option value="Buyable">Buying</option>
+              <option value="Rentable">Renting</option>
+          </select>
+          <label htmlFor="propertyImageURL">URL of Image of Property</label>
+          <input id="propertyImageURL" name="propertyImageURL" defaultValue={currentPropertyImageURL} placeholder="URL of image to be used for property" onInput={(event) => setNewPropertyImageURL(event.target.value)} />
           <div id="errorMessage">{errorMessage}</div>
           <button className="button" type="submit"> Edit Property </button>
         </form>

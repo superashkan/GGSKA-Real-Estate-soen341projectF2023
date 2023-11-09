@@ -1,10 +1,11 @@
 import {React, useContext, useState, useEffect } from 'react';
 import { BrokerContext } from '../helpers/BrokerContext';
-import { Navigate } from 'react-router-dom';
+import {useNavigate, useLocation, Navigate} from "react-router-dom";
 import '../styles/Brokers.css';
 import axios from 'axios'
 
 function Brokers() {
+  const navigate = useNavigate();
   const { ready, broker } = useContext(BrokerContext);
   var [brokerList, setBrokerList] = useState([]);
   var [firstName, setFirstName] = useState("");
@@ -75,10 +76,21 @@ const constructHTML = function() {
         </div>
         {brokerList.map((broker) => {
         return (
-        <div className="broker-card" key={broker.id}>
+        <div className="broker-card" key={broker.id} onClick = {(event) => {
+          return navigate('/BrokerInfo', {state: {
+            currentName: broker.name,
+            currentAge: broker.age,
+            currentEmail: broker.email,
+            currentAgency: broker.agency,
+            currentPhone: broker.phone_number,
+            currentLicenseNumber: broker.license_number
+          }});
+          }
+          }>
           <h2>{broker.name}</h2>
           <p>Email Address: {broker.email}</p>
           <p>Age: {broker.age}</p>
+          <p>Phone Number: {broker.phone_number}</p>
           <p>License Number: {broker.license_number}</p>
           <p>Agency: {broker.agency}</p>
         </div>
@@ -114,7 +126,17 @@ const constructHTML = function() {
           </div>
       {searchResults.map((broker) => {
         return (
-        <div className="broker-card" key={broker.id}>
+        <div className="broker-card" key={broker.id} onClick = {(event) => {
+          return navigate('/BrokerInfo', {state: {
+            currentName: broker.name,
+            currentAge: broker.age,
+            currentEmail: broker.email,
+            currentAgency: broker.agency,
+            currentPhone: broker.phone_number,
+            currentLicenseNumber: broker.license_number
+          }});
+          }
+          }>
           <h2>{broker.name}</h2>
           <p>Email Address: {broker.email}</p>
           <p>Age: {broker.age}</p>

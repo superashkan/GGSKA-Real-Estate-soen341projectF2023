@@ -17,6 +17,8 @@ import EditProperty from './pages/EditProperty'
 import EditBroker from './pages/EditBroker'
 import Offer from './pages/Offer'
 import Brokers from './pages/brokers'
+import BrokerInfo from './pages/BrokerInfo'
+import BrokerProperties from './pages/BrokerProperties'
 import axios from 'axios';
 import { BrokerContextProvider } from './helpers/BrokerContext';
 
@@ -43,8 +45,10 @@ function App() {
             <Route path='/buy_listing/' element={<BuyListing />} />
             <Route path='/rent_listing/' element={<RentListing />} />
             <Route path='/RequestVisitPage' element={<RequestVisitPage/>} />
+            <Route path='/BrokerInfo' element={<BrokerInfo/>} />
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/brokers' element={<Brokers/>}/>
+            <Route path='/BrokerProperties' element={<BrokerProperties/>}/>
           </Routes>
           <Footer/>
         </Router>

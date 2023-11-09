@@ -70,7 +70,7 @@ app.post('/submitOffer', async (req, res) => {
 
 app.post('/createProperty', async (req, res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    var {brokerEmail, address, price, type, bedrooms, bathrooms, size} = req.body;
+    var {brokerEmail, address, price, type, bedrooms, bathrooms, size, buyOrRent, propertyImageURL} = req.body;
     console.log(req.body);
     try{
         const propertyDoc = await Property.create({
@@ -80,7 +80,9 @@ app.post('/createProperty', async (req, res) => {
             propertyType: type,
             numBedrooms: bedrooms,
             numBathrooms: bathrooms,
-            propertySize: size
+            propertySize: size,
+            forRentOrPurchase: buyOrRent,
+            propertyImageURL: propertyImageURL
         });
         res.json({propertyDoc})
     }
@@ -147,25 +149,32 @@ app.post('/deleteProperty', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
     console.log("req.body: ");
     console.log(req.body);
-    const {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize} = req.body
-    const propertyDoc = await Property.updateOne(
-      {address: String(currentAddress)},
-      {
-        address: newAddress,
-        goingPrice: newPrice,
-        propertyType: newType,
-        numBedrooms: newBedrooms,
-        numBathrooms: newBathrooms,
-        propertySize: newSize
-      }
-    )
-    const offerDoc = await Offer.updateMany(
-      {address: String(currentAddress)},
-      {
-        address: newAddress,
-      }
-    )
-  })
+    try{
+      const {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL} = req.body
+      const propertyDoc = await Property.updateOne(
+        {address: String(currentAddress)},
+        {
+          address: newAddress,
+          goingPrice: newPrice,
+          propertyType: newType,
+          numBedrooms: newBedrooms,
+          numBathrooms: newBathrooms,
+          propertySize: newSize,
+          buyOrRent: newBuyOrRent,
+          propertyImageURL: newPropertyImageURL
+        }
+      )
+      const offerDoc = await Offer.updateMany(
+        {address: String(currentAddress)},
+        {
+          address: newAddress,
+        }
+      )
+  }
+  catch(err) {
+    console.log(err);
+  }}
+  )
 
   app.post('/editBroker', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
