@@ -1,4 +1,10 @@
-Giancarlo
-Shayne
-Khanh
-Chimdindu
+Giancarlo:
+
+Shayne:
+
+Khanh:
+
+Chimdindu:
+
+Ashkan:
+  
