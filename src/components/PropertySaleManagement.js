@@ -3,11 +3,12 @@ import { BuyList } from '../helpers/BuyList'
 import "../styles/MultiPageCSS.css";
 import Cookies from 'js-cookie';
 import axios from "axios";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useNavigate, useLocation} from "react-router-dom";
 
 function PropertySaleManagement() {
 
   const navigate = useNavigate();
+  const location = useLocation();
   var [price, setPrice] = useState("");
   var [size, setSize] = useState("");
   var [bedrooms, setBedrooms] = useState("");
@@ -52,7 +53,12 @@ function PropertySaleManagement() {
 
   const handleCreation = async function(event) {
     try{
-      const {data} = await axios.post('/createProperty', {address, price, type, bedrooms, bathrooms, size});
+      const state = location.state;
+      var brokerEmail = null;
+      if (location.state != null) {
+        brokerEmail = location.state.brokerEmail;
+      }
+      const {data} = await axios.post('/createProperty', {brokerEmail, address, price, type, bedrooms, bathrooms, size});
       alert('Property creation successful')
       return navigate('/Sell');
     }

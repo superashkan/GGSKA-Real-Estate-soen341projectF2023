@@ -12,8 +12,9 @@ import RentListing from './pages/rent_listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
 import Profile from './pages/profile'
-import RequestVisitPage from './pages/requestvisitpage'
+import RequestVisitPage from './pages/RequestVisitPage'
 import EditProperty from './pages/EditProperty'
+import EditBroker from './pages/EditBroker'
 import Offer from './pages/Offer'
 import Brokers from './pages/brokers'
 import axios from 'axios';
@@ -38,9 +39,10 @@ function App() {
             <Route path='/Sell' exact element={<Sell />} />
             <Route path='/Offer' exact element={<Offer />} />
             <Route path='/EditProperty' exact element={<EditProperty />} />
-            <Route path='/buy-listing/:id' element={<BuyListing />} />
+            <Route path='/EditBroker' exact element={<EditBroker />} />
+            <Route path='/buy_listing/' element={<BuyListing />} />
             <Route path='/rent-listing/:id' element={<RentListing />} />
-            <Route path='/requestvisitpage' element={<RequestVisitPage/>} />
+            <Route path='/RequestVisitPage' element={<RequestVisitPage/>} />
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/brokers' element={<Brokers/>}/>
           </Routes>

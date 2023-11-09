@@ -8,6 +8,10 @@ function Register() {
   const [name,setName] = useState("");
   const [email,setEmail] = useState("");
   const [password,setPassword] = useState('');
+  const [age, setAge] = useState('');
+  const [phone,setPhone] = useState('');
+  const [licenseNumber,setLicenseNumber] = useState('');
+  const [agency,setAgency] = useState('');
   
   async function registerUser(ev) {
     ev.preventDefault();
@@ -16,6 +20,10 @@ function Register() {
         name,
         email,
         password,
+        age,
+        phone,
+        licenseNumber,
+        agency,
       });
       alert('Registration successful. Now you can log in');
     } 
@@ -39,6 +47,18 @@ function Register() {
 
         <label htmlFor="email">Email</label>
         <input name="email" placeholder="Enter email..." type="email" onChange={(e) => setEmail(e.target.value)}/>
+
+        <label htmlFor="age">Age</label>
+        <input name="age" placeholder="Enter age..." type="number" onChange={(e) => setAge(e.target.value)}/>
+
+        <label htmlFor="phone">Phone Number</label>
+        <input name="phone" placeholder="Enter phone number..." type="string" onChange={(e) => setPhone(e.target.value)}/>
+
+        <label htmlFor="licenseNumber">License Number</label>
+        <input name="licenseNumber" placeholder="Enter license number..." type="number" onChange={(e) => setLicenseNumber(e.target.value)}/>
+
+        <label htmlFor="agency">Name of Agency</label>
+        <input name="agency" placeholder="Enter the name of your agency..." type="string" onChange={(e) => setAgency(e.target.value)}/>
 
         <label htmlFor="password">Password</label>
         <input name="password" placeholder="Enter password..." type="password" onChange={(e) => setPassword(e.target.value)}/>

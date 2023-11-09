@@ -59,14 +59,14 @@ function PropertySearchForm() {
   }
 
   const performChecks = function() {
-    if (address == "") {
-      if (minPrice == "") {
-        if (maxPrice == "") {
-          if (bedrooms == "") {
-            if (bathrooms == "") {
-              if (minSize == "") {
-                if (maxSize == "") {
-                  if (type == "") {
+    if (isNullOrEmpty(address)) {
+      if (isNullOrEmpty(minPrice)) {
+        if (isNullOrEmpty(maxPrice)) {
+          if (isNullOrEmpty(bedrooms)) {
+            if (isNullOrEmpty(bathrooms)) {
+              if (isNullOrEmpty(minSize)) {
+                if (isNullOrEmpty(maxSize)) {
+                  if (isNullOrEmpty(type)) {
                     setErrorMessage("Please enter at least one search criterion.");
                     setResults([]);
                     return false;
@@ -130,9 +130,9 @@ function PropertySearchForm() {
           <label htmlFor="address">Address</label>
           <input name="address" id="address" placeholder="Address" type="text" onInput={(event) => setAddress(event.target.value)}/>
           <label htmlFor="min_price">Minimum Price</label>
-          <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(event.target.value)} />
+          <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(parseFloat(event.target.value))} />
           <label htmlFor="max_price">Maximum Price</label>
-          <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
+          <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(parseFloat(event.target.value))}/>
           <label htmlFor="type">Type of Property</label>
           <select id="type" name="type" class="dropdown" onInput={(event) => setType(event.target.value)}>
               <option value="" selected disabled>What type of property are you searching for?</option>
@@ -162,10 +162,10 @@ function PropertySearchForm() {
               <option value="4">4 Bathrooms</option>
               <option value="5">5 Bathrooms</option>
           </select>
-          <label htmlFor="min_price">Minimum Lot Size</label>
-          <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(event.target.value)} />
-          <label htmlFor="max_price">Maximum Lot Size</label>
-          <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(event.target.value)}/>
+          <label htmlFor="min_size">Minimum Lot Size</label>
+          <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(parseFloat(event.target.value))} />
+          <label htmlFor="max_size">Maximum Lot Size</label>
+          <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(parseFloat(event.target.value))}/>
           <button className="propertySearchButton" type="submit"> Search </button>
         </form>
         </div>
@@ -177,9 +177,9 @@ function PropertySearchForm() {
           <label htmlFor="address">Address</label>
           <input name="address" id="address" placeholder="Address" type="text" onInput={(event) => setAddress(event.target.value)}/>
           <label htmlFor="min_price">Minimum Price</label>
-          <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(event.target.value)} />
+          <input name="min_price" id="min_price" placeholder="Minimum price" type="number" onInput={(event) => setMinPrice(parseFloat(event.target.value))} />
           <label htmlFor="max_price">Maximum Price</label>
-          <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(event.target.value)}/>
+          <input name="max_price" id="max_price" placeholder="Maximum price" type="number" onInput={(event) => setMaxPrice(parseFloat(event.target.value))}/>
           <label htmlFor="type">Type of Property</label>
           <select id="type" name="type" class="dropdown" onInput={(event) => setType(event.target.value)}>
               <option value="" selected disabled>What type of property are you searching for?</option>
@@ -209,10 +209,10 @@ function PropertySearchForm() {
               <option value="4">4 Bathrooms</option>
               <option value="5">5 Bathrooms</option>
           </select>
-          <label htmlFor="min_price">Minimum Lot Size</label>
-          <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(event.target.value)} />
-          <label htmlFor="max_price">Maximum Lot Size</label>
-          <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(event.target.value)}/>
+          <label htmlFor="min_size">Minimum Lot Size</label>
+          <input name="min_size" id="min_size" placeholder="Minimum Lot Size (sqft.)" type="number" onInput={(event) => setMinSize(parseFloat(event.target.value))} />
+          <label htmlFor="max_size">Maximum Lot Size</label>
+          <input name="max_size" id="max_size" placeholder="Maximum Lot Size (sqft.)" type="number" onChange={(event) => setMaxSize(parseFloat(event.target.value))}/>
           <button className="propertySearchButton" type="submit"> Search </button>
         </form>
           <h2 class="searchResHeader">Search Results: </h2>
