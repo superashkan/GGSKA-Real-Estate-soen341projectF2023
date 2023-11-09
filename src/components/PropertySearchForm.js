@@ -3,9 +3,11 @@ import { BuyList } from '../helpers/BuyList'
 import "../styles/MultiPageCSS.css";
 import "../styles/Search.css"
 import axios from "axios";
+import { useNavigate } from 'react-router-dom';
 
 function PropertySearchForm() {
 
+  const navigate = useNavigate();
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [minSize, setMinSize] = useState("");
@@ -237,6 +239,16 @@ function PropertySearchForm() {
                     <td>{neatlyFormatValue(result.propertySize)} sqft.</td>
                     <td>{result.numBedrooms}</td>
                     <td>{result.numBathrooms}</td>
+                    <td className="propertyDeleteCell">
+                      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/Offer', {state: {
+                          currentAddress: result.address
+                        }});
+                        }
+                        }>
+                        Make Offer
+                      </button>
+                    </td>
                   </tr>
                 )})
               }

@@ -17,6 +17,7 @@ function BuyListing() {
   var [bedrooms, setBedrooms] = useState("");
   var [imageURL, setImageURL] = useState("");
   var [visitList, setVisitList] = useState([]);
+  var [offerList, setOfferList] = useState([]);
 
   const neatlyFormatValue = function(value) {
     value = value.toString();
@@ -45,7 +46,7 @@ function BuyListing() {
     return newValueStr;
   }
 
-  const findOffersByAddress = () => {
+  const findPropertyByAddress = () => {
     axios.post('/findPropertyByAddress', {propertyAddress: propertyAddress}).then(result => {
       setAddress(result.data.address);
       setPrice(result.data.goingPrice);
@@ -57,6 +58,12 @@ function BuyListing() {
     });
   }
 
+  const findOffersByAddress = () => {
+    axios.post('/findOffersByAddress', {currentAddress: [propertyAddress]}).then(result => {
+      setOfferList(result.data);
+    });
+  }
+
   const findVisitsByAddress = () => {
     axios.post('/findVisitsByAddress', {propertyAddress: propertyAddress}).then(result => {
       setVisitList(result.data);
@@ -65,8 +72,9 @@ function BuyListing() {
   
   useEffect(() => {
     console.log(propertyAddress);
-    findOffersByAddress();
+    findPropertyByAddress();
     findVisitsByAddress();
+    findOffersByAddress();
  }, []);
 
   return (
@@ -93,6 +101,15 @@ function BuyListing() {
                         Request a Visit
                       </button>
       <br />
+      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/Offer', {state: {
+                          currentAddress: address
+                        }});
+                        }
+                        }>
+                        Make Offer
+                      </button>
+      <br />
       <h1>Scheduled Visits</h1>
       <table>
         <tr>
@@ -106,6 +123,20 @@ function BuyListing() {
             <td>{visit.visitorFullName}</td>
             <td>{visit.visitDate}</td>
             <td>{visit.visitTime}</td>
+          </tr>
+        )})
+        }
+      </table>
+      <br/>
+      <h1>Purchase Offers</h1>
+      <table>
+        <tr>
+          <th>Monetary Purchase Offer</th>
+        </tr>
+        {offerList.map((offer) => {
+        return (
+          <tr>
+            <td>{"$" + neatlyFormatValue(offer.offer)}</td>
           </tr>
         )})
         }

@@ -46,6 +46,7 @@ function Buy() {
       <h1 className="buyTitle" font>Properties for Purchase</h1>
       <div className="buyList">
         {propertyList.map((buyItem, key) => {
+          if (buyItem.forRentOrPurchase == "Buyable") {
           return (
             <BuyItem
               key={key}
@@ -54,8 +55,12 @@ function Buy() {
               address={buyItem.address}
               price={'$' + neatlyFormatValue(buyItem.goingPrice)}
               type={buyItem.propertyType}
+              bedrooms={buyItem.numBedrooms + " Bedroom(s)"}
+              bathrooms={buyItem.numBathrooms + " Bathroom(s)"}
+              size={neatlyFormatValue(buyItem.propertySize) + " sqft."}
             />
           );
+          }
         })}
       </div>
     </div>

@@ -68,7 +68,7 @@ function Profile() {
           <p><strong>Name:</strong> {broker?.name}</p>
           <p><strong>Email:</strong> {broker?.email}</p>
           <p><strong>Age:</strong> {broker?.age}</p>
-          <p><strong>Phone Number:</strong> {broker?.phoneNumber}</p>
+          <p><strong>Phone Number:</strong> {broker?.phone_number}</p>
           <p><strong>License Number:</strong> {broker?.license_number}</p>
           <p><strong>Agency:</strong> {broker?.agency}</p>
         </div>

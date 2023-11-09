@@ -3,7 +3,7 @@ import '../styles/BuyList.css'
 import axios from 'axios';
 import {Link, useNavigate} from "react-router-dom";
 
-function BuyItem({ image, address, price, type, uid }) {
+function BuyItem({ image, address, price, type, bedrooms, bathrooms, size }) {
   const navigate = useNavigate();
   return (
     <div className="buyItem" onClick={() => {
@@ -13,6 +13,9 @@ function BuyItem({ image, address, price, type, uid }) {
         <h1> {address} </h1>
         <p> {price} </p>
         <p> {type} </p>
+        <p> {bedrooms} </p>
+        <p> {bathrooms} </p>
+        <p> {size} </p>
     </div>
   );
 }
