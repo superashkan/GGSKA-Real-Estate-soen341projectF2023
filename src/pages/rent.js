@@ -7,7 +7,10 @@ import axios from 'axios';
 function Rent() {
   var [propertyList, setPropertyList] = useState([]);
 
-  const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data));
+  const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data))
+  .catch((err)=>{
+    console.log(err);
+  });
   
   useEffect(() => {
     getAllProperties();
