@@ -5,8 +5,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Broker = require('./models/Brokers')
 const Property = require('./models/Properties')
-const Offer = require('./models/Offers');
-const { default: Brokers } = require('../src/pages/brokers');
+const Offer = require('./models/Offers')
+const Visit = require('./models/Visits')
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'slhafhafsaflAH'
@@ -30,12 +30,16 @@ const isNullOrEmpty = function(stringInput) {
 
 app.post('/register', async (req, res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    const {name, email, password} = req.body;
+    const {name, email, password, age, phone, licenseNumber, agency} = req.body;
     try{
         const brokerDoc = await Broker.create({
-            name,
-            email,
-            password:bcrypt.hashSync(password, bcryptSalt)
+            name: name,
+            email: email,
+            password:bcrypt.hashSync(password, bcryptSalt),
+            age: age,
+            phone_number: phone,
+            license_number: licenseNumber,
+            agency: agency
     
         });
         
@@ -66,10 +70,11 @@ app.post('/submitOffer', async (req, res) => {
 
 app.post('/createProperty', async (req, res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    var {address, price, type, bedrooms, bathrooms, size} = req.body;
+    var {brokerEmail, address, price, type, bedrooms, bathrooms, size} = req.body;
     console.log(req.body);
     try{
         const propertyDoc = await Property.create({
+            brokerEmail: brokerEmail,
             address: address,
             goingPrice: price,
             propertyType: type,
@@ -81,6 +86,24 @@ app.post('/createProperty', async (req, res) => {
     }
     catch (e){
         res.status(422).json({ error: "Property creation failed. Please try again later" });
+    }
+  })
+
+  app.post('/createVisit', async (req, res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    var {address, visitorName, date, time} = req.body;
+    console.log(req.body);
+    try{
+        const visitDoc = await Visit.create({
+            propertyAddress: address,
+            visitorFullName: visitorName,
+            visitDate: date,
+            visitTime: time
+        });
+        res.json({visitDoc})
+    }
+    catch (e){
+        res.status(422).json({ error: "Visit scheduling failed. Please try again later" });
     }
   })
 
@@ -144,6 +167,24 @@ app.post('/deleteProperty', async (req,res) => {
     )
   })
 
+  app.post('/editBroker', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency} = req.body
+    const brokerDoc = await Broker.updateOne(
+      {email: String(currentEmail)},
+      {
+        email: newEmail,
+        name: newName,
+        phone_number: newPhone,
+        license_number: newLicenseNumber,
+        age: newAge,
+        agency: newAgency 
+      }
+    )
+  })
+
   app.post('/findOffersByAddress', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
     console.log("req.body: ");
@@ -159,12 +200,72 @@ app.post('/deleteProperty', async (req,res) => {
         res.status(422).json('pass not ok')
     }
   })
+
+  app.post('/findPropertyByAddress', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {propertyAddress} = req.body
+    const propertyDoc = await Property.findOne(
+      {address: String(propertyAddress)},
+    )
+    if(propertyDoc){
+      res.json(propertyDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+    }
+  })
+
+  app.post('/findPropertiesByBroker', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {brokerEmail} = req.body.state
+    const propertyDoc = await Property.find(
+      {brokerEmail: String(brokerEmail)},
+    )
+    if(propertyDoc){
+      res.json(propertyDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+    }
+  })
   
   app.get('/getAllProperties', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
     var propertyDoc = await Property.find();
     if(propertyDoc){
       res.json(propertyDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+    }
+  })
+
+  app.get('/getAllBrokers', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    var brokerDoc = await Broker.find();
+    console.log(req.body);
+    if(brokerDoc){
+      res.json(brokerDoc);
+    } 
+    else{
+        res.status(422).json('pass not ok')
+    }
+  })
+
+  app.post('/findVisitsByAddress', async (req,res) => {
+    mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+    console.log("req.body: ");
+    console.log(req.body);
+    const {propertyAddress} = req.body
+    const visitDoc = await Visit.find(
+      {propertyAddress: String(propertyAddress)},
+    )
+    if(visitDoc){
+      res.json(visitDoc);
     } 
     else{
         res.status(422).json('pass not ok')
@@ -228,18 +329,30 @@ app.post('/deleteProperty', async (req,res) => {
           }
       }) 
 
-  
-app.get('/getBrokers', async (req, res) => {
-  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-  var BrokerDoc = await Broker.find();
-  if(BrokerDoc){
-    res.json(BrokerDoc);
-  } 
-  else{
-      res.status(422).json('pass not ok')
-  }
-})  
-
+      app.post('/searchBrokers', async (req,res) => {
+        mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+        const {firstName,lastName} = req.body
+        console.log(req.body);
+        var brokerDoc = await Broker.find();
+        console.log(brokerDoc);
+        if (!isNullOrEmpty(firstName)) {
+          brokerDoc = brokerDoc.filter(function(broker) {
+              return broker.name.toLowerCase().includes(firstName.toLowerCase());
+            });
+          }
+          if (!isNullOrEmpty(lastName)) {
+            brokerDoc = brokerDoc.filter(function(broker) {
+              return broker.name.toLowerCase().includes(lastName.toLowerCase());
+            });
+          }
+        
+          if(brokerDoc){
+            res.json(brokerDoc);
+          } 
+          else{
+              res.status(422).json('pass not ok')
+            }
+        }) 
 
 app.listen(3001, () => {
     console.log("server is running")
