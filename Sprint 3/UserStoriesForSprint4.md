@@ -6,5 +6,5 @@
 
 ### Broker Reviews (Proposed New Feature):
 -User Story: As a homebuyer or renter, I should be able to write a review for a broker of a listing. Priority: Medium
-- Acceptance Criteria: Given that I have visited the house (sent a request to visit or promise to purchase). I should be able to write a simple review along with a rating (5-star system) after submiting via a "submit review" button.
+- Acceptance Criteria: Given that I have visited the house (sent a request to visit or promise to purchase). When I write a simple review as well as rate the broker out of 5 stars and sumbit the review. Then the review should be visible on the listing page.
 
