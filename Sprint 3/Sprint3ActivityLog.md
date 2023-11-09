@@ -8,6 +8,9 @@ Giancarlo:
 Chimdindu:
 
 Phuong Khanh:
+- Wrote the meeting minutes for meeting 8 - around 15 minutes (4:30 PM - 5:30 PM (11/02/2023))
+- Trying to implement unit tests (7 PM - 9 PM (11/08/2023))
+- Fixing some network error pop-up concerning Axios (10:45 AM - 11:30 AM (11/09/2023))
 
 Ashkan: 
 - Created Profile page and Brokers page (list of brokers plus a search button) (12:00 pm - 2:00 pm (2023-11-08))
