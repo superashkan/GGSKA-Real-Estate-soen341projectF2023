@@ -41,7 +41,7 @@ function App() {
             <Route path='/EditProperty' exact element={<EditProperty />} />
             <Route path='/EditBroker' exact element={<EditBroker />} />
             <Route path='/buy_listing/' element={<BuyListing />} />
-            <Route path='/rent-listing/:id' element={<RentListing />} />
+            <Route path='/rent_listing/' element={<RentListing />} />
             <Route path='/RequestVisitPage' element={<RequestVisitPage/>} />
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/brokers' element={<Brokers/>}/>

@@ -15,6 +15,7 @@ function PropertySaleManagement() {
   var [bathrooms, setBathrooms] = useState("");
   var [address, setAddress] = useState("");
   var [type, setType] = useState("");
+  var [buyOrRent, setBuyOrRent] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
   var [propertyList, setPropertyList] = useState([]);
 
@@ -161,11 +162,59 @@ function PropertySaleManagement() {
           </select>
           <label htmlFor="propertySize">Lot Size</label>
           <input name="propertySize" id="propertySize" placeholder="Lot Size (sqft.)" type="number" onInput={(event) => setSize(event.target.value)} />
+          <label htmlFor="buyOrRent">Is this property for buying or renting?</label>
+          <select id="buyOrRent" name="buyOrRent" class="dropdown" onInput={(event) => setBuyOrRent(event.target.value)}>
+              <option value="" selected disabled>Buyable or Rentable?</option>
+              <option value="Buyable">Buying</option>
+              <option value="Rentable">Renting</option>
+          </select>
           <div id="errorMessage">{errorMessage}</div>
           <button className="button" type="submit"> Create Property </button>
         </form>
         <div class="soldPropertiesTitle">
-          <h1>Manage Sold Properties</h1>
+          <h1> Properties for Sale </h1>
+        </div>
+        <table>
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Lot Size</th>
+                <th># of Bedrooms</th>
+                <th># of Bathrooms</th>
+              </tr>
+            </thead>
+            <tbody>
+              {propertyList.map((property) => {
+                if (property.forRentOrPurchase == "Buyable") {
+                return (
+                  <tr>
+                    <td>{property.address}</td>
+                    <td>${neatlyFormatValue(property.goingPrice)}</td>
+                    <td>{property.propertyType}</td>
+                    <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
+                    <td>{property.numBedrooms}</td>
+                    <td>{property.numBathrooms}</td>
+                    <td className="propertyDeleteCell">
+                      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/Offer', {state: {
+                          currentAddress: property.address
+                        }});
+                        }
+                        }>
+                        Make Offer
+                      </button>
+                    </td>
+                  </tr>
+                )
+              }})
+              }
+            </tbody>
+          </table>
+          <br />
+          <div class="soldPropertiesTitle">
+          <h1> Properties for Rent </h1>
         </div>
         <table>
             <thead>
@@ -181,6 +230,7 @@ function PropertySaleManagement() {
             </thead>
             <tbody>
               {propertyList.map((property) => {
+                if (property.forRentOrPurchase == "Rentable") {
                 return (
                   <tr>
                     <td>{property.address}</td>
@@ -189,38 +239,9 @@ function PropertySaleManagement() {
                     <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
                     <td>{property.numBedrooms}</td>
                     <td>{property.numBathrooms}</td>
-                    <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => {
-                        return navigate('/EditProperty', {state: {
-                          currentAddress: property.address,
-                          currentPrice: property.goingPrice,
-                          currentType: property.propertyType,
-                          currentBedrooms: property.numBedrooms,
-                          currentBathrooms: property.numBathrooms,
-                          currentSize: property.propertySize
-                        }});
-                        }
-                        }>
-                        Edit
-                      </button>
-                    </td>
-                    <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => {
-                        return navigate('/Offer', {state: {
-                          currentAddress: property.address
-                        }});
-                        }
-                        }>
-                        Make Offer
-                      </button>
-                    </td>
-                    <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => handleDeletion(property.address)}>
-                        Delete Property
-                      </button>
-                    </td>
                   </tr>
-                )})
+                )
+              }})
               }
             </tbody>
           </table>
