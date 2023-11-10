@@ -124,13 +124,17 @@ function Profile() {
                 <td>{property.forRentOrPurchase}</td>
                 <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => {
+                        console.log(property.currentPropertyImageURL);
+                        console.log(property.forRentOrPurchase);
                         return navigate('/EditProperty', {state: {
                           currentAddress: property.address,
                           currentPrice: property.goingPrice,
                           currentType: property.propertyType,
                           currentBedrooms: property.numBedrooms,
                           currentBathrooms: property.numBathrooms,
-                          currentSize: property.propertySize
+                          currentSize: property.propertySize,
+                          currentPropertyImageURL: property.propertyImageURL,
+                          currentBuyOrRent: property.forRentOrPurchase
                         }});
                         }
                         }>

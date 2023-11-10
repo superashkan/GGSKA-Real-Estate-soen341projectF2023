@@ -1,13 +1,14 @@
-import {React, useState, useEffect} from 'react';
+import {React, useContext, useState, useEffect} from 'react';
 import '../styles/Listing.css';
 import "../styles/MultiPageCSS.css";
-import { BuyList } from '../helpers/BuyList';
+import { BrokerContext } from '../helpers/BrokerContext'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function BuyListing() {
   const navigate = useNavigate();
   const location = useLocation();
+  const {broker} = useContext(BrokerContext);
   const propertyAddress = location.state.address;
   var [address, setAddress] = useState("");
   var [price, setPrice] = useState("");
@@ -18,6 +19,7 @@ function BuyListing() {
   var [imageURL, setImageURL] = useState("");
   var [visitList, setVisitList] = useState([]);
   var [offerList, setOfferList] = useState([]);
+  var [offerButtonDisabled, setOfferButtonDisabled] = useState(true);
 
   const neatlyFormatValue = function(value) {
     value = value.toString();
@@ -81,6 +83,9 @@ function BuyListing() {
     findPropertyByAddress();
     findVisitsByAddress();
     findOffersByAddress();
+    if (broker) {
+      setOfferButtonDisabled(false);
+    }
  }, []);
 
   return (
@@ -100,14 +105,15 @@ function BuyListing() {
       </div>
       <button className="deleteProperty" onClick = {(event) => {
                         return navigate('/RequestVisitPage', {state: {
-                          address: address
+                          address: address,
+                          buyOrRent: "buy"
                         }});
                         }
                         }>
                         Request a Visit
                       </button>
       <br />
-      <button className="deleteProperty" onClick = {(event) => {
+      <button className="deleteProperty" disabled={offerButtonDisabled} onClick = {(event) => {
                         return navigate('/Offer', {state: {
                           currentAddress: address
                         }});
@@ -137,12 +143,18 @@ function BuyListing() {
       <h1>Purchase Offers</h1>
       <table>
         <tr>
-          <th>Monetary Purchase Offer</th>
+            <th>Offer</th>
+            <th>Broker Name</th>
+            <th>Deed of Sale Date</th>
+            <th>Premises Occupancy Date</th>
         </tr>
         {offerList.map((offer) => {
         return (
           <tr>
-            <td>{"$" + neatlyFormatValue(offer.offer)}</td>
+            <td>${neatlyFormatValue(offer.offer)}</td>
+            <td>{offer.brokerName}</td>
+            <td>{offer.deedDate}</td>
+            <td>{offer.occupancyDate}</td>
           </tr>
         )})
         }

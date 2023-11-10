@@ -6,14 +6,14 @@ import {useNavigate, useLocation} from "react-router-dom";
 function PropertyEditForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentAddress = location.state.currentAddress;
-  const currentPrice = location.state.currentPrice;
-  const currentBedrooms = location.state.currentBedrooms;
-  const currentBathrooms = location.state.currentBathrooms;
-  const currentType = location.state.currentType;
-  const currentSize = location.state.currentSize;
-  const currentBuyOrRent = location.state.currentBuyOrRent;
-  const currentPropertyImageURL = location.state.currentPropertyImageURL;
+  const currentAddress = location.state ? location.state.currentAddress : null;
+  const currentPrice = location.state ? location.state.currentPrice : null;
+  const currentBedrooms = location.state ? location.state.currentBedrooms : null;
+  const currentBathrooms = location.state ? location.state.currentBathrooms : null;
+  const currentType = location.state ? location.state.currentType : null;
+  const currentSize = location.state ? location.state.currentSize : null;
+  const currentBuyOrRent = location.state ? location.state.currentBuyOrRent : null;
+  const currentPropertyImageURL = location.state ? location.state.currentPropertyImageURL : null;
   var [newPrice, setNewPrice] = useState("");
   var [newSize, setNewSize] = useState("");
   var [newBedrooms, setNewBedrooms] = useState("");
@@ -52,14 +52,18 @@ function PropertyEditForm() {
         if (isNullOrEmpty(newBathrooms)) {
             newBathrooms = currentBathrooms;
         }
-      const {data} = await axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL})
+        if (isNullOrEmpty(newBuyOrRent)) {
+          newBuyOrRent = currentBuyOrRent;
+        }
+        if (isNullOrEmpty(newPropertyImageURL)) {
+          newPropertyImageURL = currentPropertyImageURL;
+        }
+      axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL})
       .catch((err)=>{
         console.log(err);
       });
-      console.log("data: ");
-      console.log(data);
       alert('Property edit successful');
-      return navigate('/Sell');
+      return navigate('/Buy');
     }
     catch (e){
       alert(e);

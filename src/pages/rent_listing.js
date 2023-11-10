@@ -85,7 +85,8 @@ function RentListing() {
       </div>
       <button className="deleteProperty" onClick = {(event) => {
                         return navigate('/RequestVisitPage', {state: {
-                          address: address
+                          address: address,
+                          buyOrRent: "rent"
                         }});
                         }
                         }>

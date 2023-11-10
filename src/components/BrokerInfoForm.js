@@ -39,10 +39,10 @@ function BrokerEditForm() {
         <input name="phone" value={currentPhone} type="string" />
 
         <label htmlFor="licenseNumber">License Number</label>
-        <input name="licenseNumber" defaultValue={currentLicenseNumber} type="number"/>
+        <input name="licenseNumber" value={currentLicenseNumber} type="number"/>
 
         <label htmlFor="agency">Name of Agency</label>
-        <input name="agency"  defaultValue={currentAgency} type="string" />
+        <input name="agency" value={currentAgency} type="string" />
         <button className="propertySearchButton" onClick = {(event) => {
                         return navigate('/BrokerProperties', {state: {
                           brokerEmail: currentEmail,

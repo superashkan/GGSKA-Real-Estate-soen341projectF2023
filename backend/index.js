@@ -55,13 +55,19 @@ app.post('/register', async (req, res) => {
 
 app.post('/submitOffer', async (req, res) => {
   mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-  var {currentAddress, offer} = req.body
+  var {currentAddress, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate} = req.body
   try {
     const offerDoc = await Offer.create({
       address: currentAddress,
-      offer: offer
+      offer: offer,
+      brokerName: brokerName,
+      brokerLicense: brokerLicense,
+      brokerAgency: brokerAgency,
+      clientInfo: clientInfo,
+      deedDate: deedDate.toString(),
+      occupancyDate: occupancyDate.toString()
     });
-    res.json({propertyDoc})
+    res.json({offerDoc})
   }
   catch (e) {
     res.status(422).json({ error: "Offer failed. Please try again later" });
@@ -151,7 +157,7 @@ app.post('/deleteProperty', async (req,res) => {
     console.log(req.body);
     try{
       const {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL} = req.body
-      const propertyDoc = await Property.updateOne(
+      await Property.updateOne(
         {address: String(currentAddress)},
         {
           address: newAddress,
@@ -160,16 +166,25 @@ app.post('/deleteProperty', async (req,res) => {
           numBedrooms: newBedrooms,
           numBathrooms: newBathrooms,
           propertySize: newSize,
-          buyOrRent: newBuyOrRent,
-          propertyImageURL: newPropertyImageURL
+          propertyImageURL: newPropertyImageURL,
+          forRentOrPurchase: newBuyOrRent
         }
       )
-      const offerDoc = await Offer.updateMany(
+      console.log("1");
+      await Offer.updateMany(
         {address: String(currentAddress)},
         {
           address: newAddress,
         }
       )
+      console.log("2");
+      await Visit.updateMany(
+        {propertyAddress: String(currentAddress)},
+        {
+          propertyAddress: newAddress,
+        }
+      )
+      console.log("3");
   }
   catch(err) {
     console.log(err);
@@ -181,7 +196,7 @@ app.post('/deleteProperty', async (req,res) => {
     console.log("req.body: ");
     console.log(req.body);
     const {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency} = req.body
-    const brokerDoc = await Broker.updateOne(
+    await Broker.updateOne(
       {email: String(currentEmail)},
       {
         email: newEmail,

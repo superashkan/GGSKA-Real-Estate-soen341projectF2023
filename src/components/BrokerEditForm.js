@@ -3,15 +3,15 @@ import "../styles/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
 
-function PropertyEditForm() {
+function BrokerEditForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const currentEmail = location.state.currentEmail;
-  const currentPhone = location.state.currentPhone;
-  const currentName = location.state.currentName;
-  const currentAge = location.state.currentAge;
-  const currentAgency = location.state.currentAgency;
-  const currentLicenseNumber = location.state.currentLicenseNumber;
+  const currentEmail = location.state ? location.state.currentEmail : null;
+  const currentPhone = location.state ? location.state.currentPhone : null;
+  const currentName = location.state ? location.state.currentName : null;
+  const currentAge = location.state ? location.state.currentAge : null;
+  const currentAgency = location.state ? location.state.currentAgency : null;
+  const currentLicenseNumber = location.state ? location.state.currentLicenseNumber : null;
   var [newEmail, setNewEmail] = useState("");
   var [newPhone, setNewPhone] = useState("");
   var [newName, setNewName] = useState("");
@@ -48,14 +48,12 @@ function PropertyEditForm() {
         if (isNullOrEmpty(newAgency)) {
             newAgency = currentAgency;
         }
-      const {data} = await axios.post('/editBroker', {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency})
+      axios.post('/editBroker', {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency})
       .catch((err)=>{
         console.log(err);
       });
-      console.log("data: ");
-      console.log(data);
       alert('Broker edit successful');
-      return navigate('/Brokers');
+      return navigate('/profile');
     }
     catch (e){
       alert(e);
@@ -91,4 +89,4 @@ function PropertyEditForm() {
 
   return constructHTML();
 }
-export default PropertyEditForm
+export default BrokerEditForm

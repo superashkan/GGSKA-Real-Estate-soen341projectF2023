@@ -186,7 +186,6 @@ function PropertySaleManagement() {
                 <th>Lot Size</th>
                 <th># of Bedrooms</th>
                 <th># of Bathrooms</th>
-                <th>Buyable or Rentable?</th>
               </tr>
             </thead>
             <tbody>

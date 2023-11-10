@@ -8,16 +8,27 @@ function RequestVisitPage() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  const address = location.state.address;
+  const address = location.state ? location.state.address : null;
+  const buyOrRent = location.state ? location.state.buyOrRent : 'buy';
   var [visitorName, setVisitorName] = useState("");
   var [date, setDate] = useState("");
   var [time, setTime] = useState("");
 
   const handleVisitScheduling = async function(event) {
     try{
-      const {data} = await axios.post('/createVisit', {address, visitorName, date, time});
+      const {data} = axios.post('/createVisit', {address, visitorName, date, time});
       alert('Visit scheduling successful')
-      return navigate('/Sell');
+      if (buyOrRent == 'buy') {
+        return navigate('/buy_listing', {state: {
+          address: address
+        }});
+      }
+      if (buyOrRent == 'rent') {
+        return navigate('/rent_listing', {state: {
+          address: address
+        }});
+      }
+      return navigate('/');
     }
     catch (e){
       alert(e);
@@ -27,16 +38,18 @@ function RequestVisitPage() {
     return (
         <div className="visitForm">
 
-          <h1> Request a property visit </h1>
+          <h1> Request a property visit to </h1>
+          <br />
+          <h1>{address}</h1>
 
           <div>
           <form id="search-form" onSubmit={handleVisitScheduling}>
             <label htmlFor="name">Full Name</label>
             <input name="name" placeholder="Enter full name..." type="text" onInput={(event) => setVisitorName(event.target.value)}/>
             <label htmlFor="Time">24 Hour Time</label>
-            <input time="time" placeholder="Enter time in 30 minute intervals" type="text" onInput={(event) => setTime(event.target.value)}/>
+            <input time="time" type="time" required="true" onInput={(event) => setTime(event.target.value.toString())}/>
             <label htmlFor="Date">Date</label>
-            <input name="Date" placeholder="0000/00/00" type="text" onInput={(event) => setDate(event.target.value)}/>
+            <input name="Date" type="date" required="true" onInput={(event) => setDate(event.target.value.toString())}/>
             <button> Request </button>
           </form>
           </div>

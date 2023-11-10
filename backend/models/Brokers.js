@@ -7,7 +7,7 @@ const BrokerSchema = new mongoose.Schema({
     password: String,
     age: Number,
     phone_number: String,
-    license_number: Number,
+    license_number: {type: Number, unique: true},
     agency: String,
 })
 
