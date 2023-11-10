@@ -53,12 +53,15 @@ function Brokers() {
       axios.post('/searchBrokers', {firstName, lastName}).then((response) => {
         setSearchResults(response.data);
         console.log(response);
+      })
+      .catch((err) =>{
+        console.log(err);
       });
     }
-  catch(error) {
+    catch(error) {
     alert(error)
     alert("Broker search failed.");
-  }
+    }
 }
 }
 
