@@ -6,6 +6,9 @@ Giancarlo:
 - (Many thanks to Ashkan) Performed additional work on the Profile and Brokers pages. Implemented the broker search algorithm. Allowed for the creation of broker-attributable properties, alongside updating and deleting such properties, as well as the editing of profile information, all from the broker profile. Allowed for visits to officially be scheduled. (3:00 PM - 12:30 AM (11/08/2023))
 
 Chimdindu:
+-Designed and Implemented for the login and registration page using CSS and HTML (10:00 am - 8:09 pm (2023/11/4))
+-Researched color combinations that go well together in order to have an appealing website (1:45 - 4:00 pm (2023/11/3))
+-Started mofidying css design for the different webpages( Currently on the Login and Registration pages) (4:30 PM - 11:00 PM (10/27/2023))
 
 Phuong Khanh:
 - Wrote the meeting minutes for meeting 8 - around 15 minutes (4:30 PM - 5:30 PM (11/02/2023))
