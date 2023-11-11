@@ -30,3 +30,9 @@ Ashkan:
 - Worked on the user stories for sprint 4 and the acceptance tests ((3:00 pm - 4:30pm (2023-11-09))
 
 Shayne:
+
+- Edited CSS and JS for the overall website (12:00 pm to 2:00 pm (11/03/2023))
+- Worked with Gerald touch up some more CSS and JS (8:00 - 10:00 pm (11/06/2023))
+- Looked into Jest testing in order to start the unit testing (9:00 - 10:00 pm (11/07/2023))
+- Aided Giancarlo with the addition of the brokers information page (1:00 - 3:00 pm (11/09/2023))
+- Aided Giancarlo and Ashkan to discuss and implement some of the unit testing (3:00 - 4:00 pm (11/09/2023))
