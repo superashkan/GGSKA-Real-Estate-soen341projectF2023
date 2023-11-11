@@ -11,6 +11,10 @@ Phuong Khanh:
 - Wrote the meeting minutes for meeting 8 - around 15 minutes (4:30 PM - 5:30 PM (11/02/2023))
 - Trying to implement unit tests (7 PM - 9 PM (11/08/2023))
 - Fixing some network error pop-up concerning Axios (10:45 AM - 11:30 AM (11/09/2023))
+- Wrote the meeting minutes for meeting 9 - around 15 minutes (5:20 PM - 5:40 PM (11/09/2023))
+- Wrote the Planning chart for Sprint 4 (4:30 PM - 5:00 PM (11/09/2023), 7:45 PM - 8:30 PM (11/10/2023))
+- Created issues on GitHub to track acceptance tests and user stories (6:30 PM - 9 PM (11/10/2023))
+
 
 Ashkan: 
 - Created Profile page and Brokers page (list of brokers plus a search button) (12:00 pm - 2:00 pm (2023-11-08))
