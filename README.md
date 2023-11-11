@@ -4,6 +4,15 @@
 
 It is important to have every plugin and library installed before running the React app
 
+## Installation Instructions
+The steps to install the web app is as follows:
+1. Download the repository
+2. Go into the folder of the repository through your terminal
+3. Run 'npm install'
+4. Run 'npm start'
+
+If given the error 'MODULE_NOT_FOUND', delete the node_modules folder and redo steps 3-4. 
+
 ## Project Description
 The project is a real estate web application for the search and the management of real estate properties. The application will have different features to make the real estate transactions more efficient.\
 \
