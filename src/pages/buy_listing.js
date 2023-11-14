@@ -122,6 +122,15 @@ function BuyListing() {
                         Make Offer
                       </button>
       <br />
+      <button className="deleteProperty" onClick = {(event) => {
+                        return navigate('/MortgageCalculator', {state: {
+                          homePrice: price
+                        }});
+                        }
+                        }>
+                        Calculate Mortgage
+                      </button>
+      <br />
       <h1>Scheduled Visits</h1>
       <table>
         <tr>

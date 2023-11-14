@@ -19,6 +19,8 @@ import Offer from './pages/Offer'
 import Brokers from './pages/brokers'
 import BrokerInfo from './pages/BrokerInfo'
 import BrokerProperties from './pages/BrokerProperties'
+import GenericMortgageCalculator from './pages/GenericMortgageCalculator'
+import MortgageCalculator from './pages/MortgageCalculator'
 import axios from 'axios';
 import { BrokerContextProvider } from './helpers/BrokerContext';
 
@@ -49,6 +51,8 @@ function App() {
             <Route path='/profile' element={<Profile/>}/>
             <Route path='/brokers' element={<Brokers/>}/>
             <Route path='/BrokerProperties' element={<BrokerProperties/>}/>
+            <Route path='/GenericMortgageCalculator' element={<GenericMortgageCalculator/>}/>
+            <Route path='/MortgageCalculator' element={<MortgageCalculator/>}/>
           </Routes>
           <Footer/>
         </Router>

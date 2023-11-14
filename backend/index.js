@@ -378,6 +378,35 @@ app.post('/deleteProperty', async (req,res) => {
             }
         }) 
 
+app.post('/genericCalculateMortgage', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
+  try {
+    const {principalLoan, monthlyInterestRate, numPayments} = req.body;
+    var numerator = parseFloat(monthlyInterestRate * Math.pow((1 + monthlyInterestRate), numPayments));
+    var denominator = parseFloat(Math.pow(1 + monthlyInterestRate, numPayments) - 1);
+    var monthlyMortgage = {"monthlyMortgage": parseFloat(principalLoan * (numerator / denominator)).toFixed(2)};
+    res.json(monthlyMortgage);
+  }
+  catch(err) {
+    res.status(422).json({ error: "Mortgage calculation failed. Please try again later" });
+  }
+})
+
+app.post('/calculateMortgage', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
+  try {
+    const {homePrice, downPayment, monthlyInterestRate, numPayments} = req.body;
+    var principalLoan = homePrice - downPayment;
+    var numerator = parseFloat(monthlyInterestRate * Math.pow((1 + monthlyInterestRate), numPayments));
+    var denominator = parseFloat(Math.pow(1 + monthlyInterestRate, numPayments) - 1);
+    var monthlyMortgage = {"monthlyMortgage": parseFloat(principalLoan * (numerator / denominator)).toFixed(2)};
+    res.json(monthlyMortgage);
+  }
+  catch(err) {
+    res.status(422).json({ error: "Mortgage calculation failed. Please try again later" });
+  }
+})
+
 app.listen(3001, () => {
     console.log("server is running")
 
