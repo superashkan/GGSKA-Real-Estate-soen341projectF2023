@@ -141,6 +141,13 @@ function Profile() {
                         Edit
                       </button>
                     </td>
+                    <td>
+                      <button className = "deleteProperty" onClick={(event) => {
+                        return navigate('/buy_listing', {state: {address: property.address}})
+                      }}>
+                        View Property
+                      </button>
+                    </td>
                     <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => handleDeletion(property.address)}>
                         Delete Property

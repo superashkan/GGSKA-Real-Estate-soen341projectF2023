@@ -122,6 +122,12 @@
     font-weight: bold;
   }
 
+  .deleteProperty:disabled, .deleteProperty[disabled] {
+    width: 100%;
+    background-color: red;
+    font-weight: bold;
+  }
+
   .notYetRegistered {
     border: 0.5px dashed grey;
     display: inline;

@@ -9,7 +9,8 @@ const PropertySchema = new mongoose.Schema({
     numBathrooms: { type: Number, min: 1, required: true },
     propertySize: { type: Number, min: 1, required: true },
     propertyImageURL: { type: String, required: false },
-    forRentOrPurchase: { type: String, required: false }
+    forRentOrPurchase: { type: String, required: false },
+    displayed: {type: Boolean, required: false, default: true},
 })
 const PropertyModel = new mongoose.model("properties", PropertySchema)
 

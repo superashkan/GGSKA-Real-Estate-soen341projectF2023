@@ -54,11 +54,23 @@ app.post('/register', async (req, res) => {
 
 })
 
+app.post('/findOffers', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+  try {
+    const offerIDDoc = await Offer.find()
+    res.json(offerIDDoc)
+  }
+  catch(error) {
+    res.status(422).json({ error: "Offer retrieval failed. Please try again later" });
+  }
+})
+
 app.post('/submitOffer', async (req, res) => {
   mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-  var {currentAddress, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate} = req.body
+  var {currentAddress, highestID, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate} = req.body
   try {
     const offerDoc = await Offer.create({
+      offerID: parseInt(highestID),
       address: currentAddress,
       offer: offer,
       brokerName: brokerName,
@@ -145,8 +157,6 @@ app.post('/login', async (req,res) => {
 
 app.post('/deleteProperty', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const address = req.body.address
     console.log(address);
     await Property.deleteOne({"address": String(address)})
@@ -154,8 +164,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/editProperty', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     try{
       const {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL} = req.body
       await Property.updateOne(
@@ -171,21 +179,18 @@ app.post('/deleteProperty', async (req,res) => {
           forRentOrPurchase: newBuyOrRent
         }
       )
-      console.log("1");
       await Offer.updateMany(
         {address: String(currentAddress)},
         {
           address: newAddress,
         }
       )
-      console.log("2");
       await Visit.updateMany(
         {propertyAddress: String(currentAddress)},
         {
           propertyAddress: newAddress,
         }
       )
-      console.log("3");
   }
   catch(err) {
     console.log(err);
@@ -194,8 +199,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/editBroker', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency} = req.body
     await Broker.updateOne(
       {email: String(currentEmail)},
@@ -212,8 +215,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/findOffersByAddress', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const {currentAddress} = req.body
     const offerDoc = await Offer.find(
       {address: String(currentAddress)},
@@ -228,8 +229,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/findPropertyByAddress', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const {propertyAddress} = req.body
     const propertyDoc = await Property.findOne(
       {address: String(propertyAddress)},
@@ -244,8 +243,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/findPropertiesByBroker', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const {brokerEmail} = req.body.state
     const propertyDoc = await Property.find(
       {brokerEmail: String(brokerEmail)},
@@ -283,8 +280,6 @@ app.post('/deleteProperty', async (req,res) => {
 
   app.post('/findVisitsByAddress', async (req,res) => {
     mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-    console.log("req.body: ");
-    console.log(req.body);
     const {propertyAddress} = req.body
     const visitDoc = await Visit.find(
       {propertyAddress: String(propertyAddress)},
@@ -300,10 +295,7 @@ app.post('/deleteProperty', async (req,res) => {
   app.post('/searchProperties', async (req,res) => {
       mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
       const {address,maxSize,minSize,maxPrice,minPrice,bedrooms,bathrooms,type} = req.body
-      console.log(req.body);
-      console.log(address);
       var propertyDoc = await Property.find();
-      console.log(propertyDoc);
       if (!isNullOrEmpty(address)) {
           propertyDoc = propertyDoc.filter(function(property) {
             return property.address.toLowerCase().includes(address.toLowerCase());
@@ -357,9 +349,7 @@ app.post('/deleteProperty', async (req,res) => {
       app.post('/searchBrokers', async (req,res) => {
         mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
         const {firstName,lastName} = req.body
-        console.log(req.body);
         var brokerDoc = await Broker.find();
-        console.log(brokerDoc);
         if (!isNullOrEmpty(firstName)) {
           brokerDoc = brokerDoc.filter(function(broker) {
               return broker.name.toLowerCase().includes(firstName.toLowerCase());
@@ -391,14 +381,56 @@ app.post('/submitReview', async (req, res) => {
       res.json({reviewDoc})
   }
   catch(err) {
-    res.status(422).json({ error: "Review submission. Please try again later" });
+    res.status(422).json({ error: "Review submission failed. Please try again later" });
+  }
+})
+
+app.post('/acceptOffer', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
+  try {
+    const {address, offerID} = req.body;
+    await Property.updateOne(
+      {address: address},
+      {
+        displayed: false
+      }
+    );
+    await Offer.updateOne(
+      {offerID: offerID},
+      {
+        accepted: true
+      }
+    )
+  }
+  catch(err) {
+    res.status(422).json({ error: "Offer acceptance failed. Please try again later" });
+  }
+})
+
+app.post('/rejectOffer', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
+  try {
+    const {address, offerID} = req.body;
+    await Property.updateOne(
+      {address: address},
+      {
+        displayed: true
+      }
+    );
+    await Offer.updateOne(
+      {offerID: offerID},
+      {
+        accepted: false
+      }
+    )
+  }
+  catch(err) {
+    res.status(422).json({ error: "Offer rejection failed. Please try again later" });
   }
 })
 
 app.post('/findReviewsByBroker', async (req,res) => {
   mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
-  console.log("req.body: ");
-  console.log(req.body);
   const {brokerLicenseNumber} = req.body.state
   const reviewDoc = await Review.find(
     {brokerLicense: String(brokerLicenseNumber)},

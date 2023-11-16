@@ -16,6 +16,7 @@ function OfferSubmissionForm() {
   var [clientInfo, setClientInfo] = useState("");
   var [deedDate, setDeedDate] = useState("");
   var [occupancyDate, setOccupancyDate] = useState("");
+  var [highestID, setHighestID] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input a valid, non-negative offer.");
   var [offerList, setOfferList] = useState([]);
 
@@ -60,9 +61,26 @@ function OfferSubmissionForm() {
       console.log(err);
     });
   }
+
+  const getHighestID = () => {
+    axios.post('/findOffers').then(result => {
+      var highest = 0;
+      result.data.forEach((offer) => {
+        if (parseInt(offer.offerID) > highest) {
+          highest = offer.offerID;
+        }
+        highest++;
+        setHighestID(highest);
+      })
+    })
+    .catch((err)=>{
+      console.log(err);
+    });
+  }
   
   useEffect(() => {
     findOffersByAddress();
+    getHighestID();
     if (broker) {
       setBrokerAgency(broker?.agency);
       setBrokerLicense(broker?.license_number);
@@ -80,10 +98,7 @@ function OfferSubmissionForm() {
             alert("Error: Please enter a positive monetary offer");
             return;
         }
-      const {data} = await axios.post('/submitOffer', {currentAddress, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate});
-      console.log("data: ");
-      console.log(data);
-      alert('Property offer request successful');
+      axios.post('/submitOffer', {currentAddress, highestID, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate});
       alert("Offer submitted!");
       return navigate('/buy_listing', {state: {
         address: currentAddress
@@ -99,13 +114,31 @@ function OfferSubmissionForm() {
       return (
         <div>
         <form id="search-form" onSubmit={handleOffer}>
+          <label htmlFor="brokerName">Full Name</label>
+          <input name="brokerName" value={brokerName} type="text" />
+
+          <label htmlFor="brokerLicense">License Number</label>
+          <input name="brokerLicense" value={brokerLicense} type="text" />
+
+          <label htmlFor="brokerAgency">Agency</label>
+          <input name="brokerAgency" value={brokerAgency} type="text" />
+
           <label htmlFor="address">Property Address</label>
           <input name="address" id="address" value={currentAddress} type="string" />
-          <label htmlFor="offer">Offer</label>
-          <input name="offer" id="offer" placeholder="Offer ($)" type="number" onInput={(event) => setOffer(event.target.value)}/>
 
-          <div id="errorMessage">{errorMessage}</div>
-          <button className="button" type="submit"> Edit Property </button>
+          <label htmlFor="clientInfo">Client Information (Name(s), Address(es), Email(s))</label>
+          <textarea name="clientInfo" id="clientInfo" required="true" type="text" rows="4" columns="50" onInput={(event) => setClientInfo(event.target.value)}/>
+
+          <label htmlFor="offer">Offer</label>
+          <input name="offer" id="offer" required="true" placeholder="Offer ($)" type="number" onInput={(event) => setOffer(event.target.value)}/>
+
+          <label htmlFor="deedDate">Date of the Deed of Sale</label>
+          <input name="deedDate" required="true" type="date" onInput={(event) => setDeedDate(event.target.value.toString())}/>
+
+          <label htmlFor="occupancyDate">Premises Occupancy Date</label>
+          <input name="occupancyDate" required="true" type="date" onInput={(event) => setOccupancyDate(event.target.value.toString())}/>
+
+          <button className="button" type="submit"> Make Offer </button>
         </form>
         </div>
       );

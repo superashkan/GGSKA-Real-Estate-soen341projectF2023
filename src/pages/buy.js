@@ -49,7 +49,7 @@ function Buy() {
       <h1 className="buyTitle" font>Properties for Purchase</h1>
       <div className="buyList">
         {propertyList.map((buyItem, key) => {
-          if (buyItem.forRentOrPurchase == "Buyable") {
+          if (buyItem.forRentOrPurchase == "Buyable" && buyItem.displayed == true) {
           return (
             <BuyItem
               key={key}
