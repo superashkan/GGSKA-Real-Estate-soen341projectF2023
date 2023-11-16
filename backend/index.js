@@ -7,6 +7,7 @@ const Broker = require('./models/Brokers')
 const Property = require('./models/Properties')
 const Offer = require('./models/Offers')
 const Visit = require('./models/Visits')
+const Review = require('./models/Reviews')
 
 const bcryptSalt = bcrypt.genSaltSync(10)
 const jwtSecret = 'slhafhafsaflAH'
@@ -377,6 +378,38 @@ app.post('/deleteProperty', async (req,res) => {
               res.status(422).json('pass not ok')
             }
         }) 
+
+app.post('/submitReview', async (req, res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
+  try {
+    const {brokerLicenseNumber, numStars, comments} = req.body;
+    const reviewDoc = await Review.create({
+          brokerLicense: brokerLicenseNumber,
+          stars: numStars,
+          comments: comments
+      });
+      res.json({reviewDoc})
+  }
+  catch(err) {
+    res.status(422).json({ error: "Review submission. Please try again later" });
+  }
+})
+
+app.post('/findReviewsByBroker', async (req,res) => {
+  mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA")
+  console.log("req.body: ");
+  console.log(req.body);
+  const {brokerLicenseNumber} = req.body.state
+  const reviewDoc = await Review.find(
+    {brokerLicense: String(brokerLicenseNumber)},
+  )
+  if(reviewDoc){
+    res.json(reviewDoc);
+  } 
+  else{
+      res.status(422).json('pass not ok')
+  }
+})
 
 app.post('/genericCalculateMortgage', async (req, res) => {
   mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
