@@ -13,8 +13,8 @@ function BrokerReviewForm() {
   const currentAge = location.state ? location.state.currentAge : null;
   const currentAgency = location.state ? location.state.currentAgency : null;
   const currentLicenseNumber = location.state ? location.state.currentLicenseNumber : null;
-  var [numStars, setNumStars] = useState("");
-  var [comments, setComments] = useState("");
+  let [numStars, setNumStars] = useState("");
+  let [comments, setComments] = useState("");
 
 
   const handleReviewSubmit = async function(event) {
@@ -67,7 +67,7 @@ function BrokerReviewForm() {
         <option value="5">5 Stars</option>
       </select>
       <label htmlFor="comments">Comment(s)</label>
-      <textarea name="comments" id="comments" required={true} placeholder="Comment(s) about the broker go here." type="text" rows="4" columns="50" onInput={(event) => setComments(event.target.value)}/>
+      <textarea name="comments" id="comments" required={true} placeholder="Comment(s) about the broker go here." type="text" rows="4" cols="50" onInput={(event) => setComments(event.target.value)}/>
       <button className="button" type="submit">Submit Review</button>
       </form>
       </div>
