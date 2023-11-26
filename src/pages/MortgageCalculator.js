@@ -1,6 +1,6 @@
 import React from 'react'
-import MortgageCalculatorForm from '../components/MortgageCalculatorForm'
-import "../styles/MultiPageCSS.css";
+import MortgageCalculatorForm from '../components/page_specific/MortgageCalculatorForm'
+import "../static/css/MultiPageCSS.css";
 
 function MortgageCalculator() {
   return (

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import Logo from '../assets/white back logo.jpg'
-import '../styles/NewHome.css'
-import { BrokerContext } from '../helpers/BrokerContext'
+import Logo from '../../static/images/white back logo.jpg'
+import '../../static/css/NewHome.css'
+import { BrokerContext } from '../../helpers/BrokerContext'
 
 
 

@@ -1,5 +1,5 @@
-import {React, useState, useContext, useEffect } from 'react'
-import "../styles/MultiPageCSS.css";
+import {React, useState, useEffect} from 'react'
+import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
 
@@ -21,7 +21,7 @@ function BrokerInfoForm() {
   
   useEffect(() => {
     getBrokerReviews();
- }, []);
+ });
 
   const constructHTML = function() {
       return (

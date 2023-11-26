@@ -1,4 +1,4 @@
-const validation = require("./RegisterValidation");
+const validation = require("./helpers/RegisterValidation");
 
 test("RegistrationError", () => {
     expect(() => validation("test", "test", "testtest")).toThrowError("Email Didn't match");

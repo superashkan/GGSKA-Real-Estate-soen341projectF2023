@@ -1,7 +1,7 @@
 import {React, useContext, useState, useEffect } from 'react';
 import { BrokerContext } from '../helpers/BrokerContext';
-import {useNavigate, useLocation, Navigate} from "react-router-dom";
-import '../styles/Brokers.css';
+import {useNavigate} from "react-router-dom";
+import '../static/css/Brokers.css';
 import axios from 'axios'
 
 function Brokers() {

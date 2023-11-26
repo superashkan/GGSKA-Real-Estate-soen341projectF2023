@@ -1,5 +1,5 @@
-import {React, useState, useContext, useEffect } from 'react'
-import "../styles/MultiPageCSS.css";
+import {React, useState} from 'react'
+import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
 
@@ -18,7 +18,6 @@ function BrokerEditForm() {
   var [newAge, setNewAge] = useState("");
   var [newAgency, setNewAgency] = useState("");
   var [newLicenseNumber, setNewLicenseNumber] = useState("");
-  var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
 
   const isNullOrEmpty = function(stringInput) {
     if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {

@@ -1,6 +1,6 @@
 import React from 'react'
-import Hero from '../assets/hero.png'
-import '../styles/NewHome.css';
+import Hero from '../static/images/hero.png'
+import '../static/css/NewHome.css';
 
 function home() {
   return (
@@ -61,7 +61,7 @@ function home() {
 
           </div>
 
-          <img src={Hero} width="816" height="659" role="presentation" className="hero-banner"/>
+          <img src={Hero} alt="A nice-looking house." width="816" height="659" role="presentation" className="hero-banner"/>
 
 
         </div>

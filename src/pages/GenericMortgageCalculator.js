@@ -1,6 +1,6 @@
 import React from 'react'
-import GenericMortgageCalculatorForm from '../components/GenericMortgageCalculatorForm'
-import "../styles/MultiPageCSS.css";
+import GenericMortgageCalculatorForm from '../components/page_specific/GenericMortgageCalculatorForm'
+import "../static/css/MultiPageCSS.css";
 
 function GenericMortgageCalculator() {
   return (

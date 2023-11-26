@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import "../styles/Login.css";
+import "../../static/css/Login.css";
 import axios from "axios"
 
 
 function GenericMortgageCalculatorForm() {
   
-  var [monthlyMortgage, setMonthlyMortgage] = useState("");
   var [principalLoan, setPrincipalLoan] = useState("");
   var [annualInterestRate, setAnnualInterestRate] = useState("");
   var [loanLifetime, setLoanLifetime] = useState("");
@@ -15,7 +14,7 @@ function GenericMortgageCalculatorForm() {
     var newValueStr = "";
     var forwardPositionCounter = 0;
     for (var i = value.toString().length - 1;i >= 0;i--) {
-      if ((forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0)) {
+      if ((forwardPositionCounter % 3 === 0 && forwardPositionCounter > 0)) {
         newValueStr = "," + newValueStr;
       }
       newValueStr = value.toString()[i] + newValueStr;
@@ -26,15 +25,15 @@ function GenericMortgageCalculatorForm() {
 
   const handleCalculation = async function(event) {
     event.preventDefault();
-    if (principalLoan == null || principalLoan.toString().trim().length == 0) {
+    if (principalLoan === null || principalLoan.toString().trim().length == 0) {
         alert("Error: Please enter a value for the principal loan amount");
         return;
     }
-    if (annualInterestRate == null || annualInterestRate.toString().trim().length == 0) {
+    if (annualInterestRate === null || annualInterestRate.toString().trim().length == 0) {
         alert("Error: Please enter a value for the annual interest rate");
         return;
     }
-    if (loanLifetime == null || loanLifetime.toString().trim().length == 0) {
+    if (loanLifetime === null || loanLifetime.toString().trim().length == 0) {
         alert("Error: Please enter a value for the number of years in the loan lifetime/term");
         return;
     }
@@ -58,7 +57,7 @@ function GenericMortgageCalculatorForm() {
     var numPayments = loanLifetime * 12;
     axios.post('/genericCalculateMortgage', {principalLoan, monthlyInterestRate, numPayments}).then((response) => {
         console.log(response);
-        setMortgageString("Your monthly mortgage is $" + response.data.monthlyMortgage);
+        setMortgageString("Your monthly mortgage is $" + neatlyFormatValue(response.data.monthlyMortgage));
     })
     .catch((err)=>{
         console.log(err);

@@ -321,19 +321,19 @@ app.post('/deleteProperty', async (req,res) => {
             return property.goingPrice >= parseFloat(minPrice);
           });
         }
-        if (!isNullOrEmpty(bedrooms) && bedrooms != 'noselection') {
+        if (!isNullOrEmpty(bedrooms) && bedrooms !== 'noselection') {
           propertyDoc = propertyDoc.filter(function(property) {
-            return property.numBedrooms == parseInt(bedrooms);
+            return property.numBedrooms === parseInt(bedrooms);
           });
         }
         if (!isNullOrEmpty(type)) {
           propertyDoc = propertyDoc.filter(function(property) {
-            return property.propertyType == type;
+            return property.propertyType === type;
           });
         }
-        if (!isNullOrEmpty(bathrooms) && bathrooms != 'noselection') {
+        if (!isNullOrEmpty(bathrooms) && bathrooms !== 'noselection') {
           propertyDoc = propertyDoc.filter(function(property) {
-            return property.numBathrooms == parseInt(bathrooms);
+            return property.numBathrooms === parseInt(bathrooms);
           });
         }
         

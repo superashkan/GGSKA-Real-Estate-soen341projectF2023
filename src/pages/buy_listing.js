@@ -1,9 +1,10 @@
 import {React, useContext, useState, useEffect} from 'react';
-import '../styles/Listing.css';
-import "../styles/MultiPageCSS.css";
+import '../static/css/Listing.css';
+import "../static/css/MultiPageCSS.css";
 import { BrokerContext } from '../helpers/BrokerContext'
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { neatlyFormatValue } from '../helpers/HelperFunctions';
 
 function BuyListing() {
   const navigate = useNavigate();
@@ -21,34 +22,6 @@ function BuyListing() {
   var [visitList, setVisitList] = useState([]);
   var [offerList, setOfferList] = useState([]);
   var [offerButtonDisabled, setOfferButtonDisabled] = useState(true);
-  var [property, setProperty] = useState();
-
-  const neatlyFormatValue = function(value) {
-    value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
-      if (!value.toString().includes(".")) {
-        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-          newValueStr = "," + newValueStr;
-        }
-      } else {
-        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-              newValueStr = "," + newValueStr;
-            }
-          }
-        }
-        if (newValueStr.length > 6) {
-
-        }
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
 
   const findPropertyByAddress = () => {
     axios.post('/findPropertyByAddress', {propertyAddress: propertyAddress}).then(result => {
@@ -88,7 +61,7 @@ function BuyListing() {
     if (broker) {
       setOfferButtonDisabled(false);
     }
- }, []);
+ });
 
  const offerButton = function() {
   return (
@@ -107,7 +80,7 @@ function BuyListing() {
  }
 
  const acceptOrReject = function(accepted, offerID) {
-  if (broker?.email == propertyBrokerEmail) {
+  if (broker?.email === propertyBrokerEmail) {
     return (
       <div>
         <tr>
@@ -144,7 +117,7 @@ function BuyListing() {
  }
 
  const constructHTML = function() {
-    if (broker && broker.email == propertyBrokerEmail) {
+    if (broker && broker.email === propertyBrokerEmail) {
       return (
         <div className="listing">
           <h1>Address: {address}</h1>

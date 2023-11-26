@@ -1,7 +1,8 @@
-import {React, useState, useContext, useEffect } from 'react'
-import "../styles/MultiPageCSS.css";
+import {React, useState} from 'react'
+import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
+import { isNullOrEmpty } from '../../helpers/HelperFunctions';
 
 function PropertyEditForm() {
   const navigate = useNavigate();
@@ -24,16 +25,12 @@ function PropertyEditForm() {
   var [newPropertyImageURL, setNewPropertyImageURL] = useState("");
   var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
 
-  const isNullOrEmpty = function(stringInput) {
-    if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   const handleEdit = async function(event) {
     try{
+        var isEditOkay = performChecks();
+        if (!isEditOkay) {
+          return;
+        }
         if (isNullOrEmpty(newAddress)) {
             newAddress = currentAddress;
         }
@@ -77,7 +74,7 @@ function PropertyEditForm() {
           if (newBathrooms == "") {
             if (newType == "") {
               if (newSize == "") {
-                setErrorMessage("Please input values in all fields.")
+                alert("Please input values in all fields.")
                 return false;
               }
             }
@@ -86,30 +83,29 @@ function PropertyEditForm() {
       }
     }
     if (newAddress == "") {
-      setErrorMessage("Must input address.")
+      alert("Must input address.")
       return false;
     }
     if (newPrice == "" || newPrice <= 0) {
-      setErrorMessage("Must input positive price.")
+      alert("Must input positive price.")
       return false;
     }
     if (newBedrooms == "") {
-      setErrorMessage("Must select number of bedrooms.")
+      alert("Must select number of bedrooms.")
       return false;
     }
     if (newBathrooms == "") {
-      setErrorMessage("Must select number of bathrooms.")
+      alert("Must select number of bathrooms.")
       return false;
     }
     if (newType == "") {
-      setErrorMessage("Must select property type.")
+      alert("Must select property type.")
       return false;
     }
     if (newSize <= 0 || newSize == "") {
-      setErrorMessage("Must input positive property size.");
+      alert("Must input positive property size.");
       return false;
     }
-    setErrorMessage("");
     return true;
   }
 
@@ -154,7 +150,6 @@ function PropertyEditForm() {
           </select>
           <label htmlFor="propertyImageURL">URL of Image of Property</label>
           <input id="propertyImageURL" name="propertyImageURL" defaultValue={currentPropertyImageURL} placeholder="URL of image to be used for property" onInput={(event) => setNewPropertyImageURL(event.target.value)} />
-          <div id="errorMessage">{errorMessage}</div>
           <button className="button" type="submit"> Edit Property </button>
         </form>
         </div>

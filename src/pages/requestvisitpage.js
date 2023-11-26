@@ -1,8 +1,8 @@
-import {React, useState, useContext, useEffect } from 'react';
-import '../styles/RequestVisitPage.css';
-import "../styles/MultiPageCSS.css";
+import {React, useState } from 'react';
+import '../static/css/RequestVisitPage.css';
+import "../static/css/MultiPageCSS.css";
 import axios from "axios";
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
 
 function RequestVisitPage() {
 
@@ -16,14 +16,14 @@ function RequestVisitPage() {
 
   const handleVisitScheduling = async function(event) {
     try{
-      const {data} = axios.post('/createVisit', {address, visitorName, date, time});
+      axios.post('/createVisit', {address, visitorName, date, time});
       alert('Visit scheduling successful')
-      if (buyOrRent == 'buy') {
+      if (buyOrRent === 'buy') {
         return navigate('/buy_listing', {state: {
           address: address
         }});
       }
-      if (buyOrRent == 'rent') {
+      if (buyOrRent === 'rent') {
         return navigate('/rent_listing', {state: {
           address: address
         }});

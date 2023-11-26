@@ -1,8 +1,9 @@
 import {React, useContext, useState, useEffect} from 'react'
 import { BrokerContext } from '../helpers/BrokerContext'
 import { Navigate, useNavigate } from 'react-router-dom'
-import "../styles/Profile.css";
+import "../static/css/Profile.css";
 import axios from 'axios'
+import { neatlyFormatValue } from '../helpers/HelperFunctions';
 
 function Profile() {
 
@@ -18,7 +19,7 @@ function Profile() {
   
   useEffect(() => {
     getBrokerProperties();
- }, []);
+ });
  
  if(ready && !broker){
   return <Navigate to={'/login'}/>
@@ -33,33 +34,6 @@ function Profile() {
   catch (e){
     alert(e);
   }
-}
-
- const neatlyFormatValue = function(value) {
-  value = value.toString();
-  var newValueStr = "";
-  var forwardPositionCounter = 0;
-  for (var i = value.length - 1;i >= 0;i--) {
-    if (!value.toString().includes(".")) {
-      if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-        newValueStr = "," + newValueStr;
-      }
-    } else {
-      if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-        if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-          if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-            newValueStr = "," + newValueStr;
-          }
-        }
-      }
-      if (newValueStr.length > 6) {
-
-      }
-    }
-    newValueStr = value.toString()[i] + newValueStr;
-    forwardPositionCounter++;
-  }
-  return newValueStr;
 }
  
   return (

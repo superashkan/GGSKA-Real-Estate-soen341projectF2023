@@ -1,7 +1,8 @@
-import {React, useState, useContext, useEffect } from 'react'
-import "../styles/MultiPageCSS.css";
+import {React, useState} from 'react'
+import "../../static/css/MultiPageCSS.css";
 import axios from 'axios';
 import {useNavigate, useLocation} from "react-router-dom";
+import { isNullOrEmpty } from '../../helpers/HelperFunctions';
 
 function BrokerReviewForm() {
   const navigate = useNavigate();
@@ -15,13 +16,6 @@ function BrokerReviewForm() {
   var [numStars, setNumStars] = useState("");
   var [comments, setComments] = useState("");
 
-  const isNullOrEmpty = function(stringInput) {
-    if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   const handleReviewSubmit = async function(event) {
     try{

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import "../styles/Login.css";
+import "../../static/css/Login.css";
 import axios from "axios"
 import {useLocation} from 'react-router-dom'
+import { neatlyFormatValue } from '../../helpers/HelperFunctions';
 
 
-function GenericMortgageCalculatorForm() {
+function MortgageCalculatorForm() {
   
   const location = useLocation();
   const homePrice = location.state ? parseFloat(location.state.homePrice) : 0;
@@ -13,22 +14,9 @@ function GenericMortgageCalculatorForm() {
   var [loanLifetime, setLoanLifetime] = useState("");
   var [mortgageString, setMortgageString] = useState("");
 
-  const neatlyFormatValue = function(value) {
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.toString().length - 1;i >= 0;i--) {
-      if ((forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0)) {
-        newValueStr = "," + newValueStr;
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
-
   const handleCalculation = async function(event) {
     event.preventDefault();
-    if (downPayment == null || downPayment.toString().trim().length == 0) {
+    if (downPayment === null || downPayment.toString().trim().length == 0) {
         alert("Error: Please enter a value for the down payment");
         return;
     }
@@ -36,11 +24,11 @@ function GenericMortgageCalculatorForm() {
         alert("Error: Down payment must be less than home price");
         return;
     }
-    if (annualInterestRate == null || annualInterestRate.toString().trim().length == 0) {
+    if (annualInterestRate === null || annualInterestRate.toString().trim().length == 0) {
         alert("Error: Please enter a value for the annual interest rate");
         return;
     }
-    if (loanLifetime == null || loanLifetime.toString().trim().length == 0) {
+    if (loanLifetime === null || loanLifetime.toString().trim().length == 0) {
         alert("Error: Please enter a value for the number of years in the loan lifetime/term");
         return;
     }
@@ -60,7 +48,7 @@ function GenericMortgageCalculatorForm() {
     var numPayments = loanLifetime * 12;
     axios.post('/calculateMortgage', {homePrice, downPayment, monthlyInterestRate, numPayments}).then((response) => {
         console.log(response);
-        setMortgageString("Your monthly mortgage is $" + response.data.monthlyMortgage);
+        setMortgageString("Your monthly mortgage is $" + neatlyFormatValue(response.data.monthlyMortgage));
     })
     .catch((err)=>{
         console.log(err);
@@ -88,4 +76,4 @@ function GenericMortgageCalculatorForm() {
 
   return constructHTML();
 }
-export default GenericMortgageCalculatorForm
+export default MortgageCalculatorForm

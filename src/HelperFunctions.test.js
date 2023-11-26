@@ -1,4 +1,4 @@
-const {neatlyFormatValue, isNullOrEmpty} = require("./HelperFunctions");
+const {neatlyFormatValue, isNullOrEmpty} = require("./helpers/HelperFunctions");
 
 test("helperMethods_1", () => {
     expect(neatlyFormatValue("1000")).toBe("1,000");

@@ -1,9 +1,8 @@
 import {React, useState, useContext, useEffect } from 'react'
-import { BuyList } from '../helpers/BuyList'
-import "../styles/MultiPageCSS.css";
-import Cookies from 'js-cookie';
+import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useNavigate, useLocation} from "react-router-dom";
+import { neatlyFormatValue } from '../../helpers/HelperFunctions';
 
 function PropertySaleManagement() {
 
@@ -17,7 +16,6 @@ function PropertySaleManagement() {
   var [type, setType] = useState("");
   var [buyOrRent, setBuyOrRent] = useState("");
   var [propertyImageURL, setPropertyImageURL] = useState("");
-  var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
   var [propertyList, setPropertyList] = useState([]);
 
   const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data))
@@ -27,37 +25,15 @@ function PropertySaleManagement() {
   
   useEffect(() => {
     getAllProperties();
- }, []);
-
-  const neatlyFormatValue = function(value) {
-    value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
-      if (!value.toString().includes(".")) {
-        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-          newValueStr = "," + newValueStr;
-        }
-      } else {
-        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-              newValueStr = "," + newValueStr;
-            }
-          }
-        }
-        if (newValueStr.length > 6) {
-
-        }
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
+ });
 
   const handleCreation = async function(event) {
     try{
+      var isCreationOkay = performChecks();
+      if (!isCreationOkay) {
+        event.preventDefault();
+        return;
+      }
       const state = location.state;
       var brokerEmail = null;
       if (location.state != null) {
@@ -72,17 +48,6 @@ function PropertySaleManagement() {
     }
   }
 
-  const handleDeletion = async function(address) {
-    try {
-      console.log(address);
-      axios.post('/deleteProperty', {address: address})
-      window.location.reload(false);
-    }
-    catch (e){
-      alert(e);
-    }
-  }
-
   const performChecks = function() {
     if (address == "") {
       if (price == "") {
@@ -90,7 +55,7 @@ function PropertySaleManagement() {
           if (bathrooms == "") {
             if (type == "") {
               if (size == "") {
-                setErrorMessage("Please input values in all fields.")
+                alert("Please input values in all fields.")
                 return false;
               }
             }
@@ -99,30 +64,29 @@ function PropertySaleManagement() {
       }
     }
     if (address == "") {
-      setErrorMessage("Must input address.")
+      alert("Must input address.")
       return false;
     }
     if (price == "" || price <= 0) {
-      setErrorMessage("Must input positive price.")
+      alert("Must input positive price.")
       return false;
     }
     if (bedrooms == "") {
-      setErrorMessage("Must select number of bedrooms.")
+      alert("Must select number of bedrooms.")
       return false;
     }
     if (bathrooms == "") {
-      setErrorMessage("Must select number of bathrooms.")
+      alert("Must select number of bathrooms.")
       return false;
     }
     if (type == "") {
-      setErrorMessage("Must select property type.")
+      alert("Must select property type.")
       return false;
     }
     if (size <= 0 || size == "") {
-      setErrorMessage("Must input positive property size.");
+      alert("Must input positive property size.");
       return false;
     }
-    setErrorMessage("");
     return true;
   }
 
@@ -171,7 +135,6 @@ function PropertySaleManagement() {
           </select>
           <label htmlFor="propertyImageURL">URL of Image of Property</label>
           <input id="propertyImageURL" name="propertyImageURL" placeholder="URL of image to be used for property" onInput={(event) => setPropertyImageURL(event.target.value)} />
-          <div id="errorMessage">{errorMessage}</div>
           <button className="button" type="submit"> Create Property </button>
         </form>
         <div class="soldPropertiesTitle">

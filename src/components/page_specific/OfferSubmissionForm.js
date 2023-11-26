@@ -1,8 +1,9 @@
 import {React, useContext, useState, useEffect } from 'react'
-import "../styles/MultiPageCSS.css";
+import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
-import { BrokerContext } from '../helpers/BrokerContext'
+import { BrokerContext } from '../../helpers/BrokerContext'
 import {useNavigate, useLocation} from "react-router-dom";
+import { isNullOrEmpty, neatlyFormatValue } from '../../helpers/HelperFunctions';
 
 function OfferSubmissionForm() {
   const navigate = useNavigate();
@@ -17,43 +18,7 @@ function OfferSubmissionForm() {
   var [deedDate, setDeedDate] = useState("");
   var [occupancyDate, setOccupancyDate] = useState("");
   var [highestID, setHighestID] = useState("");
-  var [errorMessage, setErrorMessage] = useState("Please input a valid, non-negative offer.");
   var [offerList, setOfferList] = useState([]);
-
-  const isNullOrEmpty = function(stringInput) {
-    if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  const neatlyFormatValue = function(value) {
-    value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
-      if (!value.toString().includes(".")) {
-        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-          newValueStr = "," + newValueStr;
-        }
-      } else {
-        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-              newValueStr = "," + newValueStr;
-            }
-          }
-        }
-        if (newValueStr.length > 6) {
-
-        }
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
 
   const findOffersByAddress = () => {
     axios.post('/findOffersByAddress', {currentAddress: currentAddress}).then(result => setOfferList(result.data))

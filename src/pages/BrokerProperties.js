@@ -1,9 +1,9 @@
 import {React, useState, useEffect} from "react";
-import BuyItem from "../components/BuyItem";
-import RentItem from "../components/RentItem";
-import "../styles/BuyList.css";
+import BuyItem from "../components/page_specific/BuyItem";
+import RentItem from "../components/page_specific/RentItem";
+import "../static/css/BuyList.css";
 import axios from 'axios';
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 function Buy() {
 

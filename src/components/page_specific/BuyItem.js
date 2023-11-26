@@ -1,7 +1,6 @@
-import {React, useState, useEffect} from "react";
-import '../styles/BuyList.css'
-import axios from 'axios';
-import {Link, useNavigate} from "react-router-dom";
+import {React} from "react";
+import '../../static/css/BuyList.css'
+import {useNavigate} from "react-router-dom";
 
 function BuyItem({ image, address, price, type, bedrooms, bathrooms, size }) {
   const navigate = useNavigate();

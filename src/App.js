@@ -1,6 +1,6 @@
-import './App.css';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import './static/css/App.css';
+import Navbar from './components/all_pages/Navbar';
+import Footer from './components/all_pages/Footer';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Home from './pages/home';
 import Login from './pages/login'
@@ -12,7 +12,7 @@ import RentListing from './pages/rent_listing'
 import Search from './pages/Search'
 import Sell from './pages/Sell'
 import Profile from './pages/profile'
-import RequestVisitPage from './pages/requestvisitpage'
+import RequestVisitPage from './pages/RequestVisitPage'
 import EditProperty from './pages/EditProperty'
 import EditBroker from './pages/EditBroker'
 import Offer from './pages/Offer'

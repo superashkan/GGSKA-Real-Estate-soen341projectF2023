@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { BuyList } from '../helpers/BuyList'
-import "../styles/MultiPageCSS.css";
-import "../styles/Search.css"
+import "../../static/css/MultiPageCSS.css";
+import "../../static/css/Search.css"
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { neatlyFormatValue, isNullOrEmpty } from '../../helpers/HelperFunctions';
 
 function PropertySearchForm() {
 
@@ -16,37 +16,13 @@ function PropertySearchForm() {
   const [type, setType] = useState("");
   const [bathrooms, setBathrooms] = useState("");
   const [address, setAddress] = useState("");
-  const [errorMessage, setErrorMessage] = useState("Please enter at least one search criterion");
-  const [propertyList, setPropertyList] = useState([]);
   const [results, setResults] = useState([]);
-
-  const neatlyFormatValue = function(value) {
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.toString().length - 1;i >= 0;i--) {
-      if ((forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0)) {
-        newValueStr = "," + newValueStr;
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
-
-  const isNullOrEmpty = function(stringInput) {
-    if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
   const handleSearch = async function(event) {
     event.preventDefault();
     try{
       var isSearchOkay = performChecks();
       if (!isSearchOkay) {
-        alert(errorMessage);
         return;
       }
       axios.post('/searchProperties', {address,maxSize,minSize,maxPrice,minPrice,bedrooms,bathrooms,type}).then((response) => {
@@ -72,7 +48,7 @@ function PropertySearchForm() {
               if (isNullOrEmpty(minSize)) {
                 if (isNullOrEmpty(maxSize)) {
                   if (isNullOrEmpty(type)) {
-                    setErrorMessage("Please enter at least one search criterion.");
+                    alert("Please enter at least one search criterion.");
                     setResults([]);
                     return false;
                   }
@@ -84,46 +60,45 @@ function PropertySearchForm() {
       }
     }
     if (minPrice < 0.00) {
-      setErrorMessage("Minimum price must not be negative.");
+      alert("Minimum price must not be negative.");
       setResults([]);
       return false;
     }
     if (maxPrice <= 0.00 && maxPrice.toString() != '') {
-      setErrorMessage("Maximum price must be positive.");
+      alert("Maximum price must be positive.");
       setResults([]);
       return false;
     }
     if (minSize < 0.00) {
-      setErrorMessage("Minimum property size must not be negative.");
+      alert("Minimum property size must not be negative.");
       setResults([]);
       return false;
     }
     if (maxSize <= 0.00 && maxSize.toString() != '') {
-      setErrorMessage("Maximum property size must be positive.");
+      alert("Maximum property size must be positive.");
       setResults([]);
       return false;
     }
     if ((minPrice == 0 && maxPrice == 0) && (minPrice.toString() != '' && maxPrice.toString() != '')) {
-      setErrorMessage("Please choose a minimum or maximum price.");
+      alert("Please choose a minimum or maximum price.");
       setResults([]);
       return false;
     }
     if ((minSize == 0 && maxSize == 0) && (minSize.toString() != '' && maxSize.toString() != '')) {
-      setErrorMessage("Please choose a minimum or maximum lot size.");
+      alert("Please choose a minimum or maximum lot size.");
       setResults([]);
       return false;
     }
     if (minPrice > maxPrice && maxPrice != '') {
-      setErrorMessage("Maximum price must be greater than minimum price.");
+      alert("Maximum price must be greater than minimum price.");
       setResults([]);
       return false;
     }
     if (minSize > maxSize  && maxSize != '') {
-      setErrorMessage("Maximum lot size must be greater than minimum lot size.");
+      alert("Maximum lot size must be greater than minimum lot size.");
       setResults([]);
       return false;
     }
-    setErrorMessage("");
     return true;
   }
 
