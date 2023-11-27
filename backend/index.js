@@ -141,7 +141,7 @@ app.post('/login', async (req,res) => {
                 id:brokerDoc._id}, 
                 jwtSecret, {}, (err, token) => {
                 if(err) throw err;
-                res.cookie('token', token).json(brokerDoc)
+                res.cookie('token', token, {expires: new Date(365 * 24 * 60 * 60 * 1000)}).json(brokerDoc)
             });
         } 
         else{
@@ -389,18 +389,28 @@ app.post('/acceptOffer', async (req, res) => {
   mongoose.connect("mongodb+srv://superashkan:GGSKA2023@cluster0.z3gchiw.mongodb.net/GGSKA");
   try {
     const {address, offerID} = req.body;
+    console.log(req.body);
     await Property.updateOne(
       {address: address},
       {
         displayed: false
       }
-    );
+    )
+    console.log("1");
+    await Offer.updateMany(
+      {},
+      {
+        accepted: false
+      }
+    )
+    console.log("2");
     await Offer.updateOne(
       {offerID: offerID},
       {
         accepted: true
       }
     )
+    console.log("3");
   }
   catch(err) {
     res.status(422).json({ error: "Offer acceptance failed. Please try again later" });
