@@ -61,9 +61,9 @@ window.addEventListener("scroll", e => {
           <Link to='/buy'><span className="navbar-link label-medium">Buy</span></Link>
           </li>
 
-          <li>
+          {/* <li>
             <Link to='/Sell'><span className="navbar-link label-medium">Sell</span></Link>
-          </li>
+          </li> */}
 
           <li>
             <Link to='/Search'><span className="navbar-link label-medium">Search</span></Link>
@@ -75,14 +75,21 @@ window.addEventListener("scroll", e => {
 
         </ul>
 
-        <div class="navbar-wrapper">
+        {/* <div class="navbar-wrapper">
             <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
             <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
-        </div>
+        </div> */}
+
+        {!broker &&(
+          <div className='navbar-wrapper'>
+            <Link to='/login'><span className="btn btn-fill label-medium">Login</span></Link>
+            <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
+          </div>
+        )}
 
         {!!broker &&(
           <div className='btn-link label-medium'>
-            <Link to='/profile' style={{ color: 'black' }}>{broker.name}</Link>
+            <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link>
           </div>
         )}
 

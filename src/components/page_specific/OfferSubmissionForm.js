@@ -19,6 +19,7 @@ function OfferSubmissionForm() {
   var [occupancyDate, setOccupancyDate] = useState("");
   var [highestID, setHighestID] = useState("");
   var [offerList, setOfferList] = useState([]);
+  var [haveOffersBeenFound, setHaveOffersBeenFound] = useState(false);
 
   const findOffersByAddress = () => {
     axios.post('/findOffersByAddress', {currentAddress: currentAddress}).then(result => setOfferList(result.data))
@@ -44,7 +45,10 @@ function OfferSubmissionForm() {
   }
   
   useEffect(() => {
-    findOffersByAddress();
+    if (offerList.length === 0 && !haveOffersBeenFound) {
+      findOffersByAddress();
+      setHaveOffersBeenFound(true);
+    }
     getHighestID();
     if (broker) {
       setBrokerAgency(broker?.agency);

@@ -13,7 +13,9 @@ function Rent() {
   });
   
   useEffect(() => {
-    getAllProperties();
+    if (propertyList.length === 0) {
+      getAllProperties();
+    }
   });
 
   return (

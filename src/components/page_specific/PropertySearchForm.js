@@ -219,12 +219,19 @@ function PropertySearchForm() {
                     <td>{result.numBathrooms}</td>
                     <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => {
-                        return navigate('/Offer', {state: {
-                          currentAddress: result.address
-                        }});
+                        if (result.forRentOrPurchase === 'Buyable') {
+                          return navigate('/buy_listing', {state: {
+                            address: result.address
+                          }});
                         }
-                        }>
-                        Make Offer
+                        if (result.forRentOrPurchase === 'Rentable') {
+                          return navigate('/rent_listing', {state: {
+                            address: result.address
+                          }});
+                        }
+                      }
+                      }>
+                        View Listing
                       </button>
                     </td>
                   </tr>

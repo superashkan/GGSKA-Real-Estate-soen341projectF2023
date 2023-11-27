@@ -24,7 +24,9 @@ function PropertySaleManagement() {
   });
   
   useEffect(() => {
-    getAllProperties();
+    if (propertyList.length === 0) {
+      getAllProperties();
+    }
  });
 
   const handleCreation = async function(event) {
@@ -137,80 +139,6 @@ function PropertySaleManagement() {
           <input id="propertyImageURL" name="propertyImageURL" placeholder="URL of image to be used for property" onInput={(event) => setPropertyImageURL(event.target.value)} />
           <button className="button" type="submit"> Create Property </button>
         </form>
-        <div class="soldPropertiesTitle">
-          <h1> Properties for Sale </h1>
-        </div>
-        <table>
-            <thead>
-              <tr>
-                <th>Address</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>Lot Size</th>
-                <th># of Bedrooms</th>
-                <th># of Bathrooms</th>
-              </tr>
-            </thead>
-            <tbody>
-              {propertyList.map((property) => {
-                if (property.forRentOrPurchase == "Buyable") {
-                return (
-                  <tr>
-                    <td>{property.address}</td>
-                    <td>${neatlyFormatValue(property.goingPrice)}</td>
-                    <td>{property.propertyType}</td>
-                    <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
-                    <td>{property.numBedrooms}</td>
-                    <td>{property.numBathrooms}</td>
-                    <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => {
-                        return navigate('/Offer', {state: {
-                          currentAddress: property.address
-                        }});
-                        }
-                        }>
-                        Make Offer
-                      </button>
-                    </td>
-                  </tr>
-                )
-              }})
-              }
-            </tbody>
-          </table>
-          <br />
-          <div class="soldPropertiesTitle">
-          <h1> Properties for Rent </h1>
-        </div>
-        <table>
-            <thead>
-              <tr>
-                <th>Address</th>
-                <th>Price</th>
-                <th>Type</th>
-                <th>Lot Size</th>
-                <th># of Bedrooms</th>
-                <th># of Bathrooms</th>
-                <th className="emptyCell"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {propertyList.map((property) => {
-                if (property.forRentOrPurchase == "Rentable") {
-                return (
-                  <tr>
-                    <td>{property.address}</td>
-                    <td>${neatlyFormatValue(property.goingPrice)}</td>
-                    <td>{property.propertyType}</td>
-                    <td>{neatlyFormatValue(property.propertySize)} sqft.</td>
-                    <td>{property.numBedrooms}</td>
-                    <td>{property.numBathrooms}</td>
-                  </tr>
-                )
-              }})
-              }
-            </tbody>
-          </table>
         </div>
       );
     }

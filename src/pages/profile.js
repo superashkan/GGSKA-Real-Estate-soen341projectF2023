@@ -1,4 +1,4 @@
-import {React, useContext, useState, useEffect} from 'react'
+import { React, useContext, useState, useEffect } from 'react'
 import { BrokerContext } from '../helpers/BrokerContext'
 import { Navigate, useNavigate } from 'react-router-dom'
 import "../static/css/Profile.css";
@@ -8,34 +8,62 @@ import { neatlyFormatValue } from '../helpers/HelperFunctions';
 function Profile() {
 
   const [propertyList, setPropertyList] = useState([]);
+  const [offerList, setOfferList] = useState([]);
+  const [haveOffersBeenFound, setHaveOffersBeenFound] = useState(false);
+  const [havePropertiesBeenFound, setHavePropertiesBeenFound] = useState(false);
 
   const navigate = useNavigate();
-  const {ready, broker} = useContext(BrokerContext)
+  const { ready, broker } = useContext(BrokerContext)
 
-  const getBrokerProperties = () => axios.post('/findPropertiesByBroker', {state: {brokerEmail: broker?.email}}).then(result => setPropertyList(result.data))
-  .catch((err)=>{
-        console.log(err);
-      });
-  
+  const getBrokerProperties = () => axios.post('/findPropertiesByBroker', { state: { brokerEmail: broker?.email } }).then(result => setPropertyList(result.data))
+    .catch((err) => {
+      console.log(err);
+    });
+
+  const getOffers = () => axios.post('/findOffers').then(result => setOfferList(result.data))
+    .catch((err) => {
+      console.log(err);
+    });
+
   useEffect(() => {
-    getBrokerProperties();
- });
- 
- if(ready && !broker){
-  return <Navigate to={'/login'}/>
- }
+    if (propertyList.length === 0 && !havePropertiesBeenFound) {
+      getBrokerProperties();
+      setHavePropertiesBeenFound(true);
+    }
+    if (offerList.length === 0 && !haveOffersBeenFound) {
+      getOffers();
+      setHaveOffersBeenFound(true);
+    }
+  });
 
- const handleDeletion = async function(address) {
-  try {
-    console.log(address);
-    axios.post('/deleteProperty', {address: address})
-    window.location.reload(false);
+  if (ready && !broker) {
+    return <Navigate to={'/login'} />
   }
-  catch (e){
-    alert(e);
+
+  const handleDeletion = async function (address) {
+    try {
+      console.log(address);
+      axios.post('/deleteProperty', { address: address })
+      window.location.reload(false);
+    }
+    catch (e) {
+      alert(e);
+    }
   }
-}
- 
+
+  const determineStatus = function(property) {
+    if (property.forRentOrPurchase === 'Rentable') {
+      return "Available For Rent";
+    }
+    var hasOfferBeenAccepted = false;
+    offerList.forEach((offer) => {
+      if (offer.address === property.address && offer.accepted) {
+        hasOfferBeenAccepted = true;
+      }
+    })
+    return hasOfferBeenAccepted ? "Purchase Offer Accepted" : "Available for Purchase"
+  }
+
   return (
 
     <div className="profile-container">
@@ -50,87 +78,94 @@ function Profile() {
           <p><strong>Agency:</strong> {broker?.agency}</p>
         </div>
         <br />
-        <button className="edit-button" onClick = {(event) => {
-                        return navigate('/EditBroker', {state: {
-                          currentName: broker?.name,
-                          currentEmail: broker?.email,
-                          currentAge: broker?.age,
-                          currentPhone: broker?.phone_number,
-                          currentLicenseNumber: broker?.license_number,
-                          currentAgency: broker?.agency
-                        }});
-                        }
-                        }>
-                        Edit
-                      </button> 
-        <br />
-        <button className="add-listing-button" onClick = {(event) => {
-                        return navigate('/Sell', {state: {
-                          brokerEmail: broker?.email 
-                        }});
-                      }
-                    }>
-                Add Listing
+        <button className="edit-button" onClick={(event) => {
+          return navigate('/EditBroker', {
+            state: {
+              currentName: broker?.name,
+              currentEmail: broker?.email,
+              currentAge: broker?.age,
+              currentPhone: broker?.phone_number,
+              currentLicenseNumber: broker?.license_number,
+              currentAgency: broker?.agency
+            }
+          });
+        }
+        }>
+          Edit
         </button>
-        </div>
         <br />
-        <h1 className="userTitle">Listed properties for {broker?.name}</h1>
-        <table>
-          <tr>
-            <th>Address</th>
-            <th>Price</th>
-            <th>Type</th>
-            <th>Lot Size</th>
-            <th># of Bedrooms</th>
-            <th># of Bathrooms</th>
-            <th>Buyable or Rentable?</th>
-            <th className="emptyCell"></th>
-          </tr>
-          {propertyList.map((property) => {
-            return (
-              <tr>
-                <td>{property.address}</td>
-                <td>{'$' + neatlyFormatValue(property.goingPrice)}</td>
-                <td>{property.propertyType}</td>
-                <td>{neatlyFormatValue(property.propertySize) + "sqft."}</td>
-                <td>{property.numBedrooms}</td>
-                <td>{property.numBathrooms}</td>
-                <td>{property.forRentOrPurchase}</td>
-                <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => {
-                        console.log(property.currentPropertyImageURL);
-                        console.log(property.forRentOrPurchase);
-                        return navigate('/EditProperty', {state: {
-                          currentAddress: property.address,
-                          currentPrice: property.goingPrice,
-                          currentType: property.propertyType,
-                          currentBedrooms: property.numBedrooms,
-                          currentBathrooms: property.numBathrooms,
-                          currentSize: property.propertySize,
-                          currentPropertyImageURL: property.propertyImageURL,
-                          currentBuyOrRent: property.forRentOrPurchase
-                        }});
-                        }
-                        }>
-                        Edit
-                      </button>
-                    </td>
-                    <td>
-                      <button className = "deleteProperty" onClick={(event) => {
-                        return navigate('/buy_listing', {state: {address: property.address}})
-                      }}>
-                        View Property
-                      </button>
-                    </td>
-                    <td className="propertyDeleteCell">
-                      <button className="deleteProperty" onClick = {(event) => handleDeletion(property.address)}>
-                        Delete Property
-                      </button>
-                    </td>
-              </tr>
-            )
-          })}
-        </table>
+        <button className="add-listing-button" onClick={(event) => {
+          return navigate('/Sell', {
+            state: {
+              brokerEmail: broker?.email
+            }
+          });
+        }
+        }>
+          Add Listing
+        </button>
+      </div>
+      <br />
+      <h1 className="userTitle">Listed properties for {broker?.name}</h1>
+      <table>
+        <tr>
+          <th>Address</th>
+          <th>Price</th>
+          <th>Type</th>
+          <th>Lot Size</th>
+          <th># of Bedrooms</th>
+          <th># of Bathrooms</th>
+          <th>Buyable or Rentable?</th>
+          <th>Status</th>
+        </tr>
+        {propertyList.map((property) => {
+          return (
+            <tr>
+              <td>{property.address}</td>
+              <td>{'$' + neatlyFormatValue(property.goingPrice)}</td>
+              <td>{property.propertyType}</td>
+              <td>{neatlyFormatValue(property.propertySize) + "sqft."}</td>
+              <td>{property.numBedrooms}</td>
+              <td>{property.numBathrooms}</td>
+              <td>{property.forRentOrPurchase}</td>
+              <td>{determineStatus(property)}</td>
+              <td className="propertyDeleteCell">
+                <button className="deleteProperty" onClick={(event) => {
+                  console.log(property.currentPropertyImageURL);
+                  console.log(property.forRentOrPurchase);
+                  return navigate('/EditProperty', {
+                    state: {
+                      currentAddress: property.address,
+                      currentPrice: property.goingPrice,
+                      currentType: property.propertyType,
+                      currentBedrooms: property.numBedrooms,
+                      currentBathrooms: property.numBathrooms,
+                      currentSize: property.propertySize,
+                      currentPropertyImageURL: property.propertyImageURL,
+                      currentBuyOrRent: property.forRentOrPurchase
+                    }
+                  });
+                }
+                }>
+                  Edit
+                </button>
+              </td>
+              <td>
+                <button className="deleteProperty" onClick={(event) => {
+                  return navigate('/buy_listing', { state: { address: property.address } })
+                }}>
+                  View Property
+                </button>
+              </td>
+              <td className="propertyDeleteCell">
+                <button className="deleteProperty" onClick={(event) => handleDeletion(property.address)}>
+                  Delete Property
+                </button>
+              </td>
+            </tr>
+          )
+        })}
+      </table>
     </div>
 
   )

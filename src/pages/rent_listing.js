@@ -3,7 +3,7 @@ import '../static/css/Listing.css';
 import "../static/css/MultiPageCSS.css";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { neatlyFormatValue } from '../helpers/HelperFunctions';
+import { isNullOrEmpty, neatlyFormatValue } from '../helpers/HelperFunctions';
 
 function RentListing() {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ function RentListing() {
   var [bedrooms, setBedrooms] = useState("");
   var [imageURL, setImageURL] = useState("");
   var [visitList, setVisitList] = useState([]);
+  var [haveVisitsBeenFound, setHaveVisitsBeenFound]= useState(false);
 
   const findVisitsByAddress = () => {
     axios.post('/findVisitsByAddress', {propertyAddress: propertyAddress}).then(result => {
@@ -37,9 +38,13 @@ function RentListing() {
   }
   
   useEffect(() => {
-    console.log(propertyAddress);
-    findVisitsByAddress();
-    findPropertyByAddress();
+    if (isNullOrEmpty(address)) {
+      findPropertyByAddress();
+    }
+    if (visitList.length === 0 && !haveVisitsBeenFound) {
+      findVisitsByAddress();
+      setHaveVisitsBeenFound(true);
+    }
  });
 
   return (

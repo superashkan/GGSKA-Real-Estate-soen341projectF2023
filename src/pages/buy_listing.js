@@ -4,7 +4,7 @@ import "../static/css/MultiPageCSS.css";
 import { BrokerContext } from '../helpers/BrokerContext'
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { neatlyFormatValue } from '../helpers/HelperFunctions';
+import { neatlyFormatValue, isNullOrEmpty } from '../helpers/HelperFunctions';
 
 function BuyListing() {
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ function BuyListing() {
   var [visitList, setVisitList] = useState([]);
   var [offerList, setOfferList] = useState([]);
   var [offerButtonDisabled, setOfferButtonDisabled] = useState(true);
+  var [haveOffersBeenFound, setHaveOffersBeenFound]= useState(false);
+  var [haveVisitsBeenFound, setHaveVisitsBeenFound]= useState(false);
 
   const findPropertyByAddress = () => {
     axios.post('/findPropertyByAddress', {propertyAddress: propertyAddress}).then(result => {
@@ -55,9 +57,17 @@ function BuyListing() {
   }
   
   useEffect(() => {
-    findPropertyByAddress();
-    findVisitsByAddress();
-    findOffersByAddress();
+    if (isNullOrEmpty(address)) {
+      findPropertyByAddress();
+    }
+    if (visitList.length === 0 && !haveVisitsBeenFound) {
+      findVisitsByAddress();
+      setHaveVisitsBeenFound(true);
+    }
+    if (offerList.length === 0 && !haveOffersBeenFound) {
+      findOffersByAddress();
+      setHaveOffersBeenFound(true);
+    }
     if (broker) {
       setOfferButtonDisabled(false);
     }
@@ -90,9 +100,7 @@ function BuyListing() {
             offerID: offerID
           });
           alert("Accepted!");
-          return navigate('/buy_listing', {state: {
-            address: address
-          }});
+          return navigate('/profile');
           }
           }>
           Accept
@@ -103,9 +111,7 @@ function BuyListing() {
             offerID: offerID
           });
           alert("Rejected!");
-          return navigate('/buy_listing', {state: {
-            address: address
-          }});
+          return navigate('/profile');
           }
           }>
           Reject
@@ -117,7 +123,7 @@ function BuyListing() {
  }
 
  const constructHTML = function() {
-    if (broker && broker.email === propertyBrokerEmail) {
+    if (broker && broker.email !== propertyBrokerEmail) {
       return (
         <div className="listing">
           <h1>Address: {address}</h1>
@@ -186,7 +192,6 @@ function BuyListing() {
                 <td>{offer.brokerName}</td>
                 <td>{offer.deedDate}</td>
                 <td>{offer.occupancyDate}</td>
-                {acceptOrReject(offer.accepted, offer.offerID)}
               </tr>
             )})
             }
@@ -261,6 +266,7 @@ function BuyListing() {
                 <td>{offer.brokerName}</td>
                 <td>{offer.deedDate}</td>
                 <td>{offer.occupancyDate}</td>
+                {acceptOrReject(offer.accepted, offer.offerID)}
               </tr>
             )})
             }
