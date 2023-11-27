@@ -10,4 +10,9 @@ Khanh:
 Chimdindu:
 
 Ashkan:
+- Reviewed code for the backend (2:30 - 4:00 PM (11/27/2023))
+- Worked on presentation and the presentation slides ( 4:00 - 5:30 PM (11/27/2023))
+- Cleaned up the GitHub repository (TO-DO)
+- Start Project Report (TO-DO)
+  
   
