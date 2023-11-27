@@ -5,6 +5,7 @@ Giancarlo:
 Shayne:
 
 Khanh:
+- Wrote the meeting minutes for Meeting 10 (4:30 - 5:00 PM (11/16/2023))
 
 Chimdindu:
 
