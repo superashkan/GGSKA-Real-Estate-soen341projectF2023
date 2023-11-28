@@ -5,15 +5,15 @@ import axios from "axios"
 
 function GenericMortgageCalculatorForm() {
   
-  var [principalLoan, setPrincipalLoan] = useState("");
-  var [annualInterestRate, setAnnualInterestRate] = useState("");
-  var [loanLifetime, setLoanLifetime] = useState("");
-  var [mortgageString, setMortgageString] = useState("");
+  let [principalLoan, setPrincipalLoan] = useState("");
+  let [annualInterestRate, setAnnualInterestRate] = useState("");
+  let [loanLifetime, setLoanLifetime] = useState("");
+  let [mortgageString, setMortgageString] = useState("");
 
   const neatlyFormatValue = function(value) {
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.toString().length - 1;i >= 0;i--) {
+    let newValueStr = "";
+    let forwardPositionCounter = 0;
+    for (let i = value.toString().length - 1;i >= 0;i--) {
       if ((forwardPositionCounter % 3 === 0 && forwardPositionCounter > 0)) {
         newValueStr = "," + newValueStr;
       }
@@ -53,8 +53,8 @@ function GenericMortgageCalculatorForm() {
         alert("Error: Number of years in loan lifetime/term must be a non-zero positive value");
         return;
     }
-    var monthlyInterestRate = parseFloat((annualInterestRate / 100) / 12.0);
-    var numPayments = loanLifetime * 12;
+    let monthlyInterestRate = parseFloat((annualInterestRate / 100) / 12.0);
+    let numPayments = loanLifetime * 12;
     axios.post('/genericCalculateMortgage', {principalLoan, monthlyInterestRate, numPayments}).then((response) => {
         console.log(response);
         setMortgageString("Your monthly mortgage is $" + neatlyFormatValue(response.data.monthlyMortgage));

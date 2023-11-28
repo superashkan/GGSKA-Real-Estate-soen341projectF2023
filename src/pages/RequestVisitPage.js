@@ -1,6 +1,7 @@
-import {React, useState } from 'react';
+import {React, useState, useContext } from 'react';
 import '../static/css/RequestVisitPage.css';
 import "../static/css/MultiPageCSS.css";
+import { AccountContext } from '../helpers/AccountContext';
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
 
@@ -9,14 +10,16 @@ function RequestVisitPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const address = location.state ? location.state.address : null;
+  const email = location.state ? location.state.email : null;
   const buyOrRent = location.state ? location.state.buyOrRent : 'buy';
-  var [visitorName, setVisitorName] = useState("");
-  var [date, setDate] = useState("");
-  var [time, setTime] = useState("");
+  const { ready, account } = useContext(AccountContext);
+  let [date, setDate] = useState("");
+  let [time, setTime] = useState("");
 
   const handleVisitScheduling = async function(event) {
     try{
-      axios.post('/createVisit', {address, visitorName, date, time});
+      let visitorName = account.name;
+      axios.post('/createVisit', {address, visitorName, email, date, time});
       alert('Visit scheduling successful')
       if (buyOrRent === 'buy') {
         return navigate('/buy_listing', {state: {
@@ -45,7 +48,7 @@ function RequestVisitPage() {
           <div>
           <form id="search-form" onSubmit={handleVisitScheduling}>
             <label htmlFor="name">Full Name</label>
-            <input name="name" placeholder="Enter full name..." type="text" onInput={(event) => setVisitorName(event.target.value)}/>
+            <input name="name" placeholder="Enter full name..." type="text" readOnly={true} value={account.name}/>
             <label htmlFor="Time">24 Hour Time</label>
             <input time="time" type="time" required="true" onInput={(event) => setTime(event.target.value.toString())}/>
             <label htmlFor="Date">Date</label>

@@ -6,7 +6,7 @@ import { neatlyFormatValue } from "../helpers/HelperFunctions";
 
 function Buy() {
 
-  var [propertyList, setPropertyList] = useState([]);
+  let [propertyList, setPropertyList] = useState([]);
 
   const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data))
   .catch((err)=>{

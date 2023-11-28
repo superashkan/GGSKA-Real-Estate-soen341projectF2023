@@ -12,12 +12,12 @@ function BrokerEditForm() {
   const currentAge = location.state ? location.state.currentAge : null;
   const currentAgency = location.state ? location.state.currentAgency : null;
   const currentLicenseNumber = location.state ? location.state.currentLicenseNumber : null;
-  var [newEmail, setNewEmail] = useState("");
-  var [newPhone, setNewPhone] = useState("");
-  var [newName, setNewName] = useState("");
-  var [newAge, setNewAge] = useState("");
-  var [newAgency, setNewAgency] = useState("");
-  var [newLicenseNumber, setNewLicenseNumber] = useState("");
+  let [newEmail, setNewEmail] = useState("");
+  let [newPhone, setNewPhone] = useState("");
+  let [newName, setNewName] = useState("");
+  let [newAge, setNewAge] = useState("");
+  let [newAgency, setNewAgency] = useState("");
+  let [newLicenseNumber, setNewLicenseNumber] = useState("");
 
   const isNullOrEmpty = function(stringInput) {
     if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
@@ -47,12 +47,13 @@ function BrokerEditForm() {
         if (isNullOrEmpty(newAgency)) {
             newAgency = currentAgency;
         }
+      newAge = parseInt(newAge)
       axios.post('/editBroker', {currentEmail, newEmail, newPhone, newName, newAge, newLicenseNumber, newAgency})
       .catch((err)=>{
         console.log(err);
       });
       alert('Broker edit successful');
-      return navigate('/profile');
+      return navigate('/');
     }
     catch (e){
       alert(e);

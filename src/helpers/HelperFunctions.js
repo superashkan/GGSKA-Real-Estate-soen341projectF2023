@@ -1,8 +1,8 @@
 const neatlyFormatValue = function(value) {
     value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
+    let newValueStr = "";
+    let forwardPositionCounter = 0;
+    for (let i = value.length - 1;i >= 0;i--) {
       if (!value.toString().includes(".")) {
         if (forwardPositionCounter % 3 === 0 && forwardPositionCounter > 0) {
           newValueStr = "," + newValueStr;

@@ -4,22 +4,24 @@ import axios from "axios";
 import { BrokerContext } from '../../helpers/BrokerContext'
 import {useNavigate, useLocation} from "react-router-dom";
 import { isNullOrEmpty, neatlyFormatValue } from '../../helpers/HelperFunctions';
+import { AccountContext } from '../../helpers/AccountContext';
 
 function OfferSubmissionForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {broker} = useContext(BrokerContext);
+  const {account} = useContext(AccountContext);
   const currentAddress = location.state ? location.state.currentAddress : null;
-  var [offer, setOffer] = useState("");
-  var [brokerName, setBrokerName] = useState("");
-  var [brokerLicense, setBrokerLicense] = useState("");
-  var [brokerAgency, setBrokerAgency] = useState("");
-  var [clientInfo, setClientInfo] = useState("");
-  var [deedDate, setDeedDate] = useState("");
-  var [occupancyDate, setOccupancyDate] = useState("");
-  var [highestID, setHighestID] = useState("");
-  var [offerList, setOfferList] = useState([]);
-  var [haveOffersBeenFound, setHaveOffersBeenFound] = useState(false);
+  let [offer, setOffer] = useState("");
+  let [brokerName, setBrokerName] = useState("");
+  let [brokerEmail, setBrokerEmail] = useState("");
+  let [brokerLicense, setBrokerLicense] = useState("");
+  let [brokerAgency, setBrokerAgency] = useState("");
+  let [clientInfo, setClientInfo] = useState("");
+  let [deedDate, setDeedDate] = useState("");
+  let [occupancyDate, setOccupancyDate] = useState("");
+  let [highestID, setHighestID] = useState("");
+  let [offerList, setOfferList] = useState([]);
+  let [haveOffersBeenFound, setHaveOffersBeenFound] = useState(false);
 
   const findOffersByAddress = () => {
     axios.post('/findOffersByAddress', {currentAddress: currentAddress}).then(result => setOfferList(result.data))
@@ -30,14 +32,14 @@ function OfferSubmissionForm() {
 
   const getHighestID = () => {
     axios.post('/findOffers').then(result => {
-      var highest = 0;
+      let highest = 0;
       result.data.forEach((offer) => {
         if (parseInt(offer.offerID) > highest) {
           highest = offer.offerID;
         }
         highest++;
-        setHighestID(highest);
       })
+      setHighestID(highest);
     })
     .catch((err)=>{
       console.log(err);
@@ -50,10 +52,11 @@ function OfferSubmissionForm() {
       setHaveOffersBeenFound(true);
     }
     getHighestID();
-    if (broker) {
-      setBrokerAgency(broker?.agency);
-      setBrokerLicense(broker?.license_number);
-      setBrokerName(broker?.name);
+    if (account && account.accountType === "Broker") {
+      setBrokerAgency(account?.agency);
+      setBrokerLicense(account?.license_number);
+      setBrokerName(account?.name);
+      setBrokerEmail(account?.email);
     }
  }, []);
 
@@ -67,7 +70,8 @@ function OfferSubmissionForm() {
             alert("Error: Please enter a positive monetary offer");
             return;
         }
-      axios.post('/submitOffer', {currentAddress, highestID, offer, brokerName, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate});
+      console.log(brokerEmail);
+      axios.post('/submitOffer', {currentAddress, highestID, offer, brokerName, brokerEmail, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate});
       alert("Offer submitted!");
       return navigate('/buy_listing', {state: {
         address: currentAddress
@@ -85,6 +89,9 @@ function OfferSubmissionForm() {
         <form id="search-form" onSubmit={handleOffer}>
           <label htmlFor="brokerName">Full Name</label>
           <input name="brokerName" value={brokerName} type="text" />
+
+          <label htmlFor="brokerEmail">Full Name</label>
+          <input name="brokerEmail" value={brokerEmail} type="text" />
 
           <label htmlFor="brokerLicense">License Number</label>
           <input name="brokerLicense" value={brokerLicense} type="text" />
@@ -117,6 +124,9 @@ function OfferSubmissionForm() {
         <form id="search-form" onSubmit={handleOffer}>
           <label htmlFor="brokerName">Full Name</label>
           <input name="brokerName" value={brokerName} type="text" />
+
+          <label htmlFor="brokerEmail">Full Name</label>
+          <input name="brokerEmail" value={brokerEmail} type="text" />
 
           <label htmlFor="brokerLicense">License Number</label>
           <input name="brokerLicense" value={brokerLicense} type="text" />

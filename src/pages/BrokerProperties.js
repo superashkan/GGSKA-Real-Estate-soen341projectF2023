@@ -10,7 +10,7 @@ function Buy() {
   const location = useLocation();
   const brokerEmail = location.state.brokerEmail;
   const brokerName = location.state.brokerName;
-  var [propertyList, setPropertyList] = useState([]);
+  let [propertyList, setPropertyList] = useState([]);
 
   const getBrokerProperties = () => axios.post('/findPropertiesByBroker', {state: {brokerEmail: brokerEmail}}).then(result => setPropertyList(result.data))
   .catch((err)=>{
@@ -23,9 +23,9 @@ function Buy() {
 
   const neatlyFormatValue = function(value) {
     value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
+    let newValueStr = "";
+    let forwardPositionCounter = 0;
+    for (let i = value.length - 1;i >= 0;i--) {
       if (!value.toString().includes(".")) {
         if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
           newValueStr = "," + newValueStr;

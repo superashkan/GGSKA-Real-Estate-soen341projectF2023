@@ -8,15 +8,15 @@ function PropertySaleManagement() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  var [price, setPrice] = useState("");
-  var [size, setSize] = useState("");
-  var [bedrooms, setBedrooms] = useState("");
-  var [bathrooms, setBathrooms] = useState("");
-  var [address, setAddress] = useState("");
-  var [type, setType] = useState("");
-  var [buyOrRent, setBuyOrRent] = useState("");
-  var [propertyImageURL, setPropertyImageURL] = useState("");
-  var [propertyList, setPropertyList] = useState([]);
+  let [price, setPrice] = useState("");
+  let [size, setSize] = useState("");
+  let [bedrooms, setBedrooms] = useState("");
+  let [bathrooms, setBathrooms] = useState("");
+  let [address, setAddress] = useState("");
+  let [type, setType] = useState("");
+  let [buyOrRent, setBuyOrRent] = useState("");
+  let [propertyImageURL, setPropertyImageURL] = useState("");
+  let [propertyList, setPropertyList] = useState([]);
 
   const getAllProperties = () => axios.get('/getAllProperties').then(result => setPropertyList(result.data))
   .catch((err)=>{
@@ -30,20 +30,20 @@ function PropertySaleManagement() {
  });
 
   const handleCreation = async function(event) {
+    event.preventDefault();
     try{
-      var isCreationOkay = performChecks();
+      let isCreationOkay = performChecks();
       if (!isCreationOkay) {
-        event.preventDefault();
         return;
       }
       const state = location.state;
-      var brokerEmail = null;
+      let brokerEmail = null;
       if (location.state != null) {
         brokerEmail = location.state.brokerEmail;
       }
       const {data} = await axios.post('/createProperty', {brokerEmail, address, price, type, bedrooms, bathrooms, size, buyOrRent, propertyImageURL});
       alert('Property creation successful')
-      return navigate('/Sell');
+      return navigate('/BrokerProfile');
     }
     catch (e){
       alert(e);

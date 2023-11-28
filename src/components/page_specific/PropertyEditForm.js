@@ -15,22 +15,19 @@ function PropertyEditForm() {
   const currentSize = location.state ? location.state.currentSize : null;
   const currentBuyOrRent = location.state ? location.state.currentBuyOrRent : null;
   const currentPropertyImageURL = location.state ? location.state.currentPropertyImageURL : null;
-  var [newPrice, setNewPrice] = useState("");
-  var [newSize, setNewSize] = useState("");
-  var [newBedrooms, setNewBedrooms] = useState("");
-  var [newBathrooms, setNewBathrooms] = useState("");
-  var [newAddress, setNewAddress] = useState("");
-  var [newType, setNewType] = useState("");
-  var [newBuyOrRent, setNewBuyOrRent] = useState("");
-  var [newPropertyImageURL, setNewPropertyImageURL] = useState("");
-  var [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
+  let [newPrice, setNewPrice] = useState("");
+  let [newSize, setNewSize] = useState("");
+  let [newBedrooms, setNewBedrooms] = useState("");
+  let [newBathrooms, setNewBathrooms] = useState("");
+  let [newAddress, setNewAddress] = useState("");
+  let [newType, setNewType] = useState("");
+  let [newBuyOrRent, setNewBuyOrRent] = useState("");
+  let [newPropertyImageURL, setNewPropertyImageURL] = useState("");
+  let [errorMessage, setErrorMessage] = useState("Please input values in all fields.");
 
   const handleEdit = async function(event) {
     try{
-        var isEditOkay = performChecks();
-        if (!isEditOkay) {
-          return;
-        }
+        event.preventDefault();
         if (isNullOrEmpty(newAddress)) {
             newAddress = currentAddress;
         }
@@ -55,12 +52,16 @@ function PropertyEditForm() {
         if (isNullOrEmpty(newPropertyImageURL)) {
           newPropertyImageURL = currentPropertyImageURL;
         }
+        let isEditOkay = performChecks();
+        if (!isEditOkay) {
+          return;
+        }
       axios.post('/editProperty', {currentAddress, newAddress, newPrice, newType, newBedrooms, newBathrooms, newSize, newBuyOrRent, newPropertyImageURL})
       .catch((err)=>{
         console.log(err);
       });
       alert('Property edit successful');
-      return navigate('/Buy');
+      return navigate('/BrokerProfile');
     }
     catch (e){
       alert(e);

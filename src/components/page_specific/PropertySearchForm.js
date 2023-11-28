@@ -21,7 +21,7 @@ function PropertySearchForm() {
   const handleSearch = async function(event) {
     event.preventDefault();
     try{
-      var isSearchOkay = performChecks();
+      let isSearchOkay = performChecks();
       if (!isSearchOkay) {
         return;
       }

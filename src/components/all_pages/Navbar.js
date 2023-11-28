@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom'
 import Logo from '../../static/images/white back logo.jpg'
 import '../../static/css/NewHome.css'
 import { BrokerContext } from '../../helpers/BrokerContext'
-
+import { AccountContext } from '../../helpers/AccountContext'
 
 
 function Navbar() {
 
-const {broker} = useContext(BrokerContext)
+const {account} = useContext(AccountContext)
 
 useEffect(() => {
 
@@ -57,13 +57,11 @@ window.addEventListener("scroll", e => {
             <Link to='/rent'><span className="navbar-link label-medium">Rent</span></Link>
           </li>
 
-          <li>
-          <Link to='/buy'><span className="navbar-link label-medium">Buy</span></Link>
-          </li>
-
-          {/* <li>
-            <Link to='/Sell'><span className="navbar-link label-medium">Sell</span></Link>
-          </li> */}
+          {(!account || (!!account && account.accountType !== "Property Renter")) && (
+            <li>
+              <Link to='/buy'><span className="navbar-link label-medium">Buy</span></Link>
+            </li>
+          )}
 
           <li>
             <Link to='/Search'><span className="navbar-link label-medium">Search</span></Link>
@@ -75,21 +73,31 @@ window.addEventListener("scroll", e => {
 
         </ul>
 
-        {/* <div class="navbar-wrapper">
-            <Link to='/login'><span className="btn-link label-medium">Login</span></Link>
-            <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
-        </div> */}
-
-        {!broker &&(
+        {/* {!broker &&( */}
+        {!account &&(
           <div className='navbar-wrapper'>
-            <Link to='/login'><span className="btn btn-fill label-medium">Login</span></Link>
-            <Link to='/register'><span className="btn btn-fill label-medium">Get Started</span></Link>
+            <Link to='/NewLogin'><span className="btn btn-fill label-medium">Login</span></Link>
+            <Link to='/AccountType'><span className="btn btn-fill label-medium">Get Started</span></Link>
           </div>
         )}
 
-        {!!broker &&(
+        {/* {!!broker &&( */}
+        {(!!account && account.accountType === "Broker") &&(
           <div className='btn-link label-medium'>
-            <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link>
+            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
+            <Link to='/BrokerProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
+          </div>
+        )}
+        {(!!account && account.accountType === "Property Renter") &&(
+          <div className='btn-link label-medium'>
+            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
+            <Link to='/PropertyRenterProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
+          </div>
+        )}
+        {(!!account && account.accountType === "Homebuyer") &&(
+          <div className='btn-link label-medium'>
+            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
+            <Link to='/HomebuyerProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
           </div>
         )}
 

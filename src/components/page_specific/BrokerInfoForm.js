@@ -1,18 +1,20 @@
-import {React, useState, useEffect} from 'react'
+import {React, useState, useEffect, useContext} from 'react'
 import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
+import { AccountContext } from '../../helpers/AccountContext';
 
 function BrokerInfoForm() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { account } = useContext(AccountContext);
   const currentEmail = location.state ? location.state.currentEmail : null;
   const currentPhone = location.state ? location.state.currentPhone : null;
   const currentName = location.state ? location.state.currentName : null;
   const currentAge = location.state ? location.state.currentAge : null;
   const currentAgency = location.state ? location.state.currentAgency : null;
   const currentLicenseNumber = location.state ? location.state.currentLicenseNumber : null;
-  var [reviewList, setReviewList] = useState([]);
+  let [reviewList, setReviewList] = useState([]);
 
   const getBrokerReviews = () => axios.post('/findReviewsByBroker', {state: {brokerLicenseNumber: currentLicenseNumber}}).then(result => setReviewList(result.data))
   .catch((err)=>{
@@ -22,6 +24,58 @@ function BrokerInfoForm() {
   useEffect(() => {
     getBrokerReviews();
  });
+
+ const canYouSubmitReview = function() {
+  if (account && (account.email !== currentEmail)) {
+    return (
+      <div>
+        <button className="propertySearchButton" onClick = {(event) => {
+                        return navigate('/BrokerReview', {state: {
+                          currentEmail: currentEmail,
+                          currentPhone: currentPhone,
+                          currentName: currentName,
+                          currentAge: currentAge,
+                          currentAgency: currentAgency,
+                          currentLicenseNumber: currentLicenseNumber
+                        }});
+                      }
+                    }>
+                Submit Review of Broker
+        </button>
+      </div>
+    )
+  }
+ }
+
+ const areThereReviews = function() {
+  if (reviewList.length > 0) {
+    return (
+      <div>
+        <br />
+        <h1>Reviews of {currentName}</h1>
+        <table>
+          <thead>
+            <tr>
+              <th>Star Rating (1-5)</th>
+              <th>Comment(s)</th>
+              <th className="emptyCell"></th>
+            </tr>
+          </thead>
+          <tbody>
+          {reviewList.map((review) => {
+            return (
+              <tr>
+                <td>{review.stars}</td>
+                <td>{review.comments}</td>
+              </tr>
+            )})
+          }
+          </tbody>
+        </table>
+      </div>
+    )
+  }
+ }
 
   const constructHTML = function() {
       return (
@@ -53,40 +107,8 @@ function BrokerInfoForm() {
                     }>
                 View Listings
         </button>
-        <button className="propertySearchButton" onClick = {(event) => {
-                        return navigate('/BrokerReview', {state: {
-                          currentEmail: currentEmail,
-                          currentPhone: currentPhone,
-                          currentName: currentName,
-                          currentAge: currentAge,
-                          currentAgency: currentAgency,
-                          currentLicenseNumber: currentLicenseNumber
-                        }});
-                      }
-                    }>
-                Submit Review of Broker
-        </button>
-        <br />
-        <h1>Reviews of {currentName}</h1>
-        <table>
-          <thead>
-            <tr>
-              <th>Star Rating (1-5)</th>
-              <th>Comment(s)</th>
-              <th className="emptyCell"></th>
-            </tr>
-          </thead>
-          <tbody>
-          {reviewList.map((review) => {
-            return (
-              <tr>
-                <td>{review.stars}</td>
-                <td>{review.comments}</td>
-              </tr>
-            )})
-          }
-          </tbody>
-        </table>
+        {canYouSubmitReview()}
+        {areThereReviews()}
         </form>
         </div>
       );
