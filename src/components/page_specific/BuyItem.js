@@ -6,7 +6,7 @@ function BuyItem({ image, address, price, type, bedrooms, bathrooms, size }) {
   const navigate = useNavigate();
   return (
     <div className="buyItem" onClick={() => {
-      return navigate('/buy_listing', {state: {address: address}});
+      return navigate('/BuyListing', {state: {address: address}});
     }}>
         <div style={{ backgroundImage: `url(${image})` }}> </div>
         <h1> {address} </h1>

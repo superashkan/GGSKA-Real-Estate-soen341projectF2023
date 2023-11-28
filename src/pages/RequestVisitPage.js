@@ -22,12 +22,12 @@ function RequestVisitPage() {
       axios.post('/createVisit', {address, visitorName, email, date, time});
       alert('Visit scheduling successful')
       if (buyOrRent === 'buy') {
-        return navigate('/buy_listing', {state: {
+        return navigate('/BuyListing', {state: {
           address: address
         }});
       }
       if (buyOrRent === 'rent') {
-        return navigate('/rent_listing', {state: {
+        return navigate('/RentListing', {state: {
           address: address
         }});
       }

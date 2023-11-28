@@ -220,12 +220,12 @@ function PropertySearchForm() {
                     <td className="propertyDeleteCell">
                       <button className="deleteProperty" onClick = {(event) => {
                         if (result.forRentOrPurchase === 'Buyable') {
-                          return navigate('/buy_listing', {state: {
+                          return navigate('/BuyListing', {state: {
                             address: result.address
                           }});
                         }
                         if (result.forRentOrPurchase === 'Rentable') {
-                          return navigate('/rent_listing', {state: {
+                          return navigate('/RentListing', {state: {
                             address: result.address
                           }});
                         }

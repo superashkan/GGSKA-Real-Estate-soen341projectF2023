@@ -73,7 +73,7 @@ function OfferSubmissionForm() {
       console.log(brokerEmail);
       axios.post('/submitOffer', {currentAddress, highestID, offer, brokerName, brokerEmail, brokerLicense, brokerAgency, clientInfo, deedDate, occupancyDate});
       alert("Offer submitted!");
-      return navigate('/buy_listing', {state: {
+      return navigate('/BuyListing', {state: {
         address: currentAddress
       }});
     }

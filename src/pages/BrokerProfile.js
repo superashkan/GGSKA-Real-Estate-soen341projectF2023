@@ -84,36 +84,6 @@ function BrokerProfile() {
     }
   }
 
-  const getPropertyByAddress = function(address) {
-    let property = allProperties.filter((property) => property.address === address)[0]
-    return property;
-  }
-
-  const viewProperty = function(property) {
-    if (property.forRentOrPurchase === "Buyable") {
-      return (
-        <div>
-          <button className="deleteProperty" onClick={(event) => {
-                  return navigate('/buy_listing', { state: { address: property.address } })
-                }}>
-            View Property
-          </button>
-        </div>
-      )
-    }
-    if (property.forRentOrPurchase === "Rentable") {
-      return (
-        <div>
-          <button className="deleteProperty" onClick={(event) => {
-                  return navigate('/rent_listing', { state: { address: property.address } })
-                }}>
-            View Property
-          </button>
-        </div>
-      )
-    }
-  }
-
   const determineStatus = function(property) {
     if (property.forRentOrPurchase === 'Rentable') {
       return "Available For Rent";
@@ -178,9 +148,6 @@ function BrokerProfile() {
                   Edit
                 </button>
               </td>
-              <td>
-                {viewProperty(property)}
-              </td>
               <td className="propertyDeleteCell">
                 <button className="deleteProperty" onClick={(event) => handleDeletion(property.address)}>
                   Delete Property
@@ -213,7 +180,6 @@ function BrokerProfile() {
               <td>{visit.propertyAddress}</td>
               <td>{visit.visitDate}</td>
               <td>{visit.visitTime}</td>
-              <td>{viewProperty(getPropertyByAddress(visit.propertyAddress))}</td>
             </tr>
           )
         })}
@@ -247,7 +213,6 @@ function BrokerProfile() {
               <td>{offer.deedDate}</td>
               <td>{offer.occupancyDate}</td>
               <td>{offer.accepted? "Accepted" : "Not Accepted"}</td>
-              <td>{viewProperty(getPropertyByAddress(offer.address))}</td>
             </tr>
           )
         })}
