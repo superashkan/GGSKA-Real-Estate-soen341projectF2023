@@ -2,7 +2,7 @@ import React from 'react'
 import Hero from '../static/images/hero.png'
 import '../static/css/NewHome.css';
 
-function home() {
+function Home() {
   return (
 
       <section className="hero">
