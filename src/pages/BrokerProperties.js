@@ -1,16 +1,16 @@
 import {React, useState, useEffect} from "react";
-import BuyItem from "../components/BuyItem";
-import RentItem from "../components/RentItem";
-import "../styles/BuyList.css";
+import BuyItem from "../components/page_specific/BuyItem";
+import RentItem from "../components/page_specific/RentItem";
+import "../static/css/BuyList.css";
 import axios from 'axios';
-import {Link, useNavigate, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 
 function Buy() {
 
   const location = useLocation();
   const brokerEmail = location.state.brokerEmail;
   const brokerName = location.state.brokerName;
-  var [propertyList, setPropertyList] = useState([]);
+  let [propertyList, setPropertyList] = useState([]);
 
   const getBrokerProperties = () => axios.post('/findPropertiesByBroker', {state: {brokerEmail: brokerEmail}}).then(result => setPropertyList(result.data))
   .catch((err)=>{
@@ -23,9 +23,9 @@ function Buy() {
 
   const neatlyFormatValue = function(value) {
     value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
+    let newValueStr = "";
+    let forwardPositionCounter = 0;
+    for (let i = value.length - 1;i >= 0;i--) {
       if (!value.toString().includes(".")) {
         if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
           newValueStr = "," + newValueStr;

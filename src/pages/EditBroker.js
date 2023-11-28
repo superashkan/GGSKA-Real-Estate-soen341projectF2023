@@ -1,6 +1,6 @@
 import React from 'react'
-import BrokerEditForm from '../components/BrokerEditForm'
-import "../styles/MultiPageCSS.css";
+import BrokerEditForm from '../components/page_specific/BrokerEditForm'
+import "../static/css/MultiPageCSS.css";
 
 function EditBroker() {
   return (

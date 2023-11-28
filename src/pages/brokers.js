@@ -1,17 +1,17 @@
 import {React, useContext, useState, useEffect } from 'react';
 import { BrokerContext } from '../helpers/BrokerContext';
-import {useNavigate, useLocation, Navigate} from "react-router-dom";
-import '../styles/Brokers.css';
+import {useNavigate} from "react-router-dom";
+import '../static/css/Brokers.css';
 import axios from 'axios'
 
 function Brokers() {
   const navigate = useNavigate();
   const { ready, broker } = useContext(BrokerContext);
-  var [brokerList, setBrokerList] = useState([]);
-  var [firstName, setFirstName] = useState("");
-  var [lastName, setLastName] = useState("");
-  var [searchResults, setSearchResults] = useState([]);
-  var [hasSearchOccurred, setHasSearchOccurred] = useState(false);
+  let [brokerList, setBrokerList] = useState([]);
+  let [firstName, setFirstName] = useState("");
+  let [lastName, setLastName] = useState("");
+  let [searchResults, setSearchResults] = useState([]);
+  let [hasSearchOccurred, setHasSearchOccurred] = useState(false);
 
   const isNullOrEmpty = function(stringInput) {
     if (stringInput === null || (stringInput === undefined || stringInput.toString().trim() === "")) {
@@ -33,7 +33,8 @@ function Brokers() {
   }
 
   const getAllBrokers = () => {
-    axios.get('/getAllBrokers').then(result => {
+    //axios.get('/getAllBrokers').then(result => {
+    axios.get('/getAllBrokerAccounts').then(result => {
       setBrokerList(result.data);
     })
     .catch((err)=>{

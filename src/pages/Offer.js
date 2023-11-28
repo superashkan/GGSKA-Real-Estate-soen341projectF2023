@@ -1,6 +1,6 @@
 import React from 'react'
-import OfferSubmissionForm from '../components/OfferSubmissionForm'
-import "../styles/MultiPageCSS.css";
+import OfferSubmissionForm from '../components/page_specific/OfferSubmissionForm'
+import "../static/css/MultiPageCSS.css";
 
 function Offer() {
   return (

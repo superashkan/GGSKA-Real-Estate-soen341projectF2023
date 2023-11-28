@@ -1,6 +1,6 @@
 import React from 'react'
-import PropertyEditForm from '../components/PropertyEditForm'
-import "../styles/MultiPageCSS.css";
+import PropertyEditForm from '../components/page_specific/PropertyEditForm'
+import "../static/css/MultiPageCSS.css";
 
 function EditProperty() {
   return (

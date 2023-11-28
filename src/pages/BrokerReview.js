@@ -1,6 +1,6 @@
 import React from 'react'
-import BrokerReviewForm from '../components/BrokerReviewForm'
-import "../styles/MultiPageCSS.css";
+import BrokerReviewForm from '../components/page_specific/BrokerReviewForm'
+import "../static/css/MultiPageCSS.css";
 
 function BrokerReview() {
   return (

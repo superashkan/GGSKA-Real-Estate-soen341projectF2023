@@ -1,6 +1,6 @@
 import React from 'react'
-import BrokerInfoForm from '../components/BrokerInfoForm'
-import "../styles/MultiPageCSS.css";
+import BrokerInfoForm from '../components/page_specific/BrokerInfoForm'
+import "../static/css/MultiPageCSS.css";
 
 function BrokerInfo() {
   return (

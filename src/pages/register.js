@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { useState } from 'react';
 import axios from 'axios';
-import '../styles/Login.css'
+import '../static/css/Login.css'
 
 function Register() {
   const [name,setName] = useState("");

@@ -1,6 +1,6 @@
 import React from 'react'
-import PropertySaleManagement from '../components/PropertySaleManagement'
-import "../styles/MultiPageCSS.css";
+import PropertySaleManagement from '../components/page_specific/PropertySaleManagement'
+import "../static/css/MultiPageCSS.css";
 
 function Sell() {
   return (

@@ -1,57 +1,34 @@
-import {React, useState, useEffect} from 'react';
-import '../styles/Listing.css';
-import "../styles/MultiPageCSS.css";
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { React, useState, useEffect, useContext } from 'react';
+import '../static/css/Listing.css';
+import "../static/css/MultiPageCSS.css";
+import { AccountContext } from '../helpers/AccountContext';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { isNullOrEmpty, neatlyFormatValue } from '../helpers/HelperFunctions';
 
 function RentListing() {
   const navigate = useNavigate();
   const location = useLocation();
   const propertyAddress = location.state.address;
-  var [address, setAddress] = useState("");
-  var [price, setPrice] = useState("");
-  var [type, setType] = useState("");
-  var [size, setSize] = useState("");
-  var [bathrooms, setBathrooms] = useState("");
-  var [bedrooms, setBedrooms] = useState("");
-  var [imageURL, setImageURL] = useState("");
-  var [visitList, setVisitList] = useState([]);
-
-  const neatlyFormatValue = function(value) {
-    value = value.toString();
-    var newValueStr = "";
-    var forwardPositionCounter = 0;
-    for (var i = value.length - 1;i >= 0;i--) {
-      if (!value.toString().includes(".")) {
-        if (forwardPositionCounter % 3 == 0 && forwardPositionCounter > 0) {
-          newValueStr = "," + newValueStr;
-        }
-      } else {
-        if (forwardPositionCounter % 3 && forwardPositionCounter > 0) {
-          if ((newValueStr[i] != "," && newValueStr[i + 1] != ",") && (newValueStr[i + 2] != "," && newValueStr[i + 3] != ",")) {
-            if ((value.toString()[i] != "." && value.toString()[i + 1] != ".") && (value.toString()[i + 2] != "." && value.toString()[i + 3] != ".")) {
-              newValueStr = "," + newValueStr;
-            }
-          }
-        }
-        if (newValueStr.length > 6) {
-
-        }
-      }
-      newValueStr = value.toString()[i] + newValueStr;
-      forwardPositionCounter++;
-    }
-    return newValueStr;
-  }
+  const { ready, account } = useContext(AccountContext);
+  let [address, setAddress] = useState("");
+  let [price, setPrice] = useState("");
+  let [type, setType] = useState("");
+  let [size, setSize] = useState("");
+  let [bathrooms, setBathrooms] = useState("");
+  let [bedrooms, setBedrooms] = useState("");
+  let [imageURL, setImageURL] = useState("");
+  let [visitList, setVisitList] = useState([]);
+  let [haveVisitsBeenFound, setHaveVisitsBeenFound] = useState(false);
 
   const findVisitsByAddress = () => {
-    axios.post('/findVisitsByAddress', {propertyAddress: propertyAddress}).then(result => {
+    axios.post('/findVisitsByAddress', { propertyAddress: propertyAddress }).then(result => {
       setVisitList(result.data);
     });
   }
 
   const findPropertyByAddress = () => {
-    axios.post('/findPropertyByAddress', {propertyAddress: propertyAddress}).then(result => {
+    axios.post('/findPropertyByAddress', { propertyAddress: propertyAddress }).then(result => {
       setAddress(result.data.address);
       setPrice(result.data.goingPrice);
       setType(result.data.propertyType);
@@ -61,57 +38,105 @@ function RentListing() {
       setImageURL(result.data.propertyImageURL);
     });
   }
-  
-  useEffect(() => {
-    console.log(propertyAddress);
-    findVisitsByAddress();
-    findPropertyByAddress();
- }, []);
 
-  return (
-    <div className="listing">
-      <h1>Address: {address}</h1>
-      <div className="listing-body">
+  useEffect(() => {
+    if (isNullOrEmpty(address)) {
+      findPropertyByAddress();
+    }
+    if (visitList.length === 0 && !haveVisitsBeenFound) {
+      findVisitsByAddress();
+      setHaveVisitsBeenFound(true);
+    }
+  });
+
+  const requestVisit = function () {
+    if (account) {
+      return (
         <div>
-          <p>Price: {'$' + neatlyFormatValue(price)}</p>
-          <p>Type: {type}</p>
-          <p>Lot Size: {neatlyFormatValue(size) + " sqft."}</p>
-          <p>Bedrooms: {bedrooms}</p>
-          <p>Bathrooms: {bathrooms}</p>
+          <button className="deleteProperty" onClick={(event) => {
+            return navigate('/RequestVisitPage', {
+              state: {
+                address: address,
+                buyOrRent: "rent",
+                email: account.email
+              }
+            });
+          }
+          }>
+            Request a Visit
+          </button>
+          <br />
         </div>
+      )
+    }
+  }
+
+  const getVisits = function () {
+    if (visitList.length > 0) {
+      return (
         <div>
-          <img src={imageURL} alt="Property Image" style={{ marginBottom: '10px', marginTop: '10px'}} />
+          <h1>Scheduled Visits</h1>
+          <table>
+            <tr>
+              <th>Visitor Name</th>
+              <th>Date</th>
+              <th>Time</th>
+            </tr>
+            {visitList.map((visit) => {
+              return (
+                <tr>
+                  <td>{visit.visitorFullName}</td>
+                  <td>{visit.visitDate}</td>
+                  <td>{visit.visitTime}</td>
+                </tr>
+              )
+            })
+            }
+          </table>
+        </div>
+      )
+    }
+  }
+
+  if (account) {
+    return (
+      <div className="listing">
+        <h1>Address: {address}</h1>
+        <div className="listing-body">
+          <div>
+            <p>Price: {'$' + neatlyFormatValue(price)}</p>
+            <p>Type: {type}</p>
+            <p>Lot Size: {neatlyFormatValue(size) + " sqft."}</p>
+            <p>Bedrooms: {bedrooms}</p>
+            <p>Bathrooms: {bathrooms}</p>
+          </div>
+          <div>
+            <img src={imageURL} alt="What this property looks like." style={{ marginBottom: '10px', marginTop: '10px' }} />
+          </div>
+        </div>
+        {requestVisit()}
+        {getVisits()}
+      </div>
+    );
+  } else {
+    return (
+      <div className="listing">
+        <h1>Address: {address}</h1>
+        <div className="listing-body">
+          <div>
+            <p>Price: {'$' + neatlyFormatValue(price)}</p>
+            <p>Type: {type}</p>
+            <p>Lot Size: {neatlyFormatValue(size) + " sqft."}</p>
+            <p>Bedrooms: {bedrooms}</p>
+            <p>Bathrooms: {bathrooms}</p>
+          </div>
+          <div>
+            <img src={imageURL} alt="Property Image" style={{ marginBottom: '10px', marginTop: '10px' }} />
+          </div>
         </div>
       </div>
-      <button className="deleteProperty" onClick = {(event) => {
-                        return navigate('/RequestVisitPage', {state: {
-                          address: address,
-                          buyOrRent: "rent"
-                        }});
-                        }
-                        }>
-                        Request a Visit
-                      </button>
-      <br />
-      <h1>Scheduled Visits</h1>
-      <table>
-        <tr>
-          <th>Visitor Name</th>
-          <th>Date</th>
-          <th>Time</th>
-        </tr>
-        {visitList.map((visit) => {
-        return (
-          <tr>
-            <td>{visit.visitorFullName}</td>
-            <td>{visit.visitDate}</td>
-            <td>{visit.visitTime}</td>
-          </tr>
-        )})
-        }
-      </table>
-    </div>
-  );
+    )
+  }
 }
 
 export default RentListing;

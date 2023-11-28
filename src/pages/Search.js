@@ -1,6 +1,6 @@
 import React from 'react'
-import PropertySearchForm from '../components/PropertySearchForm'
-import "../styles/MultiPageCSS.css";
+import PropertySearchForm from '../components/page_specific/PropertySearchForm'
+import "../static/css/MultiPageCSS.css";
 
 function Search() {
   return (
