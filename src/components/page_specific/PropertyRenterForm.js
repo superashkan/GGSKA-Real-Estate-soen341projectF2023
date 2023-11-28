@@ -25,7 +25,7 @@ function PropertyRenterForm() {
         phone: phone,
       });
       alert('Registration successful. Now you can log in');
-      return navigate('/NewLogin');
+      return navigate('/Login');
     } 
     
     catch (e) {
