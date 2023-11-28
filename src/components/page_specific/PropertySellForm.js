@@ -1,10 +1,9 @@
-import {React, useState, useContext, useEffect } from 'react'
+import {React, useState, useEffect } from 'react'
 import "../../static/css/MultiPageCSS.css";
 import axios from "axios";
 import {useNavigate, useLocation} from "react-router-dom";
-import { neatlyFormatValue } from '../../helpers/HelperFunctions';
 
-function PropertySaleManagement() {
+function PropertySellForm() {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -145,4 +144,4 @@ function PropertySaleManagement() {
 
   return constructHTML();
 }
-export default PropertySaleManagement
+export default PropertySellForm

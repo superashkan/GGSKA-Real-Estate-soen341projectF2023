@@ -73,30 +73,25 @@ window.addEventListener("scroll", e => {
 
         </ul>
 
-        {/* {!broker &&( */}
         {!account &&(
           <div className='navbar-wrapper'>
-            <Link to='/NewLogin'><span className="btn btn-fill label-medium">Login</span></Link>
+            <Link to='/Login'><span className="btn btn-fill label-medium">Login</span></Link>
             <Link to='/AccountType'><span className="btn btn-fill label-medium">Get Started</span></Link>
           </div>
         )}
 
-        {/* {!!broker &&( */}
         {(!!account && account.accountType === "Broker") &&(
           <div className='btn-link label-medium'>
-            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
             <Link to='/BrokerProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
           </div>
         )}
         {(!!account && account.accountType === "Property Renter") &&(
           <div className='btn-link label-medium'>
-            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
             <Link to='/PropertyRenterProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
           </div>
         )}
         {(!!account && account.accountType === "Homebuyer") &&(
           <div className='btn-link label-medium'>
-            {/* <Link to='/profile'><span className="btn btn-fill label-medium">{broker.name}</span></Link> */}
             <Link to='/HomebuyerProfile'><span className="btn btn-fill label-medium">{account.name}</span></Link>
           </div>
         )}

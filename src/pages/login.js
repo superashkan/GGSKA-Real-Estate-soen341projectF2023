@@ -1,24 +1,25 @@
 import {Link, Navigate} from "react-router-dom";
 import {useContext, useState} from "react";
 import axios from "axios";
-import { BrokerContext } from "../helpers/BrokerContext";
-
-
+import { AccountContext } from "../helpers/AccountContext";
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const {setBroker} = useContext(BrokerContext);
+  const {setAccount} = useContext(AccountContext);
   
   async function handleLoginSubmit(ev) {
     ev.preventDefault();
     try{
-      const {data} = await axios.post('/login', {email,password})
+      console.log(email);
+      console.log(password);
+      const {data} = await axios.post('/login_new', {email,password})
       .catch((err)=>{
         console.log(err);
       });
-      setBroker(data);
+      console.log(data);
+      setAccount(data);
       alert('Login successful')
       setRedirect(true);
     }
@@ -44,7 +45,7 @@ function Login() {
               <input name="password" placeholder="Enter password..." type="password" onChange={ev => setPassword(ev.target.value)}/>
 
               <div className='notRegistered'>
-              <Link to='/register'> Not yet registered? Do it now!</Link>
+                <Link to='/AccountType'> Not yet registered? Do it now!</Link>
               </div>  
 
               <button type="submit"> Login </button>

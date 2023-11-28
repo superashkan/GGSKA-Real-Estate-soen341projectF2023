@@ -39,36 +39,6 @@ function HomebuyerProfile() {
     return <Navigate to={'/login'} />
   }
 
-  const getPropertyByAddress = function(address) {
-    let property = allProperties.filter((property) => property.address === address)[0]
-    return property;
-  }
-
-  const viewProperty = function(property) {
-    if (property.forRentOrPurchase === "Buyable") {
-      return (
-        <div>
-          <button className="deleteProperty" onClick={(event) => {
-                  return navigate('/buy_listing', { state: { address: property.address } })
-                }}>
-            View Property
-          </button>
-        </div>
-      )
-    }
-    if (property.forRentOrPurchase === "Rentable") {
-      return (
-        <div>
-          <button className="deleteProperty" onClick={(event) => {
-                  return navigate('/rent_listing', { state: { address: property.address } })
-                }}>
-            View Property
-          </button>
-        </div>
-      )
-    }
-  }
-
   const areThereVisits = function() {
     if (visitList.length > 0) {
       return (
@@ -87,7 +57,6 @@ function HomebuyerProfile() {
               <td>{visit.propertyAddress}</td>
               <td>{visit.visitDate}</td>
               <td>{visit.visitTime}</td>
-              <td>{viewProperty(getPropertyByAddress(visit.propertyAddress))}</td>
             </tr>
           )
         })}
